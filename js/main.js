@@ -7,7 +7,13 @@ const videos = [
     'assets/videos/background3.mp4'
 ];
 
-let currentVideoIndex = 0;
+// 从 localStorage 读取用户上次选择的视频索引
+let currentVideoIndex = parseInt(localStorage.getItem('selectedVideoIndex')) || 0;
+
+// 确保索引有效
+if (currentVideoIndex >= videos.length) {
+    currentVideoIndex = 0;
+}
 
 // 页面加载动画
 window.addEventListener('load', () => {
@@ -68,6 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.querySelector('.background-video');
 
     if (video) {
+        // 设置初始视频为用户上次选择的视频
+        video.src = videos[currentVideoIndex];
+
         // 确保视频播放
         video.addEventListener('loadeddata', () => {
             video.play().catch(err => {
@@ -77,10 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 视频加载失败时的处理
         video.addEventListener('error', () => {
-            console.log('视频加载失败，使用静态背景');
-            const container = document.querySelector('.video-container');
-            if (container) {
-                container.style.background = 'linear-gradient(135deg, #0c0505 0%, #1a1625 50%, #2d2540 100%)';
+            console.log('视频加载失败，尝试加载下一个视频');
+            // 如果当前视频加载失败，尝试下一个
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            if (currentVideoIndex < videos.length) {
+                video.src = videos[currentVideoIndex];
+                video.load();
+            } else {
+                // 所有视频都失败，使用静态背景
+                const container = document.querySelector('.video-container');
+                if (container) {
+                    container.style.background = 'linear-gradient(135deg, #0c0505 0%, #1a1625 50%, #2d2540 100%)';
+                }
             }
         });
     }
@@ -95,8 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // 切换到下一个视频
             currentVideoIndex = (currentVideoIndex + 1) % videos.length;
             const newVideo = videos[currentVideoIndex];
+
+            // 保存用户选择到 localStorage
+            localStorage.setItem('selectedVideoIndex', currentVideoIndex);
 
             // 淡出效果
             video.style.opacity = '0';
@@ -104,12 +125,23 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 video.src = newVideo;
                 video.load();
-                video.play().catch(err => {
-                    console.log('视频切换失败:', err);
-                });
 
-                // 淡入效果
-                video.style.opacity = '1';
+                // 监听视频加载完成
+                const loadHandler = () => {
+                    video.play().catch(err => {
+                        console.log('视频切换播放失败:', err);
+                    });
+                    // 淡入效果
+                    video.style.opacity = '1';
+                    video.removeEventListener('loadeddata', loadHandler);
+                };
+
+                video.addEventListener('loadeddata', loadHandler);
+
+                // 如果5秒后还没加载完成，强制淡入
+                setTimeout(() => {
+                    video.style.opacity = '1';
+                }, 5000);
             }, 500);
         });
     }
