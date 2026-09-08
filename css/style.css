@@ -48,8 +48,8 @@ body {
 }
 
 .signature-logo {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,9 +96,25 @@ body {
     min-height: 100%;
     width: auto;
     height: auto;
+    max-width: none;
+    max-height: none;
     transform: translate(-50%, -50%);
     object-fit: cover;
     transition: opacity 0.5s ease;
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .background-video {
+        width: auto;
+        height: 100%;
+    }
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .background-video {
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* 视频遮罩层 */

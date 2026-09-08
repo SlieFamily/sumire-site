@@ -1089,8 +1089,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1106,7 +1106,7 @@
 
 @media (max-width: 768px) {
     .page-signature {
-        width: 80px;
-        height: 80px;
+        width: 120px;
+        height: 120px;
     }
 }
