@@ -505,35 +505,83 @@ body {
 }
 
 .game-card {
-    padding: 2rem;
+    position: relative;
+    padding-top: 100%; /* 1:1 正方形 */
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 0;
-    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .game-card:hover {
-    background: rgba(255, 255, 255, 0.05);
     border-color: var(--primary-color);
+    transform: translateY(-5px);
 }
 
-.game-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.game-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
 }
 
-.game-card h3 {
+.game-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-image img {
+    transform: scale(1.05);
+}
+
+.game-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.15), rgba(107, 159, 232, 0.15));
+}
+
+.game-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.game-card:hover .game-overlay {
+    opacity: 1;
+}
+
+.game-overlay h3 {
     font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-weight: 700;
     color: var(--text-light);
+    margin-bottom: 0.25rem;
 }
 
-.game-card p {
+.game-name-en {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.game-desc {
     font-size: 0.9375rem;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* 电竞历程 */

@@ -213,3 +213,49 @@ data/
 ✅ 易于维护和更新  
 ✅ 支持批量操作  
 ✅ 自动容错处理  
+
+
+## 🎮 游戏列表（games.json）
+
+### 添加游戏
+
+编辑 `data/games.json`，添加新游戏：
+
+```json
+{
+  "id": "game-id",
+  "name": "游戏中文名",
+  "nameEn": "Game English Name",
+  "description": "游戏类型或描述",
+  "image": "game-image.jpg"
+}
+```
+
+### 字段说明
+
+- `id`: 唯一ID（英文）
+- `name`: 游戏中文名
+- `nameEn`: 游戏英文名（悬停时显示）
+- `description`: 游戏描述或类型
+- `image`: 图片文件名（放在 `assets/images/games/` 文件夹）
+
+### 图片要求
+
+- 位置：`assets/images/games/`
+- 格式：JPG/PNG
+- 推荐尺寸：正方形（500x500px 或更大）
+- 文件名：使用英文和数字，如 `valorant.jpg`
+
+### 如何获取游戏图片
+
+1. **官方素材**：从游戏官网下载高清图片
+2. **Steam/Epic**：从游戏商店页面下载封面图
+3. **搜索引擎**：搜索"游戏名 logo"或"游戏名 wallpaper"
+4. **裁剪处理**：使用图片编辑工具裁剪为正方形
+
+### 悬停效果
+
+- 默认：只显示游戏图片
+- 悬停：显示半透明遮罩 + 游戏名 + 英文名 + 描述
+- 过渡动画：平滑淡入淡出
+

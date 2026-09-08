@@ -1,0 +1,32 @@
+{
+  "games": [
+    {
+      "id": "valorant",
+      "name": "无畏契约",
+      "nameEn": "VALORANT",
+      "description": "战术射击",
+      "image": "valorant.jpg"
+    },
+    {
+      "id": "apex",
+      "name": "APEX Legends",
+      "nameEn": "APEX",
+      "description": "FPS大逃杀",
+      "image": "apex.jpg"
+    },
+    {
+      "id": "pubg",
+      "name": "PUBG",
+      "nameEn": "PUBG",
+      "description": "绝地求生",
+      "image": "pubg.jpg"
+    },
+    {
+      "id": "zzz",
+      "name": "绝区零",
+      "nameEn": "Zenless Zone Zero",
+      "description": "动作RPG",
+      "image": "zzz.jpg"
+    }
+  ]
+}
