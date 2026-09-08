@@ -9,23 +9,23 @@
     },
     {
       "id": "apex",
-      "name": "APEX Legends",
-      "nameEn": "APEX",
+      "name": "APEX英雄",
+      "nameEn": "APEX Legends",
       "description": "FPS大逃杀",
       "image": "apex.jpg"
     },
     {
       "id": "pubg",
-      "name": "PUBG",
+      "name": "绝地求生",
       "nameEn": "PUBG",
-      "description": "绝地求生",
+      "description": "沙盒吃鸡",
       "image": "pubg.jpg"
     },
     {
       "id": "zzz",
       "name": "绝区零",
       "nameEn": "Zenless Zone Zero",
-      "description": "动作RPG",
+      "description": "米哈游·动作RPG",
       "image": "zzz.jpg"
     }
   ]

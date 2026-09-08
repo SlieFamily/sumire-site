@@ -1,7 +1,7 @@
 {
   "songs": [
     {
-      "id": 1,
+      "id": 9,
       "title": "奇妙能力歌",
       "artist": "陈粒",
       "type": "翻唱",
@@ -10,13 +10,13 @@
       "url": "https://www.bilibili.com/video/BV1Cy1eBJEVp"
     },
     {
-      "id": 2,
-      "title": "夜空中最亮的星",
-      "artist": "明日堇sumire",
+      "id": 1,
+      "title": "Bling Bling Bling",
+      "artist": "后海大鲨鱼",
       "type": "翻唱",
       "lang": "zh",
       "duration": "04:12",
-      "url": "https://www.bilibili.com/video/BV..."
+      "url": "https://www.bilibili.com/video/BV1ooVz6CEr6"
     },
     {
       "id": 3,

@@ -686,6 +686,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .node-avatar:hover {
@@ -922,5 +923,492 @@ body {
 @media (min-width: 769px) and (max-width: 1024px) {
     .hero-content {
         max-width: 75%;
+    }
+}
+
+/* 创作者推荐区域 */
+.creators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.creator-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.creator-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.creator-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.creator-card:hover .creator-avatar {
+    border-color: var(--primary-color);
+}
+
+.creator-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.creator-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.creator-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.creator-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 2px;
+}
+
+.creator-description {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.creator-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.creator-tag {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.625rem;
+    background: rgba(139, 125, 200, 0.2);
+    color: var(--accent-color);
+    border: 1px solid rgba(139, 125, 200, 0.3);
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .creators-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .creator-card {
+        padding: 1.25rem;
+    }
+
+    .creator-avatar {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* 个人信息卡片 */
+.profile-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.info-card {
+    padding: 2rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+}
+
+.info-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 1.25rem;
+    background: var(--primary-color);
+}
+
+.basic-info-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--primary-color);
+}
+
+.info-row-label {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    min-width: 80px;
+}
+
+.info-row-value {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.color-preview {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.color-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.likes-dislikes-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+.list-item-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.list-item-text {
+    font-size: 0.9375rem;
+    color: var(--text-light);
+}
+
+.fanclub-card {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(106, 137, 228, 0.1), rgba(141, 153, 221, 0.1));
+    border: 1px solid rgba(106, 137, 228, 0.3);
+}
+
+.fanclub-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary-color);
+}
+
+.fanclub-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fanclub-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.fanclub-subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .profile-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .info-row-label {
+        min-width: 60px;
+        font-size: 0.875rem;
+    }
+}
+
+/* 重新设计的个人简介 */
+.profile-main-card {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+    padding: 3rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.profile-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-frame {
+    width: 300px;
+    height: 400px;
+    transform: rotate(-5deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.intro-text {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.basic-info-large {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-item-large {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.info-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label-large {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.info-value-large {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.color-display {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.color-swatch {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.color-code {
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.fanclub-info-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.fanclub-image-hover {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.fanclub-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fanclub-image-hover:hover .fanclub-thumb {
+    transform: scale(3);
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-color);
+}
+
+.preferences-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.preference-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.preference-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.preference-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+}
+
+.preference-content {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .preferences-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .fanclub-inline {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1024px) {
+    .profile-main-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .photo-frame {
+        width: 250px;
+        height: 333px;
+    }
+
+    .preferences-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-main-card {
+        padding: 1.5rem;
+    }
+
+    .photo-frame {
+        width: 200px;
+        height: 267px;
+    }
+
+    .intro-text {
+        font-size: 1rem;
+    }
+
+    .info-value-large {
+        font-size: 1.25rem;
+    }
+
+    .color-display {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .fanclub-banner {
+        flex-direction: column;
+        text-align: center;
     }
 }

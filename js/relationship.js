@@ -103,7 +103,7 @@ class ForceLayout {
                     const dx = target.x - source.x;
                     const dy = target.y - source.y;
                     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const force = distance * 0.008; // 从0.01减小到0.008
+                    const force = distance * 0.005; // 从0.008减小到0.005，弧线更长
 
                     const fx = (dx / distance) * force;
                     const fy = (dy / distance) * force;
@@ -192,8 +192,8 @@ function initRelationshipNetwork() {
         const dy = toPos.y - fromPos.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // 控制点偏移（产生弧度）
-        const offset = dist * 0.2;
+        // 控制点偏移（产生弧度，增大偏移让弧线更长）
+        const offset = dist * 0.3; // 从0.2增加到0.3
         const controlX = midX - dy / dist * offset;
         const controlY = midY + dx / dist * offset;
 
@@ -231,13 +231,25 @@ function initRelationshipNetwork() {
         avatar.style.backgroundColor = node.color;
 
         // 头像内容（表情符号或图片）
-        if (node.avatar.startsWith('http')) {
+        if (node.avatar && (node.avatar.startsWith('http') || node.avatar.startsWith('assets/') || node.avatar.startsWith('./'))) {
+            // 使用图片
             const img = document.createElement('img');
             img.src = node.avatar;
             img.alt = node.name;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '50%';
+            // 图片加载失败时显示表情符号
+            img.onerror = function() {
+                this.style.display = 'none';
+                avatar.textContent = '👤';
+                avatar.style.fontSize = (node.size * 0.5) + 'px';
+            };
             avatar.appendChild(img);
         } else {
-            avatar.textContent = node.avatar;
+            // 使用表情符号或默认图标
+            avatar.textContent = node.avatar || '👤';
             avatar.style.fontSize = (node.size * 0.5) + 'px';
         }
 

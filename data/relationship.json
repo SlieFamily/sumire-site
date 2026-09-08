@@ -3,7 +3,7 @@
     {
       "id": "sumire",
       "name": "明日堇sumire",
-      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "avatar": "./assets/images/avatar/sumire.jpg",
       "url": "https://space.bilibili.com/13271481",
       "size": 70,
       "color": "#8B7DC8",
@@ -11,33 +11,41 @@
     },
     {
       "id": "cheese",
-      "name": "好友A",
-      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
-      "url": "https://space.bilibili.com/example1",
+      "name": "雪糕Cheese",
+      "avatar": "./assets/images/avatar/cheese.jpg",
+      "url": "https://space.bilibili.com/3493139945884106",
       "size": 50,
       "color": "#6B9FE8"
     },
     {
-      "id": "friend2",
-      "name": "好友B",
-      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "id": "azusa",
+      "name": "阿梓从小就很可爱",
+      "avatar": "./assets/images/avatar/azusa.jpg",
       "url": "https://space.bilibili.com/example2",
       "size": 50,
       "color": "#6B9FE8"
     },
     {
-      "id": "friend3",
-      "name": "好友C",
-      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
-      "url": "https://space.bilibili.com/example3",
+      "id": "951",
+      "name": "黑之951",
+      "avatar": "./assets/images/avatar/951.jpg",
+      "url": "https://space.bilibili.com/3494353391585585",
       "size": 50,
       "color": "#6B9FE8"
     },
     {
-      "id": "friend4",
-      "name": "好友D",
-      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
-      "url": "https://space.bilibili.com/example4",
+      "id": "koritsu",
+      "name": "符瑶koritsu",
+      "avatar": "./assets/images/avatar/koritsu.jpg",
+      "url": "https://space.bilibili.com/2109776",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "170",
+      "name": "喂大笨蛋你在里面吗",
+      "avatar": "./assets/images/avatar/170.jpg",
+      "url": "https://space.bilibili.com/7924497",
       "size": 50,
       "color": "#6B9FE8"
     }
@@ -45,39 +53,51 @@
   "edges": [
     {
       "from": "sumire",
-      "to": "friend1",
+      "to": "cheese",
       "color": "#ff6b6b",
       "width": 2
     },
     {
       "from": "sumire",
-      "to": "friend2",
+      "to": "azusa",
       "color": "#ff6b6b",
       "width": 2
     },
     {
       "from": "sumire",
-      "to": "friend3",
+      "to": "951",
       "color": "#ff6b6b",
-      "width": 2
+      "width": 4
     },
     {
       "from": "sumire",
-      "to": "friend4",
+      "to": "koritsu",
+      "color": "#ff6b6b",
+      "width": 5
+    },
+    {
+      "from": "sumire",
+      "to": "170",
       "color": "#ff6b6b",
       "width": 2
     },
     {
-      "from": "friend1",
-      "to": "friend2",
-      "color": "rgba(255, 255, 255, 0.2)",
-      "width": 1
+      "from": "951",
+      "to": "170",
+      "color": "rgba(255, 255, 255, 0.8)",
+      "width": 4
     },
     {
-      "from": "friend3",
-      "to": "friend4",
-      "color": "rgba(255, 255, 255, 0.2)",
-      "width": 1
+      "from": "cheese",
+      "to": "azusa",
+      "color": "rgba(255, 255, 255, 0.8)",
+      "width": 4
+    },
+    {
+      "from": "cheese",
+      "to": "koritsu",
+      "color": "rgba(255, 255, 255, 0.8)",
+      "width": 4
     }
   ]
 }
