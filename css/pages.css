@@ -563,3 +563,176 @@
         font-size: 1.25rem;
     }
 }
+
+/* 子页面背景效果 */
+.page-main {
+    background: linear-gradient(180deg,
+        rgba(12, 5, 5, 0.92) 0%,
+        rgba(12, 5, 5, 0.96) 50%,
+        rgba(12, 5, 5, 0.98) 100%) !important;
+    position: relative;
+}
+
+.page-main::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #0c0505 0%, #1a1625 50%, #2d2540 100%);
+    filter: blur(40px) brightness(0.3);
+    z-index: -1;
+    opacity: 0.4;
+}
+
+/* 更新日志样式 */
+.changelog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.changelog-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.changelog-item:hover {
+    border-color: rgba(139, 125, 200, 0.3);
+}
+
+.changelog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.version-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    font-family: 'Inter', monospace;
+}
+
+.changelog-date {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-family: 'Inter', monospace;
+}
+
+.changelog-content {
+    padding: 2rem;
+}
+
+.changelog-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.changelog-section {
+    margin-bottom: 1.5rem;
+}
+
+.changelog-section:last-child {
+    margin-bottom: 0;
+}
+
+.changelog-section h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.changelog-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.changelog-section li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    position: relative;
+    font-size: 0.9375rem;
+}
+
+.changelog-section li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* 歌曲列表 - komichi 风格 */
+.songs-list {
+    gap: 0 !important;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.song-item {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 0 !important;
+}
+
+.song-item:last-child {
+    border-bottom: none !important;
+}
+
+.song-item:hover {
+    background: rgba(139, 125, 200, 0.08) !important;
+    transform: none !important;
+}
+
+.song-number {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: var(--text-muted) !important;
+    font-family: 'Inter', monospace;
+}
+
+.song-link {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-muted) !important;
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.song-duration {
+    font-family: 'Inter', monospace;
+}
+
+@media (max-width: 768px) {
+    .changelog-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem 1.5rem;
+        align-items: flex-start;
+    }
+
+    .changelog-content {
+        padding: 1.5rem;
+    }
+
+    .changelog-title {
+        font-size: 1.25rem;
+    }
+}

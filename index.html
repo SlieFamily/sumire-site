@@ -34,6 +34,20 @@
                 <a href="guestbook.html" class="nav-link">堇言慎行</a>
             </div>
             <div class="nav-right">
+                <!-- 视频切换按钮 -->
+                <button class="video-toggle-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
+                    <span>切换背景</span>
+                </button>
                 <a href="https://space.bilibili.com/13271481" target="_blank" class="nav-btn">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="m8 4-2 2"></path>
@@ -42,7 +56,7 @@
                         <path d="m9 11-.01 3"></path>
                         <path d="m15 11-.01 3"></path>
                     </svg>
-                    <span>B站空间</span>
+                    <span>B站</span>
                 </a>
             </div>
         </div>
@@ -141,24 +155,52 @@
                     <h2 class="section-title">爱玩的游戏</h2>
                     <div class="games-grid">
                         <div class="game-card">
+                            <div class="game-icon">🎯</div>
+                            <h3>无畏契约</h3>
+                            <p>VALORANT · 战术射击</p>
+                        </div>
+                        <div class="game-card">
                             <div class="game-icon">🎮</div>
                             <h3>APEX Legends</h3>
-                            <p>最喜欢的FPS游戏</p>
+                            <p>FPS大逃杀</p>
                         </div>
                         <div class="game-card">
-                            <div class="game-icon">🎲</div>
-                            <h3>原神</h3>
-                            <p>每日任务不能断</p>
+                            <div class="game-icon">🪂</div>
+                            <h3>PUBG</h3>
+                            <p>绝地求生</p>
                         </div>
                         <div class="game-card">
-                            <div class="game-icon">🎯</div>
-                            <h3>恐鬼症</h3>
-                            <p>和朋友一起探险</p>
+                            <div class="game-icon">⚡</div>
+                            <h3>绝区零</h3>
+                            <p>动作RPG</p>
                         </div>
-                        <div class="game-card">
-                            <div class="game-icon">🎪</div>
-                            <h3>马里奥派对</h3>
-                            <p>友尽游戏</p>
+                    </div>
+
+                    <!-- 电竞历程 -->
+                    <div class="esports-timeline">
+                        <h3>电竞参赛与夺冠历程</h3>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="timeline-year">2024</div>
+                                <div class="timeline-content">
+                                    <h4>🏆 无畏契约主播赛冠军</h4>
+                                    <p>在虚拟主播无畏契约邀请赛中，带领队伍夺得冠军</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2023</div>
+                                <div class="timeline-content">
+                                    <h4>🥈 APEX联赛亚军</h4>
+                                    <p>参加APEX主播联赛，获得亚军佳绩</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2022</div>
+                                <div class="timeline-content">
+                                    <h4>🎮 首次参加电竞赛事</h4>
+                                    <p>首次代表虚拟主播参加PUBG邀请赛</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,22 +210,8 @@
             <section class="content-section relations-section">
                 <div class="section-container">
                     <h2 class="section-title">人物关系网</h2>
-                    <div class="relations-grid">
-                        <div class="relation-card">
-                            <div class="relation-avatar">👥</div>
-                            <h3>好友A</h3>
-                            <p>一起玩游戏的伙伴</p>
-                        </div>
-                        <div class="relation-card">
-                            <div class="relation-avatar">👥</div>
-                            <h3>好友B</h3>
-                            <p>经常联动的朋友</p>
-                        </div>
-                        <div class="relation-card">
-                            <div class="relation-avatar">👥</div>
-                            <h3>好友C</h3>
-                            <p>唱歌搭档</p>
-                        </div>
+                    <div class="relations-network">
+                        <canvas id="network-canvas"></canvas>
                     </div>
                 </div>
             </section>
