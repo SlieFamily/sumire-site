@@ -1,93 +1,56 @@
 // 主要 JavaScript 功能
 
-// 导航栏滚动效果
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+// 页面加载动画
+window.addEventListener('load', () => {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+        setTimeout(() => {
+            loadingOverlay.classList.add('hidden');
+        }, 800);
     }
 });
 
-// 移动端菜单切换
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
+// 视频加载处理
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.background-video');
 
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // 点击菜单项后关闭菜单
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
+    if (video) {
+        // 确保视频播放
+        video.addEventListener('loadeddata', () => {
+            video.play().catch(err => {
+                console.log('视频自动播放失败:', err);
+            });
         });
-    });
-}
+
+        // 视频加载失败时的处理
+        video.addEventListener('error', () => {
+            console.log('视频加载失败，使用静态背景');
+            const container = document.querySelector('.video-container');
+            if (container) {
+                container.style.background = 'linear-gradient(135deg, #0c0505 0%, #1a1625 50%, #2d2540 100%)';
+            }
+        });
+    }
+});
+
+// 移动端菜单处理
+const setupMobileMenu = () => {
+    // 如果需要移动端汉堡菜单，在这里添加
+};
 
 // 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
-});
-
-// 懒加载图片
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    observer.unobserve(img);
-                }
-            }
-        });
-    });
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// 元素进入视口时添加动画
-const observeElements = () => {
-    const elements = document.querySelectorAll('.section');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    elements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(element);
-    });
-};
-
-// 页面加载完成后执行
-document.addEventListener('DOMContentLoaded', () => {
-    observeElements();
 });

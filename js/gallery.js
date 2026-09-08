@@ -1,10 +1,9 @@
-// 画廊页面 JavaScript
+// 画廊筛选功能
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
-    // 筛选功能
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             // 更新按钮状态
@@ -18,38 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const category = item.getAttribute('data-category');
 
                 if (filter === 'all' || category === filter) {
-                    item.classList.remove('hidden');
-                    // 添加淡入动画
-                    item.style.animation = 'fadeIn 0.5s ease';
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeUp 0.5s ease';
                 } else {
-                    item.classList.add('hidden');
+                    item.style.display = 'none';
                 }
             });
         });
     });
-
-    // 画廊卡片点击效果
-    const galleryCards = document.querySelectorAll('.gallery-card');
-    galleryCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // 这里可以添加模态框或大图预览功能
-            console.log('Gallery card clicked');
-        });
-    });
 });
-
-// 添加 CSS 动画
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
-document.head.appendChild(style);
