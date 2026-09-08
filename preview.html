@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预览网站 - 明日堇sumire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1625 0%, #2d2540 100%);
+            color: #ffffff;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #8B7DC8, #6B9FE8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            text-align: center;
+            color: #b8b4c8;
+            margin-bottom: 3rem;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .preview-card {
+            background: rgba(139, 125, 200, 0.1);
+            border: 1px solid rgba(139, 125, 200, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 125, 200, 0.3);
+            border-color: #8B7DC8;
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #8B7DC8;
+        }
+        .card-desc {
+            color: #b8b4c8;
+            line-height: 1.6;
+        }
+        .info-box {
+            background: rgba(107, 159, 232, 0.1);
+            border: 1px solid rgba(107, 159, 232, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .info-box h2 {
+            color: #6B9FE8;
+            margin-bottom: 1rem;
+        }
+        .info-box p {
+            color: #b8b4c8;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            color: #b8b4c8;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(139, 125, 200, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 明日堇sumire 个人网站</h1>
+        <p class="subtitle">本地预览 - 点击卡片访问各个页面</p>
+
+        <div class="info-box">
+            <h2>📌 预览说明</h2>
+            <p>✅ 网站已开发完成，你可以点击下方卡片预览各个页面</p>
+            <p>📸 当前使用虚构内容和占位符，部署后可以替换为真实内容</p>
+            <p>🎬 主页的视频背景需要上传 background.mp4 到 assets/videos/ 文件夹</p>
+            <p>🚀 预览满意后，参考 <strong>推送说明.txt</strong> 将网站推送到 GitHub 并部署</p>
+        </div>
+
+        <h2 style="color: #8B7DC8; margin-bottom: 1.5rem;">网站页面</h2>
+        <div class="preview-grid">
+            <a href="index.html" class="preview-card">
+                <div class="card-icon">🏠</div>
+                <h3 class="card-title">人物设堇</h3>
+                <p class="card-desc">主页，包含视频背景、个人简介、游戏、人物关系、录播站和直播日历</p>
+            </a>
+
+            <a href="music.html" class="preview-card">
+                <div class="card-icon">🎵</div>
+                <h3 class="card-title">千千堇听</h3>
+                <p class="card-desc">歌单页面，展示原创、翻唱和合唱歌曲</p>
+            </a>
+
+            <a href="costumes.html" class="preview-card">
+                <div class="card-icon">👗</div>
+                <h3 class="card-title">堇衣卫</h3>
+                <p class="card-desc">历代皮套展示，采用时间线设计</p>
+            </a>
+
+            <a href="gallery.html" class="preview-card">
+                <div class="card-icon">🖼️</div>
+                <h3 class="card-title">触堇生情</h3>
+                <p class="card-desc">表情包与二创图归档，支持分类筛选</p>
+            </a>
+
+            <a href="guestbook.html" class="preview-card">
+                <div class="card-icon">💬</div>
+                <h3 class="card-title">堇言慎行</h3>
+                <p class="card-desc">留言板页面（功能占位，待后续开发）</p>
+            </a>
+
+            <a href="about.html" class="preview-card">
+                <div class="card-icon">ℹ️</div>
+                <h3 class="card-title">ABOUT</h3>
+                <p class="card-desc">关于 sumire 和网站的介绍页面</p>
+            </a>
+
+            <a href="changelog.html" class="preview-card">
+                <div class="card-icon">📝</div>
+                <h3 class="card-title">更新日志</h3>
+                <p class="card-desc">记录网站的更新历史和未来计划</p>
+            </a>
+        </div>
+
+        <div class="info-box" style="background: rgba(255, 107, 107, 0.1); border-color: rgba(255, 107, 107, 0.3);">
+            <h2 style="color: #ff6b6b;">🚀 下一步操作</h2>
+            <p><strong>1. 推送到 GitHub：</strong>查看 <code>推送说明.txt</code> 或 <code>DEPLOYMENT.md</code></p>
+            <p><strong>2. 部署到 Vercel：</strong>在 vercel.com 导入 GitHub 仓库</p>
+            <p><strong>3. 添加真实内容：</strong>参考 <code>MAINTENANCE.md</code> 修改文本和上传图片</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 明日堇sumire 个人网站</p>
+            <p>本网站为粉丝制作的非官方页面</p>
+        </div>
+    </div>
+</body>
+</html>
