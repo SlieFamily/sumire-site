@@ -37,7 +37,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    gap: 1.5rem;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -48,8 +48,8 @@ body {
 }
 
 .signature-logo {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
