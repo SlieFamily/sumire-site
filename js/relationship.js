@@ -1,26 +1,23 @@
-// 人物关系网配置文件
-// 管理员可以编辑此文件来添加/修改关系网
+// 人物关系网配置文件 - 自动布局版本
+// 管理员只需要配置节点和连接关系，位置会自动计算
 
 const relationshipData = {
-    // 节点配置
+    // 节点配置 - 不需要设置 x, y 坐标
     nodes: [
         {
             id: 'sumire',
             name: '明日堇sumire',
             avatar: '👤', // 可替换为头像URL
             url: 'https://space.bilibili.com/13271481',
-            x: 50, // 百分比位置
-            y: 50,
-            size: 60, // 节点大小
-            color: '#8B7DC8' // 节点颜色
+            size: 70, // 节点大小
+            color: '#8B7DC8', // 节点颜色
+            fixed: true // 是否固定在中心
         },
         {
             id: 'friend1',
             name: '好友A',
             avatar: '👥',
             url: 'https://space.bilibili.com/example1',
-            x: 30,
-            y: 25,
             size: 50,
             color: '#6B9FE8'
         },
@@ -29,8 +26,6 @@ const relationshipData = {
             name: '好友B',
             avatar: '👥',
             url: 'https://space.bilibili.com/example2',
-            x: 70,
-            y: 25,
             size: 50,
             color: '#6B9FE8'
         },
@@ -39,8 +34,6 @@ const relationshipData = {
             name: '好友C',
             avatar: '👥',
             url: 'https://space.bilibili.com/example3',
-            x: 20,
-            y: 70,
             size: 50,
             color: '#6B9FE8'
         },
@@ -49,8 +42,6 @@ const relationshipData = {
             name: '好友D',
             avatar: '👥',
             url: 'https://space.bilibili.com/example4',
-            x: 75,
-            y: 75,
             size: 50,
             color: '#6B9FE8'
         }
@@ -61,7 +52,7 @@ const relationshipData = {
         {
             from: 'sumire',
             to: 'friend1',
-            color: '#ff6b6b', // 红色连线
+            color: '#ff6b6b',
             width: 2
         },
         {
@@ -85,7 +76,7 @@ const relationshipData = {
         {
             from: 'friend1',
             to: 'friend2',
-            color: 'rgba(255, 255, 255, 0.2)', // 灰色连线
+            color: 'rgba(255, 255, 255, 0.2)',
             width: 1
         },
         {
@@ -96,6 +87,106 @@ const relationshipData = {
         }
     ]
 };
+
+// 力导向布局算法
+class ForceLayout {
+    constructor(nodes, edges, width, height) {
+        this.nodes = nodes.map(n => ({
+            ...n,
+            x: n.fixed ? width / 2 : Math.random() * width,
+            y: n.fixed ? height / 2 : Math.random() * height,
+            vx: 0,
+            vy: 0
+        }));
+        this.edges = edges;
+        this.width = width;
+        this.height = height;
+    }
+
+    simulate(iterations = 100) {
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+
+        for (let i = 0; i < iterations; i++) {
+            // 斥力：节点之间互相排斥
+            for (let i = 0; i < this.nodes.length; i++) {
+                for (let j = i + 1; j < this.nodes.length; j++) {
+                    const nodeA = this.nodes[i];
+                    const nodeB = this.nodes[j];
+
+                    const dx = nodeB.x - nodeA.x;
+                    const dy = nodeB.y - nodeA.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+                    const force = 5000 / (distance * distance);
+
+                    const fx = (dx / distance) * force;
+                    const fy = (dy / distance) * force;
+
+                    if (!nodeA.fixed) {
+                        nodeA.vx -= fx;
+                        nodeA.vy -= fy;
+                    }
+                    if (!nodeB.fixed) {
+                        nodeB.vx += fx;
+                        nodeB.vy += fy;
+                    }
+                }
+            }
+
+            // 引力：连接的节点互相吸引
+            this.edges.forEach(edge => {
+                const source = this.nodes.find(n => n.id === edge.from);
+                const target = this.nodes.find(n => n.id === edge.to);
+
+                if (source && target) {
+                    const dx = target.x - source.x;
+                    const dy = target.y - source.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+                    const force = distance * 0.01;
+
+                    const fx = (dx / distance) * force;
+                    const fy = (dy / distance) * force;
+
+                    if (!source.fixed) {
+                        source.vx += fx;
+                        source.vy += fy;
+                    }
+                    if (!target.fixed) {
+                        target.vx -= fx;
+                        target.vy -= fy;
+                    }
+                }
+            });
+
+            // 向中心的吸引力
+            this.nodes.forEach(node => {
+                if (!node.fixed) {
+                    const dx = centerX - node.x;
+                    const dy = centerY - node.y;
+                    node.vx += dx * 0.001;
+                    node.vy += dy * 0.001;
+                }
+            });
+
+            // 更新位置
+            this.nodes.forEach(node => {
+                if (!node.fixed) {
+                    node.vx *= 0.8; // 阻尼
+                    node.vy *= 0.8;
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    // 边界约束
+                    const margin = 100;
+                    node.x = Math.max(margin, Math.min(this.width - margin, node.x));
+                    node.y = Math.max(margin, Math.min(this.height - margin, node.y));
+                }
+            });
+        }
+
+        return this.nodes;
+    }
+}
 
 // 初始化关系网络
 function initRelationshipNetwork() {
@@ -116,22 +207,22 @@ function initRelationshipNetwork() {
     container.appendChild(svg);
 
     const rect = container.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
 
-    // 计算节点的实际像素位置
-    const calculatePosition = (node) => ({
-        x: (node.x / 100) * rect.width,
-        y: (node.y / 100) * rect.height
-    });
+    // 使用力导向布局计算节点位置
+    const layout = new ForceLayout(relationshipData.nodes, relationshipData.edges, width, height);
+    const positionedNodes = layout.simulate(150);
 
     // 绘制连线（使用贝塞尔曲线）
     relationshipData.edges.forEach(edge => {
-        const fromNode = relationshipData.nodes.find(n => n.id === edge.from);
-        const toNode = relationshipData.nodes.find(n => n.id === edge.to);
+        const fromNode = positionedNodes.find(n => n.id === edge.from);
+        const toNode = positionedNodes.find(n => n.id === edge.to);
 
         if (!fromNode || !toNode) return;
 
-        const fromPos = calculatePosition(fromNode);
-        const toPos = calculatePosition(toNode);
+        const fromPos = { x: fromNode.x, y: fromNode.y };
+        const toPos = { x: toNode.x, y: toNode.y };
 
         // 计算控制点（创建弧线效果）
         const midX = (fromPos.x + toPos.x) / 2;
@@ -158,14 +249,12 @@ function initRelationshipNetwork() {
     });
 
     // 创建节点
-    relationshipData.nodes.forEach(node => {
-        const pos = calculatePosition(node);
-
+    positionedNodes.forEach(node => {
         // 节点容器
         const nodeEl = document.createElement('div');
         nodeEl.className = 'network-node';
-        nodeEl.style.left = pos.x + 'px';
-        nodeEl.style.top = pos.y + 'px';
+        nodeEl.style.left = node.x + 'px';
+        nodeEl.style.top = node.y + 'px';
 
         // 节点链接
         const link = document.createElement('a');
@@ -212,8 +301,12 @@ function initRelationshipNetwork() {
     });
 
     // 响应式调整
+    let resizeTimer;
     window.addEventListener('resize', () => {
-        initRelationshipNetwork();
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            initRelationshipNetwork();
+        }, 250);
     });
 }
 
