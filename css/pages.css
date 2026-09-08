@@ -1110,3 +1110,90 @@
         height: 140px;
     }
 }
+
+/* 关于页面链接样式 */
+.link-primary {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.link-primary:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+.about-content code {
+    padding: 0.125rem 0.375rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* 彩蛋样式 */
+.easter-egg {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.easter-egg details {
+    cursor: pointer;
+}
+
+.easter-egg summary {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    list-style: none;
+    padding: 1rem;
+    background: rgba(139, 125, 200, 0.1);
+    border: 1px solid rgba(139, 125, 200, 0.3);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.easter-egg summary::-webkit-details-marker {
+    display: none;
+}
+
+.easter-egg summary::before {
+    content: '▶ ';
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.easter-egg details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.easter-egg summary:hover {
+    background: rgba(139, 125, 200, 0.15);
+    border-color: var(--primary-color);
+}
+
+.easter-egg-content {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--primary-color);
+    line-height: 1.8;
+    animation: fadeIn 0.5s ease;
+}
+
+.easter-egg-content p {
+    color: var(--text-light);
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
