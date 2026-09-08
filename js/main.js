@@ -26,22 +26,30 @@ window.addEventListener('load', () => {
                 // 获取目标位置
                 const targetRect = pageSignature.getBoundingClientRect();
 
-                // 计算偏移量
+                // 计算偏移量和缩放比例
                 const deltaX = targetRect.left - loadingRect.left;
                 const deltaY = targetRect.top - loadingRect.top;
+                const scaleX = targetRect.width / loadingRect.width;
+                const scaleY = targetRect.height / loadingRect.height;
 
                 // 克隆签名元素用于过渡动画
                 const clonedSignature = signatureLogo.cloneNode(true);
                 clonedSignature.style.position = 'fixed';
                 clonedSignature.style.left = loadingRect.left + 'px';
                 clonedSignature.style.top = loadingRect.top + 'px';
+                clonedSignature.style.width = loadingRect.width + 'px';
+                clonedSignature.style.height = loadingRect.height + 'px';
                 clonedSignature.style.zIndex = '10000';
                 clonedSignature.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                clonedSignature.style.animation = 'none'; // 停止淡入淡出动画
                 document.body.appendChild(clonedSignature);
 
                 // 触发过渡
                 setTimeout(() => {
-                    clonedSignature.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                    clonedSignature.style.left = targetRect.left + 'px';
+                    clonedSignature.style.top = targetRect.top + 'px';
+                    clonedSignature.style.width = targetRect.width + 'px';
+                    clonedSignature.style.height = targetRect.height + 'px';
                     clonedSignature.style.opacity = '0';
                 }, 100);
 

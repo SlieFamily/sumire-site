@@ -40,7 +40,7 @@ sumire-site/
 
 **找到**：
 ```html
-<div class="signature-logo">✨</div>
+<div class="signature-logo"><img src="assets/images/signature.png" alt="签名"></div>
 <div class="page-signature">✨</div>
 ```
 
