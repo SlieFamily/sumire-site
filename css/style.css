@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', system-ui, sans-serif;
     background: var(--dark-bg);
     color: var(--text-light);
     overflow-x: hidden;
@@ -143,8 +143,7 @@ body {
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
     border-radius: 9999px;
     transition: all 0.3s ease;
 }
@@ -174,7 +173,7 @@ body {
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     transition: all 0.3s ease;
 }
 
@@ -191,13 +190,12 @@ body {
 /* 主内容区 */
 .main-content {
     position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-end;
 }
 
 .hero-section {
-    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
     padding: 2.5rem;
     padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
 }
@@ -239,7 +237,7 @@ body {
 .hero-title {
     font-size: clamp(2.5rem, 7vw, 4.8rem);
     font-weight: 900;
-    line-height: 1;
+    line-height: 0.9;
     letter-spacing: -0.045em;
     text-shadow: 0 4px 32px rgba(0, 0, 0, 0.45);
     animation: fadeUp 0.8s ease-out 0.3s both;
@@ -247,7 +245,7 @@ body {
 
 .title-accent {
     margin-left: 0.18em;
-    font-family: Georgia, serif;
+    font-family: 'Noto Serif SC', Georgia, 'Songti SC', serif;
     font-weight: 600;
     font-style: italic;
     letter-spacing: -0.02em;
@@ -260,6 +258,41 @@ body {
     letter-spacing: 0.5em;
     color: rgba(255, 255, 255, 0.6);
     animation: fadeUp 0.8s ease-out 0.3s both;
+}
+
+/* 社交链接 */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s ease-out 0.4s both;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(139, 125, 200, 0.3);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.social-link svg {
+    width: 1.125rem;
+    height: 1.125rem;
 }
 
 /* 导航按钮网格 */
@@ -299,7 +332,7 @@ body {
 .btn-label {
     font-size: 1.125rem;
     font-weight: 600;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.1em;
     color: var(--text-light);
 }
 
@@ -316,10 +349,229 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
+/* 内容区域 */
+.content-sections {
+    position: relative;
+    background: var(--dark-bg);
+    z-index: 10;
+}
+
+.content-section {
+    padding: 5rem 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+    color: var(--text-light);
+}
+
+/* 个人简介 */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.profile-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+/* 游戏网格 */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.game-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.game-card:hover {
+    background: rgba(139, 125, 200, 0.08);
+    border-color: rgba(139, 125, 200, 0.3);
+    transform: translateY(-5px);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.game-card p {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+/* 人物关系网 */
+.relations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.relation-card {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.relation-card:hover {
+    background: rgba(139, 125, 200, 0.08);
+    border-color: rgba(139, 125, 200, 0.3);
+    transform: translateY(-5px);
+}
+
+.relation-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.relation-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.relation-card p {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+/* 录播站与日历 */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-box {
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.info-box .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.archive-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.archive-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.archive-link:hover {
+    background: rgba(139, 125, 200, 0.15);
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.link-icon {
+    font-size: 1.5rem;
+}
+
+.schedule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.schedule-info p {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.schedule-time {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color) !important;
+}
+
+.schedule-note {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
 /* 页脚 */
 .footer {
     position: relative;
     z-index: 10;
+    background: var(--dark-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1.25rem 3rem;
 }
@@ -393,15 +645,42 @@ body {
         padding: 0.5rem 0.75rem;
     }
 
+    .hero-section {
+        padding: 1.5rem;
+        min-height: 80vh;
+    }
+
     .hero-content {
         max-width: 100%;
     }
 
-    .hero-section {
-        padding: 1.5rem;
+    .hero-nav-grid {
+        grid-template-columns: 1fr;
     }
 
-    .hero-nav-grid {
+    .social-links {
+        flex-wrap: wrap;
+    }
+
+    .content-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .profile-stats {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .games-grid,
+    .relations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
         grid-template-columns: 1fr;
     }
 
