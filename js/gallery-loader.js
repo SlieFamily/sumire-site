@@ -47,5 +47,9 @@ function renderGallery(items) {
 
 // 页面加载时自动加载画廊
 if (document.querySelector('.gallery-grid')) {
-    document.addEventListener('DOMContentLoaded', loadGallery);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadGallery);
+    } else {
+        loadGallery();
+    }
 }

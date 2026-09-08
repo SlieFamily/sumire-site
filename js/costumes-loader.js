@@ -58,5 +58,9 @@ function renderCostumes(costumes) {
 
 // 页面加载时自动加载皮套
 if (document.querySelector('.costumes-masonry')) {
-    document.addEventListener('DOMContentLoaded', loadCostumes);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadCostumes);
+    } else {
+        loadCostumes();
+    }
 }

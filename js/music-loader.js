@@ -59,5 +59,10 @@ function getLangName(lang) {
 
 // 页面加载时自动加载歌曲
 if (document.querySelector('.songs-table')) {
-    document.addEventListener('DOMContentLoaded', loadSongs);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadSongs);
+    } else {
+        // 如果页面已经加载完成，立即执行
+        loadSongs();
+    }
 }

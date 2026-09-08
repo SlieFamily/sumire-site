@@ -43,5 +43,9 @@ function renderGames(games) {
 
 // 页面加载时自动加载游戏
 if (document.querySelector('.games-grid')) {
-    document.addEventListener('DOMContentLoaded', loadGames);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadGames);
+    } else {
+        loadGames();
+    }
 }
