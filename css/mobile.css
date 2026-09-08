@@ -30,8 +30,9 @@
     }
 
     .nav-right {
-        width: 100%;
-        justify-content: center;
+        width: auto;
+        justify-content: flex-end;
+        margin-left: auto;
     }
 
     .video-toggle-btn {

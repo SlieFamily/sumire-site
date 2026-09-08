@@ -62,6 +62,10 @@ class ForceLayout {
         this.edges = edges;
         this.width = width;
         this.height = height;
+        // 根据屏幕宽度调整参数
+        this.isMobile = width < 768;
+        this.repulsionForce = this.isMobile ? 20000 : 15000;
+        this.minDistanceExtra = this.isMobile ? 40 : 30;
     }
 
     simulate(iterations = 100) {
@@ -80,12 +84,12 @@ class ForceLayout {
                     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
 
                     // 计算节点半径，防止重叠
-                    const minDistance = (nodeA.size + nodeB.size) / 2 + 30; // 增加30px安全间距
+                    const minDistance = (nodeA.size + nodeB.size) / 2 + this.minDistanceExtra;
 
                     let force;
                     if (distance < minDistance) {
                         // 如果距离太近，施加更强的斥力
-                        force = 15000 / (distance * distance);
+                        force = this.repulsionForce / (distance * distance);
                     } else {
                         force = 8000 / (distance * distance);
                     }
@@ -113,7 +117,7 @@ class ForceLayout {
                     const dx = target.x - source.x;
                     const dy = target.y - source.y;
                     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const force = distance * 0.003; // 从0.005减小到0.003，拉长弧线
+                    const force = distance * (this.isMobile ? 0.002 : 0.003); // 移动端进一步减小引力
 
                     const fx = (dx / distance) * force;
                     const fy = (dy / distance) * force;
@@ -134,7 +138,7 @@ class ForceLayout {
                 if (!node.fixed) {
                     const dx = centerX - node.x;
                     const dy = centerY - node.y;
-                    node.vx += dx * 0.0003; // 从0.0005减小到0.0003
+                    node.vx += dx * 0.0003;
                     node.vy += dy * 0.0003;
                 }
             });
@@ -142,13 +146,13 @@ class ForceLayout {
             // 更新位置
             this.nodes.forEach(node => {
                 if (!node.fixed) {
-                    node.vx *= 0.85; // 从0.8增加到0.85，增加阻尼
+                    node.vx *= 0.85;
                     node.vy *= 0.85;
                     node.x += node.vx;
                     node.y += node.vy;
 
-                    // 边界约束（增大边距）
-                    const margin = 120;
+                    // 边界约束（移动端边距更大）
+                    const margin = this.isMobile ? 80 : 120;
                     node.x = Math.max(margin, Math.min(this.width - margin, node.x));
                     node.y = Math.max(margin, Math.min(this.height - margin, node.y));
                 }

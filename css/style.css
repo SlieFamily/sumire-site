@@ -6,9 +6,9 @@
 }
 
 /* 使用CDN字体，但优先使用系统字体作为fallback */
-@import url('https://fonts.font.im/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-@import url('https://fonts.font.im/css2?family=ZCOOL+XiaoWei&display=swap');
-@import url('https://fonts.font.im/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+@import url('https://font.webcache.cn/google/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+@import url('https://font.webcache.cn/google/css2?family=ZCOOL+XiaoWei&display=swap');
+@import url('https://font.webcache.cn/google/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 :root {
     --primary-color: #8B7DC8;
