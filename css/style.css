@@ -34,8 +34,10 @@ body {
     background: var(--dark-bg);
     z-index: 9999;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 3rem;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -45,12 +47,28 @@ body {
     pointer-events: none;
 }
 
+.signature-logo {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--primary-color);
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
 .loading-text {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 0.5em;
     color: var(--primary-color);
     animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
 }
 
 @keyframes pulse {

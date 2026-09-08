@@ -12,10 +12,46 @@ let currentVideoIndex = 0;
 // 页面加载动画
 window.addEventListener('load', () => {
     const loadingOverlay = document.getElementById('loadingOverlay');
+    const signatureLogo = document.querySelector('.signature-logo');
+    const pageSignature = document.querySelector('.page-signature');
+
     if (loadingOverlay) {
         setTimeout(() => {
             loadingOverlay.classList.add('hidden');
-        }, 800);
+
+            // 如果存在页面签名，触发过渡动画
+            if (pageSignature && signatureLogo) {
+                // 获取 loading 中签名的位置
+                const loadingRect = signatureLogo.getBoundingClientRect();
+                // 获取目标位置
+                const targetRect = pageSignature.getBoundingClientRect();
+
+                // 计算偏移量
+                const deltaX = targetRect.left - loadingRect.left;
+                const deltaY = targetRect.top - loadingRect.top;
+
+                // 克隆签名元素用于过渡动画
+                const clonedSignature = signatureLogo.cloneNode(true);
+                clonedSignature.style.position = 'fixed';
+                clonedSignature.style.left = loadingRect.left + 'px';
+                clonedSignature.style.top = loadingRect.top + 'px';
+                clonedSignature.style.zIndex = '10000';
+                clonedSignature.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                document.body.appendChild(clonedSignature);
+
+                // 触发过渡
+                setTimeout(() => {
+                    clonedSignature.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                    clonedSignature.style.opacity = '0';
+                }, 100);
+
+                // 显示真正的页面签名
+                setTimeout(() => {
+                    pageSignature.style.opacity = '1';
+                    clonedSignature.remove();
+                }, 900);
+            }
+        }, 1500);
     }
 });
 
