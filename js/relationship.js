@@ -108,7 +108,7 @@ class ForceLayout {
         const centerY = this.height / 2;
 
         for (let i = 0; i < iterations; i++) {
-            // 斥力：节点之间互相排斥
+            // 斥力：节点之间互相排斥（增大斥力让节点更分散）
             for (let i = 0; i < this.nodes.length; i++) {
                 for (let j = i + 1; j < this.nodes.length; j++) {
                     const nodeA = this.nodes[i];
@@ -117,7 +117,7 @@ class ForceLayout {
                     const dx = nodeB.x - nodeA.x;
                     const dy = nodeB.y - nodeA.y;
                     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const force = 5000 / (distance * distance);
+                    const force = 8000 / (distance * distance); // 从5000增加到8000
 
                     const fx = (dx / distance) * force;
                     const fy = (dy / distance) * force;
@@ -133,7 +133,7 @@ class ForceLayout {
                 }
             }
 
-            // 引力：连接的节点互相吸引
+            // 引力：连接的节点互相吸引（减小引力让节点更分散）
             this.edges.forEach(edge => {
                 const source = this.nodes.find(n => n.id === edge.from);
                 const target = this.nodes.find(n => n.id === edge.to);
@@ -142,7 +142,7 @@ class ForceLayout {
                     const dx = target.x - source.x;
                     const dy = target.y - source.y;
                     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const force = distance * 0.01;
+                    const force = distance * 0.008; // 从0.01减小到0.008
 
                     const fx = (dx / distance) * force;
                     const fy = (dy / distance) * force;
@@ -158,13 +158,13 @@ class ForceLayout {
                 }
             });
 
-            // 向中心的吸引力
+            // 向中心的吸引力（减小向心力）
             this.nodes.forEach(node => {
                 if (!node.fixed) {
                     const dx = centerX - node.x;
                     const dy = centerY - node.y;
-                    node.vx += dx * 0.001;
-                    node.vy += dy * 0.001;
+                    node.vx += dx * 0.0005; // 从0.001减小到0.0005
+                    node.vy += dy * 0.0005;
                 }
             });
 
@@ -176,8 +176,8 @@ class ForceLayout {
                     node.x += node.vx;
                     node.y += node.vy;
 
-                    // 边界约束
-                    const margin = 100;
+                    // 边界约束（增大边距）
+                    const margin = 120; // 从100增加到120
                     node.x = Math.max(margin, Math.min(this.width - margin, node.x));
                     node.y = Math.max(margin, Math.min(this.height - margin, node.y));
                 }
