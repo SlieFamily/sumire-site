@@ -5,8 +5,8 @@
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=ZCOOL+XiaoWei&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+@import url('https://fonts.loli.net/css2?family=Inter:wght@400;500;600;700;900&family=ZCOOL+XiaoWei&display=swap');
+@import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 :root {
     --primary-color: #8B7DC8;
@@ -16,7 +16,8 @@
     --text-light: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.55);
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-    --font-serif: 'ZCOOL XiaoWei', 'Noto Serif SC', 'STZhongsong', 'SimSun', serif;
+    --font-serif: 'ZCOOL XiaoWei', 'Noto Serif SC', 'SimSun', 'STZhongsong', 'STSong', 'NSimSun', serif;
+    --primary-jin: var(--primary-color);
 }
 
 body {
@@ -222,13 +223,14 @@ body {
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 9999px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.02em;
+    font-family: var(--font-serif);
     transition: all 0.3s ease;
     cursor: pointer;
 }

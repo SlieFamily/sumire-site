@@ -1,5 +1,10 @@
 /* 子页面通用样式 */
 
+/* 子页面导航栏修复 - 无右侧按钮时左对齐 */
+.page-main .nav-container {
+    justify-content: flex-start;
+}
+
 .page-main {
     min-height: 100vh;
     padding-top: calc(env(safe-area-inset-top) + 5rem);
