@@ -64,6 +64,7 @@
 }
 
 .page-title {
+    font-family: var(--font-serif);
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     letter-spacing: -0.02em;

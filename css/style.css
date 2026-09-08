@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     background: var(--dark-bg);
     color: var(--text-light);
     overflow-x: hidden;
@@ -253,7 +253,7 @@ body {
 }
 
 .hero-title {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     font-size: clamp(2.5rem, 7vw, 4.8rem);
     font-weight: 900;
     line-height: 0.9;
@@ -391,6 +391,7 @@ body {
 }
 
 .section-title {
+    font-family: var(--font-serif);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
