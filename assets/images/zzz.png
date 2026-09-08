@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>NoSuchKey</Code>
-  <Message>The specified key does not exist.</Message>
-  <RequestId>6A9FDE5234318D3133EEBE4A</RequestId>
-  <HostId>webstatic-sea.hoyoverse.com</HostId>
-  <Key>upload/event/2024/04/15/aef47e4ba11dfb076c61cccef79ee78e_2082133467025435044.png</Key>
-</Error>

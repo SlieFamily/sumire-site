@@ -1,0 +1,58 @@
+{
+  "costumes": [
+    {
+      "id": "costume-2024-08",
+      "title": "夏日泳装",
+      "date": "2024.08",
+      "year": 2024,
+      "image": "costume-2024-summer.jpg",
+      "badge": "NEW",
+      "badgeType": "new",
+      "tags": ["夏日", "泳装", "限定"]
+    },
+    {
+      "id": "costume-2024-05",
+      "title": "星光偶像服",
+      "date": "2024.05",
+      "year": 2024,
+      "image": "costume-2024-idol.jpg",
+      "badge": "HOT",
+      "badgeType": "hot",
+      "tags": ["偶像", "歌回", "华丽"]
+    },
+    {
+      "id": "costume-2023-12",
+      "title": "冬日圣诞装",
+      "date": "2023.12",
+      "year": 2023,
+      "image": "costume-2023-christmas.jpg",
+      "tags": ["冬季", "圣诞", "节日"]
+    },
+    {
+      "id": "costume-2023-04",
+      "title": "学院风制服",
+      "date": "2023.04",
+      "year": 2023,
+      "image": "costume-2023-school.jpg",
+      "tags": ["学院", "制服", "经典"]
+    },
+    {
+      "id": "costume-2023-03",
+      "title": "春日和服",
+      "date": "2023.03",
+      "year": 2023,
+      "image": "costume-2023-kimono.jpg",
+      "tags": ["和服", "春季"]
+    },
+    {
+      "id": "costume-2020-05",
+      "title": "初代服装",
+      "date": "2020.05",
+      "year": 2020,
+      "image": "costume-2020-original.jpg",
+      "badge": "经典",
+      "badgeType": "classic",
+      "tags": ["初代", "经典", "回忆"]
+    }
+  ]
+}

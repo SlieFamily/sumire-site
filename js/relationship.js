@@ -1,92 +1,53 @@
-// 人物关系网配置文件 - 自动布局版本
-// 管理员只需要配置节点和连接关系，位置会自动计算
+// 人物关系网 - 从JSON文件加载数据
 
-const relationshipData = {
-    // 节点配置 - 不需要设置 x, y 坐标
-    nodes: [
-        {
-            id: 'sumire',
-            name: '明日堇sumire',
-            avatar: '👤', // 可替换为头像URL
-            url: 'https://space.bilibili.com/13271481',
-            size: 70, // 节点大小
-            color: '#8B7DC8', // 节点颜色
-            fixed: true // 是否固定在中心
-        },
-        {
-            id: 'friend1',
-            name: '好友A',
-            avatar: '👥',
-            url: 'https://space.bilibili.com/example1',
-            size: 50,
-            color: '#6B9FE8'
-        },
-        {
-            id: 'friend2',
-            name: '好友B',
-            avatar: '👥',
-            url: 'https://space.bilibili.com/example2',
-            size: 50,
-            color: '#6B9FE8'
-        },
-        {
-            id: 'friend3',
-            name: '好友C',
-            avatar: '👥',
-            url: 'https://space.bilibili.com/example3',
-            size: 50,
-            color: '#6B9FE8'
-        },
-        {
-            id: 'friend4',
-            name: '好友D',
-            avatar: '👥',
-            url: 'https://space.bilibili.com/example4',
-            size: 50,
-            color: '#6B9FE8'
-        }
-    ],
+let relationshipData = null;
 
-    // 连接关系配置
-    edges: [
-        {
-            from: 'sumire',
-            to: 'friend1',
-            color: '#ff6b6b',
-            width: 2
-        },
-        {
-            from: 'sumire',
-            to: 'friend2',
-            color: '#ff6b6b',
-            width: 2
-        },
-        {
-            from: 'sumire',
-            to: 'friend3',
-            color: '#ff6b6b',
-            width: 2
-        },
-        {
-            from: 'sumire',
-            to: 'friend4',
-            color: '#ff6b6b',
-            width: 2
-        },
-        {
-            from: 'friend1',
-            to: 'friend2',
-            color: 'rgba(255, 255, 255, 0.2)',
-            width: 1
-        },
-        {
-            from: 'friend3',
-            to: 'friend4',
-            color: 'rgba(255, 255, 255, 0.2)',
-            width: 1
-        }
-    ]
-};
+// 从JSON文件加载关系网数据
+async function loadRelationshipData() {
+    try {
+        const response = await fetch('data/relationship.json');
+        relationshipData = await response.json();
+        initRelationshipNetwork();
+    } catch (error) {
+        console.error('加载关系网数据失败:', error);
+        // 使用默认数据
+        relationshipData = getDefaultData();
+        initRelationshipNetwork();
+    }
+}
+
+// 默认数据（作为后备）
+function getDefaultData() {
+    return {
+        nodes: [
+            {
+                id: 'sumire',
+                name: '明日堇sumire',
+                avatar: '👤',
+                url: 'https://space.bilibili.com/13271481',
+                size: 70,
+                color: '#8B7DC8',
+                fixed: true
+            },
+            {
+                id: 'friend1',
+                name: '好友A',
+                avatar: '👥',
+                url: 'https://space.bilibili.com/example1',
+                size: 50,
+                color: '#6B9FE8'
+            }
+        ],
+        edges: [
+            {
+                from: 'sumire',
+                to: 'friend1',
+                color: '#ff6b6b',
+                width: 2
+            }
+        ]
+    };
+}
 
 // 力导向布局算法
 class ForceLayout {
@@ -312,5 +273,5 @@ function initRelationshipNetwork() {
 
 // 页面加载后初始化
 if (document.querySelector('.relations-network')) {
-    window.addEventListener('load', initRelationshipNetwork);
+    window.addEventListener('load', loadRelationshipData);
 }

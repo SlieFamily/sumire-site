@@ -1,0 +1,64 @@
+{
+  "gallery": [
+    {
+      "id": "fanart-001",
+      "image": "fanart-001.jpg",
+      "category": "fanart",
+      "title": "插画作品1"
+    },
+    {
+      "id": "emoji-001",
+      "image": "emoji-001.jpg",
+      "category": "emoji",
+      "title": "表情包1"
+    },
+    {
+      "id": "fanart-002",
+      "image": "fanart-002.jpg",
+      "category": "fanart",
+      "title": "插画作品2"
+    },
+    {
+      "id": "emoji-002",
+      "image": "emoji-002.jpg",
+      "category": "emoji",
+      "title": "表情包2"
+    },
+    {
+      "id": "comic-001",
+      "image": "comic-001.jpg",
+      "category": "comic",
+      "title": "漫画作品1"
+    },
+    {
+      "id": "fanart-003",
+      "image": "fanart-003.jpg",
+      "category": "fanart",
+      "title": "插画作品3"
+    },
+    {
+      "id": "emoji-003",
+      "image": "emoji-003.jpg",
+      "category": "emoji",
+      "title": "表情包3"
+    },
+    {
+      "id": "fanart-004",
+      "image": "fanart-004.jpg",
+      "category": "fanart",
+      "title": "插画作品4"
+    },
+    {
+      "id": "comic-002",
+      "image": "comic-002.jpg",
+      "category": "comic",
+      "title": "漫画作品2"
+    },
+    {
+      "id": "fanart-005",
+      "image": "fanart-005.jpg",
+      "category": "fanart",
+      "title": "插画作品5"
+    }
+  ]
+}

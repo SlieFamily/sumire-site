@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "sumire",
+      "name": "明日堇sumire",
+      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "url": "https://space.bilibili.com/13271481",
+      "size": 70,
+      "color": "#8B7DC8",
+      "fixed": true
+    },
+    {
+      "id": "friend1",
+      "name": "好友A",
+      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "url": "https://space.bilibili.com/example1",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "friend2",
+      "name": "好友B",
+      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "url": "https://space.bilibili.com/example2",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "friend3",
+      "name": "好友C",
+      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "url": "https://space.bilibili.com/example3",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "friend4",
+      "name": "好友D",
+      "avatar": "https://i0.hdslb.com/bfs/face/member/noface.jpg",
+      "url": "https://space.bilibili.com/example4",
+      "size": 50,
+      "color": "#6B9FE8"
+    }
+  ],
+  "edges": [
+    {
+      "from": "sumire",
+      "to": "friend1",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "friend2",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "friend3",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "friend4",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "friend1",
+      "to": "friend2",
+      "color": "rgba(255, 255, 255, 0.2)",
+      "width": 1
+    },
+    {
+      "from": "friend3",
+      "to": "friend4",
+      "color": "rgba(255, 255, 255, 0.2)",
+      "width": 1
+    }
+  ]
+}

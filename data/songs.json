@@ -1,0 +1,76 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "title": "星光下的约定",
+      "artist": "明日堇sumire",
+      "type": "原创",
+      "lang": "zh",
+      "duration": "03:45",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 2,
+      "title": "夜空中最亮的星",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "zh",
+      "duration": "04:12",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 3,
+      "title": "紫色梦境",
+      "artist": "明日堇sumire",
+      "type": "原创",
+      "lang": "ja",
+      "duration": "03:28",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 4,
+      "title": "告白气球",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "zh",
+      "duration": "03:52",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 5,
+      "title": "君の知らない物語",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "ja",
+      "duration": "05:43",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 6,
+      "title": "Shape of You",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "en",
+      "duration": "03:54",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 7,
+      "title": "起风了",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "zh",
+      "duration": "05:20",
+      "url": "https://www.bilibili.com/video/BV..."
+    },
+    {
+      "id": 8,
+      "title": "紅蓮華",
+      "artist": "明日堇sumire",
+      "type": "翻唱",
+      "lang": "ja",
+      "duration": "04:04",
+      "url": "https://www.bilibili.com/video/BV..."
+    }
+  ]
+}
