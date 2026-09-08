@@ -373,11 +373,29 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* 内容区域 - 纯黑背景 */
+/* 内容区域 - 添加渐变背景 */
 .content-sections {
     position: relative;
-    background: var(--dark-bg);
+    background: linear-gradient(180deg,
+        rgba(12, 5, 5, 0.85) 0%,
+        rgba(26, 22, 37, 0.90) 30%,
+        rgba(45, 37, 64, 0.92) 60%,
+        rgba(12, 5, 5, 0.95) 100%);
     z-index: 10;
+}
+
+/* 添加背景模糊效果 */
+.content-sections::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(139, 125, 200, 0.08) 0%,
+        rgba(107, 159, 232, 0.08) 50%,
+        rgba(139, 125, 200, 0.08) 100%);
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
 }
 
 .content-section {

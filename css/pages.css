@@ -863,3 +863,219 @@
         font-size: 0.8125rem;
     }
 }
+
+/* 音乐控制区 */
+.music-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+}
+
+.search-box svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 0.9375rem;
+    font-family: var(--font-serif);
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.filter-tags {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-tag {
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-tag:hover {
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.filter-tag.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.submit-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+@media (max-width: 768px) {
+    .music-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .filter-tags {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* 皮套瀑布流布局 */
+.costumes-masonry {
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.costume-card {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.costume-card:hover {
+    border-color: var(--primary-color);
+}
+
+.costume-card-image {
+    position: relative;
+    width: 100%;
+    padding-top: 133.33%;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.15), rgba(107, 159, 232, 0.15));
+}
+
+.costume-card-info {
+    padding: 1.25rem;
+}
+
+.costume-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.costume-card-date {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.costume-card-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+    .costumes-masonry {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .costumes-masonry {
+        column-count: 1;
+    }
+}
+
+/* 画廊纯图片展示 */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-card {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-card:hover {
+    border-color: var(--primary-color);
+}
+
+.gallery-image {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.15), rgba(107, 159, 232, 0.15));
+    overflow: hidden;
+}
+
+.gallery-info {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+}
