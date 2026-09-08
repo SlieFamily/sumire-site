@@ -5,16 +5,18 @@
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=ZCOOL+XiaoWei&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 :root {
     --primary-color: #8B7DC8;
     --secondary-color: #6B9FE8;
+    --accent-color: #B794F6;
     --dark-bg: #0c0505;
     --text-light: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.55);
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', system-ui, sans-serif;
-    --font-display: 'Noto Serif SC', Georgia, 'Songti SC', 'STSong', 'SimSun', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    --font-serif: 'ZCOOL XiaoWei', 'Noto Serif SC', 'STZhongsong', 'SimSun', serif;
 }
 
 body {
@@ -163,13 +165,18 @@ body {
     color: var(--text-light);
 }
 
+/* 导航链接中的"堇"字高亮 */
+.nav-link .highlight-jin {
+    color: var(--accent-color);
+}
+
 .nav-right {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
 
-.nav-btn, .video-toggle-btn {
+.video-toggle-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -188,12 +195,12 @@ body {
     cursor: pointer;
 }
 
-.nav-btn:hover, .video-toggle-btn:hover {
+.video-toggle-btn:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
 }
 
-.nav-btn svg, .video-toggle-btn svg {
+.video-toggle-btn svg {
     width: 1rem;
     height: 1rem;
 }
@@ -257,7 +264,7 @@ body {
 
 .title-accent {
     margin-left: 0.18em;
-    font-family: var(--font-display);
+    font-family: var(--font-serif);
     font-weight: 600;
     font-style: italic;
     letter-spacing: -0.02em;
@@ -348,6 +355,11 @@ body {
     color: var(--text-light);
 }
 
+/* 按钮中的"堇"字高亮 */
+.btn-label .highlight-jin {
+    color: var(--accent-color);
+}
+
 .btn-caption {
     font-size: 0.625rem;
     font-weight: 500;
@@ -361,15 +373,10 @@ body {
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* 内容区域 - 添加背景效果 */
+/* 内容区域 - 纯黑背景 */
 .content-sections {
     position: relative;
-    background: linear-gradient(180deg,
-        rgba(12, 5, 5, 0.92) 0%,
-        rgba(12, 5, 5, 0.96) 50%,
-        rgba(12, 5, 5, 0.98) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--dark-bg);
     z-index: 10;
 }
 
@@ -389,6 +396,11 @@ body {
     letter-spacing: -0.02em;
     margin-bottom: 2.5rem;
     color: var(--text-light);
+}
+
+/* section-title 中的"堇"字高亮 */
+.section-title .highlight-jin {
+    color: var(--accent-color);
 }
 
 /* 个人简介 */
@@ -428,7 +440,7 @@ body {
     color: var(--text-muted);
 }
 
-/* 游戏网格 - 使用真实图片 */
+/* 游戏网格 */
 .games-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -532,7 +544,7 @@ body {
     color: var(--text-muted);
 }
 
-/* 人物关系网 - 网络图样式 */
+/* 人物关系网 */
 .relations-network {
     position: relative;
     min-height: 500px;
@@ -622,7 +634,7 @@ body {
 .footer {
     position: relative;
     z-index: 10;
-    background: rgba(12, 5, 5, 0.98);
+    background: var(--dark-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1.25rem 3rem;
 }
