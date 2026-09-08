@@ -5,10 +5,8 @@
     box-sizing: border-box;
 }
 
-/* 使用CDN字体，但优先使用系统字体作为fallback */
-@import url('https://font.webcache.cn/google/css2?family=Inter:wght@400;500;600;700;900&display=swap');
-@import url('https://font.webcache.cn/google/css2?family=ZCOOL+XiaoWei&display=swap');
-@import url('https://font.webcache.cn/google/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+/* 使用本地字体 */
+@import url('../assets/fonts/fonts.css');
 
 :root {
     --primary-color: #8B7DC8;
@@ -308,12 +306,14 @@ body {
     letter-spacing: -0.045em;
     text-shadow: 0 4px 32px rgba(0, 0, 0, 0.45);
     animation: fadeUp 0.8s ease-out 0.3s both;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .title-accent {
     margin-left: 0.18em;
     font-family: var(--font-serif);
-    font-weight: 600;
+    font-weight: 500;
     font-style: italic;
     letter-spacing: -0.02em;
     color: var(--primary-color);
