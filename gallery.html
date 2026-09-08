@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>触堇生情 - 明日堇sumire</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">明日堇sumire</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">人物设堇</a></li>
+                <li><a href="music.html">千千堇听</a></li>
+                <li><a href="costumes.html">堇衣卫</a></li>
+                <li><a href="gallery.html" class="active">触堇生情</a></li>
+                <li><a href="guestbook.html">堇言慎行</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="changelog.html">更新日志</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">触堇生情</h1>
+            <p class="page-subtitle">表情包与二创图归档 · 记录每一份创作的热爱</p>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <!-- 分类导航 -->
+        <section class="section filter-section">
+            <div class="container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="emoji">表情包</button>
+                    <button class="filter-btn" data-filter="fanart">二创插画</button>
+                    <button class="filter-btn" data-filter="meme">梗图</button>
+                    <button class="filter-btn" data-filter="comic">漫画</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 画廊网格 -->
+        <section class="section gallery-section">
+            <div class="container">
+                <div class="gallery-grid">
+                    <!-- 表情包 -->
+                    <div class="gallery-item" data-category="emoji">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-emoji">😊</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>开心堇</h3>
+                                <p class="gallery-author">by 粉丝A</p>
+                                <span class="gallery-category">表情包</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="emoji">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-emoji">😭</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>委屈堇</h3>
+                                <p class="gallery-author">by 粉丝B</p>
+                                <span class="gallery-category">表情包</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="emoji">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-emoji">🤔</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>思考堇</h3>
+                                <p class="gallery-author">by 粉丝C</p>
+                                <span class="gallery-category">表情包</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="emoji">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-emoji">😴</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>困困堇</h3>
+                                <p class="gallery-author">by 粉丝D</p>
+                                <span class="gallery-category">表情包</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 二创插画 -->
+                    <div class="gallery-item" data-category="fanart">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-art">🎨</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>星空下的sumire</h3>
+                                <p class="gallery-author">by 画师E</p>
+                                <span class="gallery-category">二创插画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="fanart">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-art">🖼️</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>夏日海滩</h3>
+                                <p class="gallery-author">by 画师F</p>
+                                <span class="gallery-category">二创插画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="fanart">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-art">🎭</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>舞台上的光芒</h3>
+                                <p class="gallery-author">by 画师G</p>
+                                <span class="gallery-category">二创插画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 梗图 -->
+                    <div class="gallery-item" data-category="meme">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-meme">😂</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>游戏名场面</h3>
+                                <p class="gallery-author">by 粉丝H</p>
+                                <span class="gallery-category">梗图</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="meme">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-meme">🤣</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>直播搞笑瞬间</h3>
+                                <p class="gallery-author">by 粉丝I</p>
+                                <span class="gallery-category">梗图</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="meme">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-meme">😆</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>堇式吐槽</h3>
+                                <p class="gallery-author">by 粉丝J</p>
+                                <span class="gallery-category">梗图</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 漫画 -->
+                    <div class="gallery-item" data-category="comic">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-comic">📖</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>日常小剧场 #1</h3>
+                                <p class="gallery-author">by 漫画家K</p>
+                                <span class="gallery-category">漫画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="comic">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-comic">📚</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>游戏攻略篇</h3>
+                                <p class="gallery-author">by 漫画家L</p>
+                                <span class="gallery-category">漫画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="comic">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-comic">📕</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>歌回准备中</h3>
+                                <p class="gallery-author">by 漫画家M</p>
+                                <span class="gallery-category">漫画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 更多二创插画 -->
+                    <div class="gallery-item" data-category="fanart">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-art">🌸</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>春日樱花</h3>
+                                <p class="gallery-author">by 画师N</p>
+                                <span class="gallery-category">二创插画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" data-category="fanart">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-art">🌙</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>月夜幻想</h3>
+                                <p class="gallery-author">by 画师O</p>
+                                <span class="gallery-category">二创插画</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 更多表情包 -->
+                    <div class="gallery-item" data-category="emoji">
+                        <div class="gallery-card">
+                            <div class="gallery-image">
+                                <div class="placeholder-emoji">😎</div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3>酷酷堇</h3>
+                                <p class="gallery-author">by 粉丝P</p>
+                                <span class="gallery-category">表情包</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 投稿指南 -->
+        <section class="section submit-section">
+            <div class="container">
+                <div class="submit-box">
+                    <h2 class="section-title">投稿指南</h2>
+                    <div class="submit-content">
+                        <p>欢迎为sumire创作表情包和二创作品！</p>
+                        <div class="submit-rules">
+                            <div class="rule-item">
+                                <span class="rule-icon">📝</span>
+                                <div class="rule-text">
+                                    <h4>投稿方式</h4>
+                                    <p>在B站私信或使用指定话题发布作品</p>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">✅</span>
+                                <div class="rule-text">
+                                    <h4>注意事项</h4>
+                                    <p>请尊重原创，标注作者信息</p>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">❤️</span>
+                                <div class="rule-text">
+                                    <h4>版权说明</h4>
+                                    <p>投稿即表示同意展示在本网站</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://space.bilibili.com/13271481" class="btn submit-btn">前往投稿</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 统计信息 -->
+        <section class="section stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎨</div>
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">总作品数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">创作者</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-number">每周</div>
+                        <div class="stat-label">持续更新</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 明日堇sumire. All rights reserved.</p>
+            <p>本网站为粉丝制作的非官方页面</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

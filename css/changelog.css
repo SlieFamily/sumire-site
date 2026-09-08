@@ -1,0 +1,252 @@
+/* 更新日志页面样式 */
+
+/* 页面头部 */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 更新日志列表 */
+.changelog-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.changelog-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.changelog-item:hover {
+    box-shadow: 0 10px 30px rgba(139, 125, 200, 0.3);
+    border-color: var(--primary-color);
+}
+
+.changelog-item.upcoming {
+    border: 2px dashed var(--card-border);
+    opacity: 0.85;
+}
+
+.changelog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.15), rgba(107, 159, 232, 0.15));
+    border-bottom: 1px solid var(--card-border);
+}
+
+.version-badge {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(139, 125, 200, 0.3);
+}
+
+.version-badge.upcoming {
+    background: linear-gradient(135deg, #ffd93d, #f6c90e);
+    color: #333;
+}
+
+.changelog-date {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.changelog-content {
+    padding: 2.5rem;
+}
+
+.changelog-title {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--card-border);
+}
+
+.changelog-section {
+    margin-bottom: 2rem;
+}
+
+.changelog-section:last-child {
+    margin-bottom: 0;
+}
+
+.changelog-section h4 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.changelog-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.changelog-section li {
+    padding: 0.75rem 0 0.75rem 2rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    position: relative;
+    font-size: 1.05rem;
+}
+
+.changelog-section li::before {
+    content: '▸';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* 贡献说明盒子 */
+.contribute-box {
+    max-width: 900px;
+    margin: 4rem auto 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+}
+
+.contribute-box h3 {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.contribute-box p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.contribute-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.contribute-btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contribute-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(139, 125, 200, 0.4);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 6rem 1rem 3rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+    }
+
+    .changelog-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .version-badge {
+        font-size: 1rem;
+        padding: 0.5rem 1.2rem;
+    }
+
+    .changelog-date {
+        font-size: 1rem;
+    }
+
+    .changelog-content {
+        padding: 1.5rem;
+    }
+
+    .changelog-title {
+        font-size: 1.5rem;
+    }
+
+    .changelog-section h4 {
+        font-size: 1.1rem;
+    }
+
+    .changelog-section li {
+        font-size: 0.95rem;
+        padding-left: 1.5rem;
+    }
+
+    .contribute-box {
+        padding: 2rem 1.5rem;
+    }
+
+    .contribute-box h3 {
+        font-size: 1.5rem;
+    }
+
+    .contribute-box p {
+        font-size: 1rem;
+    }
+
+    .contribute-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contribute-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}

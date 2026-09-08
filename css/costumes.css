@@ -1,0 +1,326 @@
+/* 皮套页面样式 */
+
+/* 页面头部 */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 3rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 时间线 */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+    transform: translateX(-50%);
+}
+
+.timeline-year {
+    text-align: center;
+    margin: 4rem 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-year h3 {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--dark-bg);
+    color: var(--primary-color);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    border: 2px solid var(--primary-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-item:nth-child(odd) {
+    justify-content: flex-end;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    padding-right: calc(50% + 2rem);
+}
+
+.timeline-item:nth-child(even) {
+    justify-content: flex-start;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    padding-left: calc(50% + 2rem);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.marker-dot {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    border: 3px solid var(--dark-bg);
+    box-shadow: 0 0 0 3px var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .marker-dot {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.timeline-content {
+    width: 100%;
+}
+
+/* 服装卡片 */
+.costume-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.costume-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(139, 125, 200, 0.4);
+    border-color: var(--primary-color);
+}
+
+.costume-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.2), rgba(107, 159, 232, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.costume-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.costume-card:hover .costume-image img {
+    transform: scale(1.05);
+}
+
+.costume-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.costume-badge.new {
+    background: linear-gradient(135deg, #4ecdc4, #44a8a0);
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+}
+
+.costume-badge.classic {
+    background: linear-gradient(135deg, #ffd93d, #f6c90e);
+    box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+}
+
+.costume-info {
+    padding: 2rem;
+}
+
+.costume-title {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.costume-date {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.costume-desc {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.costume-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(139, 125, 200, 0.2);
+    border: 1px solid var(--card-border);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+
+/* 统计区域 */
+.stats-section {
+    background: var(--darker-bg);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(139, 125, 200, 0.3);
+    border-color: var(--primary-color);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 6rem 1rem 3rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        padding-left: 60px;
+        padding-right: 0;
+    }
+
+    .timeline-marker {
+        left: 30px;
+    }
+
+    .timeline-year h3 {
+        font-size: 1.5rem;
+        padding: 0.4rem 1.5rem;
+    }
+
+    .costume-image {
+        height: 250px;
+    }
+
+    .costume-info {
+        padding: 1.5rem;
+    }
+
+    .costume-title {
+        font-size: 1.3rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
