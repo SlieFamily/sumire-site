@@ -89,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoToggleBtn = document.querySelector('.video-toggle-btn');
     if (videoToggleBtn && video) {
         videoToggleBtn.addEventListener('click', () => {
+            // 检查是否有多个视频
+            if (videos.length <= 1) {
+                console.log('只有一个视频，无需切换');
+                return;
+            }
+
             currentVideoIndex = (currentVideoIndex + 1) % videos.length;
             const newVideo = videos[currentVideoIndex];
 
