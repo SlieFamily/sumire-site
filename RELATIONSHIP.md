@@ -4,6 +4,12 @@
 
 编辑 `js/relationship.js` 文件即可修改人物关系网。
 
+**核心特性**：
+- 使用力导向布局算法自动计算节点位置
+- 自动防止节点重叠
+- 移动端和桌面端自动优化布局参数
+- 使用贝塞尔曲线连接节点
+
 
 ### 添加/修改节点
 
@@ -15,27 +21,12 @@
     name: '显示名称',        // 显示在头像下方的名字
     avatar: '👤',           // 头像（可以是表情符号或图片URL）
     url: 'https://...',    // 点击跳转的链接（通常是B站空间）
-    size: 60,              // 头像大小（像素）
-    color: '#8B7DC8',      // 头像背景色
-    fixed: false           // 是否固定在中心（可选，默认false）
+    size: 60,              // 头像大小（像素，推荐40-70）
+    color: '#8B7DC8'       // 头像背景色
 }
 ```
 
-### 固定主播在中心
-
-设置 `fixed: true` 可以让节点固定在中心位置：
-
-```javascript
-{
-    id: 'sumire',
-    name: '明日堇sumire',
-    avatar: '👤',
-    url: 'https://space.bilibili.com/13271481',
-    size: 70,
-    color: '#8B7DC8',
-    fixed: true  // 固定在中心
-}
-```
+**注意**：不再需要手动设置 x、y 坐标，系统会自动计算最优位置！
 
 ### 添加/修改连线
 
@@ -45,6 +36,7 @@
 {
     from: 'node_id_1',              // 起始节点ID
     to: 'node_id_2',                // 结束节点ID
+    label: '关系描述',               // 连线上的文字标签（可选）
     color: '#ff6b6b',               // 连线颜色
     width: 2                        // 连线宽度
 }
@@ -69,11 +61,29 @@ avatar: 'https://i0.hdslb.com/bfs/face/xxx.jpg'
 
 如果需要调整自动布局的效果，可以修改 `ForceLayout` 类中的参数：
 
-- `iterations`：迭代次数（默认150，数值越大越稳定但计算时间越长）
-- 斥力强度：`5000 / (distance * distance)`（数值越大，节点间距越大）
-- 引力强度：`distance * 0.01`（数值越大，连接的节点越靠近）
-- 向心力：`dx * 0.001`（数值越大，节点越向中心聚拢）
-- 阻尼：`0.8`（数值越小，节点移动越慢，越稳定）
+**移动端优化参数**：
+- 检测屏幕宽度 < 768px 自动切换为移动端模式
+- 移动端斥力：20000（更强，防止重叠）
+- 桌面端斥力：15000
+- 移动端安全间距：40px
+- 桌面端安全间距：30px
+
+**关键参数说明**：
+- `iterations`：迭代次数（默认100，数值越大越稳定）
+- 斥力强度：防止节点重叠，距离太近时施加更强斥力
+- 引力强度：连接的节点互相吸引
+  - 移动端：`distance * 0.002`
+  - 桌面端：`distance * 0.003`
+- 向心力：`dx * 0.0003`（节点向中心聚拢）
+- 阻尼：`0.85`（数值越小，节点移动越慢）
+- 边界边距：
+  - 移动端：80px
+  - 桌面端：120px
+
+**防重叠机制**：
+- 计算节点半径，确保最小安全距离
+- 距离小于安全距离时施加强斥力
+- 碰撞检测防止节点完全重叠
 
 ## 示例
 
@@ -81,13 +91,13 @@ avatar: 'https://i0.hdslb.com/bfs/face/xxx.jpg'
 
 ```javascript
 nodes: [
-    { id: 'sumire', name: '明日堇', avatar: '👤', url: 'https://...', size: 70, color: '#8B7DC8', fixed: true },
+    { id: 'sumire', name: '明日堇', avatar: '👤', url: 'https://...', size: 70, color: '#8B7DC8' },
     { id: 'friend1', name: '好友A', avatar: '👥', url: 'https://...', size: 50, color: '#6B9FE8' },
     { id: 'friend2', name: '好友B', avatar: '👥', url: 'https://...', size: 50, color: '#6B9FE8' }
 ],
 edges: [
-    { from: 'sumire', to: 'friend1', color: '#ff6b6b', width: 2 },
-    { from: 'sumire', to: 'friend2', color: '#ff6b6b', width: 2 }
+    { from: 'sumire', to: 'friend1', label: '好友', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'friend2', label: '好友', color: '#ff6b6b', width: 2 }
 ]
 ```
 
@@ -95,7 +105,7 @@ edges: [
 
 ```javascript
 nodes: [
-    { id: 'sumire', name: '明日堇', avatar: '👤', url: 'https://...', size: 70, color: '#8B7DC8', fixed: true },
+    { id: 'sumire', name: '明日堇', avatar: '👤', url: 'https://...', size: 70, color: '#8B7DC8' },
     { id: 'f1', name: '好友1', avatar: '👥', url: 'https://...', size: 50, color: '#6B9FE8' },
     { id: 'f2', name: '好友2', avatar: '👥', url: 'https://...', size: 50, color: '#6B9FE8' },
     { id: 'f3', name: '好友3', avatar: '👥', url: 'https://...', size: 50, color: '#6B9FE8' },
@@ -104,11 +114,11 @@ nodes: [
 ],
 edges: [
     // 主播连接到所有好友
-    { from: 'sumire', to: 'f1', color: '#ff6b6b', width: 2 },
-    { from: 'sumire', to: 'f2', color: '#ff6b6b', width: 2 },
-    { from: 'sumire', to: 'f3', color: '#ff6b6b', width: 2 },
-    { from: 'sumire', to: 'f4', color: '#ff6b6b', width: 2 },
-    { from: 'sumire', to: 'f5', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'f1', label: '联动', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'f2', label: '合作', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'f3', label: '好友', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'f4', label: '好友', color: '#ff6b6b', width: 2 },
+    { from: 'sumire', to: 'f5', label: '好友', color: '#ff6b6b', width: 2 },
     // 好友之间的关系
     { from: 'f1', to: 'f2', color: 'rgba(255, 255, 255, 0.2)', width: 1 },
     { from: 'f3', to: 'f4', color: 'rgba(255, 255, 255, 0.2)', width: 1 }
@@ -117,7 +127,9 @@ edges: [
 
 ## 注意事项
 
-- 第一次加载时会计算布局，可能需要几毫秒
-- 节点数量过多（>20个）时可能需要增加迭代次数
-- 响应式调整时会重新计算布局，有轻微延迟
-- 建议主播节点设置 `fixed: true` 以保持中心位置
+- 首次加载时会自动计算布局，迭代100次
+- 移动端自动使用更强的防重叠参数
+- 响应式调整时会重新计算布局
+- 节点数量过多（>15个）时建议增加迭代次数
+- 所有节点位置由算法自动计算，无需手动设置坐标
+- 连线使用贝塞尔曲线，自动避开节点中心

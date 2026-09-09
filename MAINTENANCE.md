@@ -4,7 +4,7 @@
 
 ```
 sumire-site/
-├── index.html              # 主页
+├── index.html              # 主页（人物设堇）
 ├── music.html              # 千千堇听（歌曲列表）
 ├── costumes.html           # 堇衣卫（历代皮套）
 ├── gallery.html            # 触堇生情（画廊）
@@ -12,14 +12,21 @@ sumire-site/
 ├── changelog.html          # 更新日志
 ├── css/
 │   ├── style.css          # 全局样式（主页 + 基础组件）
-│   └── pages.css          # 子页面样式
+│   ├── pages.css          # 子页面样式
+│   ├── gallery.css        # 画廊页面专用样式
+│   └── mobile.css         # 移动端适配样式
 ├── js/
 │   ├── main.js            # 主要功能（视频切换、loading动画）
 │   ├── music.js           # 音乐页面功能（搜索、筛选）
 │   ├── gallery.js         # 画廊筛选功能
-│   └── relationship.js    # 人物关系网配置
+│   └── relationship.js    # 人物关系网（力导向布局算法）
 ├── assets/
+│   ├── fonts/             # 本地字体文件
+│   │   ├── fonts.css      # 字体定义
+│   │   ├── inter-*.ttf    # Inter字体（400/500/600/700/900）
+│   │   └── zcool-xiaowei.ttf # 站酷小薇体
 │   ├── images/            # 图片资源
+│   │   ├── avatar/        # 头像图片
 │   │   └── signature.png  # 签名图片（需要添加）
 │   └── videos/            # 视频资源
 │       ├── background.mp4 # 主背景视频
@@ -103,6 +110,11 @@ const videos = [
 
 编辑 `js/relationship.js` 文件。
 
+**重要特性**：
+- 使用力导向布局算法自动排列节点，防止重叠
+- 移动端和桌面端自动优化布局参数
+- 节点间通过贝塞尔曲线连接
+
 **添加新节点**：
 ```javascript
 {
@@ -110,22 +122,28 @@ const videos = [
     name: 'UP主名字',                           // 显示名称
     avatar: 'https://...',                     // 头像URL或表情符号
     url: 'https://space.bilibili.com/...',    // B站链接
-    x: 60,                                     // 水平位置（0-100）
-    y: 40,                                     // 垂直位置（0-100）
-    size: 50,                                  // 头像大小
+    size: 50,                                  // 头像大小（推荐40-70）
     color: '#6B9FE8'                          // 背景色
 }
 ```
+
+**注意**：移除了手动的 x、y 坐标，系统会自动计算最优位置。
 
 **添加连线**：
 ```javascript
 {
     from: 'sumire',
     to: 'friend5',
+    label: '关系描述',                         // 连线上的文字标签
     color: '#ff6b6b',
     width: 2
 }
 ```
+
+**算法说明**：
+- 自动防止节点重叠
+- 根据屏幕大小调整斥力和安全间距
+- 移动端（<768px）使用更强斥力确保不重叠
 
 详细说明见 `RELATIONSHIP.md`
 
@@ -202,10 +220,20 @@ const videos = [
 
 ## 🔧 字体
 
-- 界面文字：Inter
-- 标题/中文：ZCOOL XiaoWei（站酷小薇体）、Noto Serif SC
+项目使用本地字体文件，确保在任何网络环境下都能正常显示：
 
-字体自动从 Google Fonts 加载。
+- **界面文字**：Inter（400/500/600/700/900）
+- **标题/中文**：ZCOOL XiaoWei（站酷小薇体）
+- **系统字体回退**：SimSun、STSong、PingFang SC、Microsoft YaHei
+
+所有字体文件位于 `assets/fonts/` 目录，通过 `assets/fonts/fonts.css` 引入。
+
+### 特殊效果
+
+主页标题"sumire"采用：
+- 渐变色效果（紫色→蓝色→淡紫）
+- 外发光效果（炫光边缘）
+- 使用Unicode数学字母字符：𝓼𝓾𝓶𝓲𝓻𝓮
 
 ## 📝 更新日志
 

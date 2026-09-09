@@ -7,17 +7,20 @@
 ## 📦 已完成的内容
 
 ### ✅ 页面功能
-- **人物设堇（主页）** - 带视频背景的主页，包含个人简介、游戏、人物关系、录播站、直播日历
-- **千千堇听** - 歌单展示页面，包含原创、翻唱、合唱等分类
+- **人物设堇（主页）** - 带视频背景的主页，包含渐变炫光标题、个人简介、电竞历程、人物关系网（力导向算法）
+- **千千堇听** - 歌单展示页面，支持搜索和语言筛选
 - **堇衣卫** - 历代皮套展示，采用时间线设计
 - **触堇生情** - 画廊页面，支持分类筛选（表情包、二创、梗图、漫画）
-- **堇言慎行** - 留言板占位页面（功能待开发）
-- **ABOUT** - 关于页面，介绍网站和主播
+- **ABOUT** - 关于页面，带本地SVG图标系统
 - **更新日志** - 记录网站更新历史
 
 ### ✅ 技术特性
-- 响应式设计，完美支持移动端
-- 视频背景效果（主页）
+- 完整响应式设计，移动端深度优化
+- 视频背景效果（支持多视频切换）
+- 渐变炫光文字效果
+- 本地字体加载（Inter、ZCOOL XiaoWei）
+- 力导向布局算法（人物关系网自动防重叠）
+- 本地SVG图标系统
 - 流畅的动画和过渡效果
 - 紫蓝配色主题
 - 纯静态，无后端依赖
@@ -69,27 +72,27 @@ sumire-site/
 ├── music.html              # 歌单
 ├── costumes.html           # 皮套
 ├── gallery.html            # 画廊
-├── guestbook.html          # 留言板
 ├── about.html              # 关于
 ├── changelog.html          # 更新日志
 │
 ├── css/                    # 样式文件
-│   ├── style.css          # 全局样式
-│   ├── home.css           # 主页样式
-│   ├── music.css          # 歌单样式
-│   ├── costumes.css       # 皮套样式
-│   ├── gallery.css        # 画廊样式
-│   ├── guestbook.css      # 留言板样式
-│   ├── about.css          # 关于页面样式
-│   └── changelog.css      # 更新日志样式
+│   ├── style.css          # 全局样式 + 主页
+│   ├── pages.css          # 子页面样式
+│   └── gallery.css        # 画廊专用样式
 │
 ├── js/                     # JavaScript
-│   ├── main.js            # 主要功能
-│   ├── home.js            # 主页功能
-│   └── gallery.js         # 画廊功能
+│   ├── main.js            # 主要功能（视频切换、loading）
+│   ├── music.js           # 音乐页面（搜索、筛选）
+│   ├── gallery.js         # 画廊筛选
+│   └── relationship.js    # 人物关系网（力导向算法）
 │
 ├── assets/                 # 资源文件
+│   ├── fonts/             # 本地字体
+│   │   ├── fonts.css      # 字体定义
+│   │   ├── inter-*.ttf    # Inter字体（5个权重）
+│   │   └── zcool-xiaowei.ttf
 │   ├── images/            # 图片
+│   │   ├── avatar/        # 头像
 │   │   └── README.md      # 图片说明
 │   └── videos/            # 视频
 │       └── README.md      # 视频说明
@@ -97,9 +100,10 @@ sumire-site/
 ├── README.md              # 项目说明
 ├── MAINTENANCE.md         # 维护文档
 ├── DEPLOYMENT.md          # 部署指南
+├── RELATIONSHIP.md        # 关系网配置说明
+├── DATA_CONFIG.md         # 数据配置说明
 ├── QUICKSTART.md          # 本文件
-├── .gitignore             # Git忽略文件
-└── vercel.json            # Vercel配置
+└── .gitignore             # Git忽略文件
 ```
 
 ## 🎨 自定义配色
@@ -148,6 +152,8 @@ sumire-site/
 | `QUICKSTART.md` | 快速入门指南（本文件） |
 | `MAINTENANCE.md` | 详细的内容维护文档 |
 | `DEPLOYMENT.md` | 部署到 Vercel 的完整指南 |
+| `RELATIONSHIP.md` | 人物关系网详细配置说明 |
+| `DATA_CONFIG.md` | 数据配置说明 |
 
 ## ⚡ 本地预览
 
@@ -178,18 +184,20 @@ php -S localhost:8000
 
 ## ✨ 功能规划
 
-- [ ] 留言板功能实现
-- [ ] 画廊灯箱查看
-- [ ] 搜索功能
-- [ ] 深色模式
+- [ ] 画廊灯箱查看效果
+- [ ] 深色模式切换
 - [ ] 多语言支持
+- [ ] 字体子集化优化
+- [ ] PWA离线支持
+- [ ] 关系网交互动画增强
 
 ## 🎉 开始使用
 
 1. ✅ 网站文件已创建完成
-2. ⏳ 上传图片和视频资源
-3. ⏳ 推送到 GitHub
-4. ⏳ 部署到 Vercel
-5. ⏳ 分享给观众
+2. ✅ 本地字体已配置
+3. ✅ 响应式布局已优化
+4. ⏳ 上传图片和视频资源
+5. ⏳ 自定义内容
+6. ⏳ 部署到线上
 
 祝使用愉快！
