@@ -21,7 +21,7 @@
       "id": "azusa",
       "name": "阿梓从小就很可爱",
       "avatar": "./assets/images/avatar/azusa.jpg",
-      "url": "https://space.bilibili.com/example2",
+      "url": "https://space.bilibili.com/7706705",
       "size": 50,
       "color": "#6B9FE8"
     },
@@ -38,7 +38,7 @@
       "name": "符瑶koritsu",
       "avatar": "./assets/images/avatar/koritsu.jpg",
       "url": "https://space.bilibili.com/2109776",
-      "size": 50,
+      "size": 60,
       "color": "#6B9FE8"
     },
     {
@@ -47,6 +47,14 @@
       "avatar": "./assets/images/avatar/170.jpg",
       "url": "https://space.bilibili.com/7924497",
       "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "xmm",
+      "name": "希咩咩Kaguya",
+      "avatar": "./assets/images/avatar/xmm.jpg",
+      "url": "https://space.bilibili.com/3546691244395002",
+      "size": 60,
       "color": "#6B9FE8"
     }
   ],
@@ -72,6 +80,12 @@
     {
       "from": "sumire",
       "to": "koritsu",
+      "color": "#ff6b6b",
+      "width": 5
+    },
+    {
+      "from": "sumire",
+      "to": "xmm",
       "color": "#ff6b6b",
       "width": 5
     },

@@ -64,6 +64,13 @@
                 </div>
 
                 <div class="about-section">
+                    <h2>网站架构</h2>
+                    <div class="architecture-embed">
+                        <iframe src="architecture-interactive.html" frameborder="0" title="Website Architecture Interactive Diagram"></iframe>
+                    </div>
+                </div>
+
+                <div class="about-section">
                     <h2>免责声明</h2>
                     <ul class="disclaimer-list">
                         <li>本网站为粉丝自发制作的非官方网站</li>
@@ -71,6 +78,137 @@
                         <li>本网站仅供学习交流使用，不用于任何商业目的</li>
                         <li>具体信息请以官方渠道为准</li>
                     </ul>
+                </div>
+
+                <div class="about-section" style="display: none;">
+                    <h2>网站架构旧版</h2>
+                    <div class="architecture-container">
+                        <svg viewBox="0 0 1356 440" class="architecture-diagram" role="img" aria-label="sumire-site 网站架构图">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+                                </marker>
+                                <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+                                </marker>
+                                <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#fb923c"/>
+                                </marker>
+                                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M 40 0 L 0 0 0 40" stroke="#1e293b" stroke-width="0.5" fill="none"/>
+                                </pattern>
+                            </defs>
+
+                            <!-- Background -->
+                            <rect width="100%" height="100%" fill="url(#grid)"/>
+
+                            <!-- Boundaries -->
+                            <rect x="274" y="94" width="1042" height="242" rx="12" fill="rgba(120, 53, 15, 0.15)" stroke="#fbbf24" stroke-width="1"/>
+                            <text x="282" y="112" fill="#fbbf24" font-size="9" font-weight="600">Vercel Edge Network</text>
+
+                            <rect x="553" y="324" width="474" height="108" rx="8" fill="rgba(136, 19, 55, 0.15)" stroke="#fb7185" stroke-width="1"/>
+                            <text x="561" y="342" fill="#fb7185" font-size="9" font-weight="600">第三方服务（跨域）</text>
+
+                            <!-- Connections -->
+                            <path d="M 160 283 L 300 283" stroke="#34d399" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)" fill="none"/>
+                            <path d="M 95 186 L 95 212 Q 95 220 103 220 L 362 220 Q 370 220 370 228 L 370 250" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" fill="none"/>
+                            <path d="M 440 283 L 580 283" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)" fill="none"/>
+                            <path d="M 650 250 L 650 186" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)" fill="none"/>
+                            <path d="M 720 283 L 860 283" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)" fill="none"/>
+                            <path d="M 1000 283 L 1140 283" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)" fill="none"/>
+                            <path d="M 650 316 L 650 346" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" fill="none"/>
+                            <path d="M 930 316 L 930 346" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" fill="none"/>
+
+                            <!-- Nodes -->
+                            <g class="node-external" data-node="github">
+                                <rect x="30" y="120" width="130" height="66" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+                                <text x="95" y="151" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">GitHub</text>
+                                <text x="95" y="167" fill="#94a3b8" font-size="9" text-anchor="middle">源代码仓库</text>
+                            </g>
+
+                            <g class="node-external" data-node="fans">
+                                <rect x="30" y="250" width="130" height="66" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+                                <text x="95" y="281" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">访客</text>
+                                <text x="95" y="297" fill="#94a3b8" font-size="9" text-anchor="middle">浏览器设备</text>
+                            </g>
+
+                            <g class="node-cloud" data-node="vercel">
+                                <rect x="300" y="250" width="140" height="66" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+                                <text x="370" y="281" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Vercel Edge</text>
+                                <text x="370" y="297" fill="#94a3b8" font-size="9" text-anchor="middle">CDN · HTTPS</text>
+                            </g>
+
+                            <g class="node-frontend" data-node="pages">
+                                <rect x="580" y="250" width="140" height="66" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+                                <text x="650" y="281" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">HTML 页面</text>
+                                <text x="650" y="297" fill="#94a3b8" font-size="9" text-anchor="middle">6个静态路由</text>
+                            </g>
+
+                            <g class="node-frontend" data-node="shell">
+                                <rect x="580" y="120" width="140" height="66" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+                                <text x="650" y="151" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">Shell JS</text>
+                                <text x="650" y="167" fill="#94a3b8" font-size="9" text-anchor="middle">js/main.js</text>
+                            </g>
+
+                            <g class="node-frontend" data-node="loaders">
+                                <rect x="860" y="250" width="140" height="66" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+                                <text x="930" y="281" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">加载器 &amp; UI</text>
+                                <text x="930" y="297" fill="#94a3b8" font-size="9" text-anchor="middle">模块 · 关系图</text>
+                            </g>
+
+                            <g class="node-database" data-node="content">
+                                <rect x="1140" y="250" width="150" height="66" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+                                <text x="1215" y="281" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">内容 JSON</text>
+                                <text x="1215" y="297" fill="#94a3b8" font-size="9" text-anchor="middle">7个数据集</text>
+                            </g>
+
+                            <g class="node-external" data-node="social">
+                                <rect x="575" y="346" width="150" height="66" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+                                <text x="650" y="377" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">社交平台</text>
+                                <text x="650" y="393" fill="#94a3b8" font-size="9" text-anchor="middle">Bilibili · 微博</text>
+                            </g>
+
+                            <g class="node-external" data-node="weserv">
+                                <rect x="855" y="346" width="150" height="66" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+                                <text x="930" y="377" fill="#ffffff" font-size="11" font-weight="600" text-anchor="middle">图片代理</text>
+                                <text x="930" y="393" fill="#94a3b8" font-size="9" text-anchor="middle">wsrv.nl</text>
+                            </g>
+
+                            <!-- Connection Labels -->
+                            <g class="edge-label">
+                                <rect x="203" y="263" width="54" height="14" rx="3" fill="#0f172a"/>
+                                <text x="230" y="273" fill="#34d399" font-size="8" text-anchor="middle">HTTPS GET</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="194" y="200" width="77" height="14" rx="3" fill="#0f172a"/>
+                                <text x="232" y="210" fill="#fb923c" font-size="8" text-anchor="middle">自动部署</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="479" y="263" width="62" height="14" rx="3" fill="#0f172a"/>
+                                <text x="510" y="273" fill="#94a3b8" font-size="8" text-anchor="middle">服务文件</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="609" y="230" width="82" height="14" rx="3" fill="#0f172a"/>
+                                <text x="650" y="240" fill="#94a3b8" font-size="8" text-anchor="middle">共享脚本</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="754" y="263" width="72" height="14" rx="3" fill="#0f172a"/>
+                                <text x="790" y="273" fill="#94a3b8" font-size="8" text-anchor="middle">加载模块</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="1029" y="263" width="82" height="14" rx="3" fill="#0f172a"/>
+                                <text x="1070" y="273" fill="#94a3b8" font-size="8" text-anchor="middle">获取数据</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="702" y="321" width="116" height="14" rx="3" fill="#0f172a"/>
+                                <text x="760" y="331" fill="#fb923c" font-size="8" text-anchor="middle">外链（新标签页）</text>
+                            </g>
+                            <g class="edge-label">
+                                <rect x="976" y="321" width="68" height="14" rx="3" fill="#0f172a"/>
+                                <text x="1010" y="331" fill="#fb923c" font-size="8" text-anchor="middle">头像加载</text>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
 
                 <div class="about-section">

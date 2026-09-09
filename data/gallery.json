@@ -1,64 +1,166 @@
 {
   "gallery": [
     {
-      "id": "fanart-001",
-      "image": "fanart-001.jpg",
+      "id": "wlh-xyxms",
+      "image": "wlh-xyxms.png",
       "category": "fanart",
-      "title": "插画作品1"
+      "title": "属于我们的夏天，谁也无法抹去",
+      "description": "以此稿纪念往里浩师徒杯S3夺冠，以后也一直走下去吧\n@JDG_Babyblue ​@龟龟叁叁 ​@阿辙azhe ​@悠一wakareno ​@希咩咩Kaguya ​@Yuko咩咩 ​@明日堇sumire ​",
+      "author": "B站@小呀小木石",
+      "date": "2026.7.31"
     },
     {
-      "id": "emoji-001",
-      "image": "emoji-001.jpg",
-      "category": "emoji",
-      "title": "表情包1"
+      "id": "stb3mc",
+      "image": "stb3mc.png",
+      "category": "fanart",
+      "title": "明天见",
+      "description": "图是我自己找人整合素材地图找老师做的，有一部分没有出现的主播是忘记发给我了，第二季结档的时候会在出图加进去，祝大家玩得开心 看得开心",
+      "author": "B站@悠一wakareno",
+      "date": "2026.8.1"
     },
     {
-      "id": "fanart-002",
-      "image": "fanart-002.jpg",
+      "id": "wlh-ygydmmt",
+      "image": "wlh-ygydmmt.png",
       "category": "fanart",
-      "title": "插画作品2"
+      "title": "师傅组合照欧耶",
+      "description": "技术有限只能画出QQ人站桩 有些细节没还原出来 参考图不完整可能细节上有错误 还请包涵",
+      "author": "B站@云骨鱼炖眠眠汤",
+      "date": "2026.7.16"
+    },
+    {
+      "id": "wlh-lp",
+      "image": "wlh-lp.png",
+      "category": "fanart",
+      "title": "往里浩~",
+      "description": "搓了师傅组这几只，原图已经发给蓝哥了\n二编：堇小妹的头发吸错色了，改过了\n模板：🍠rainyday 老师",
+      "author": "B站@Celia_cart0n",
+      "date": "2026.7.16"
+    },
+    {
+      "id": "mrjxmm",
+      "image": "mrjxmm.png",
+      "category": "fanart",
+      "title": "103+110=好朋友",
+      "description": "尝试摸了一张复古画风的同人\n两位分别是@明日堇sumire​左 @希咩咩Kaguya​右\n最近发现xmm的冷面幽默和mrj外闹内柔的友娇性格很搭有感觉吗",
+      "author": "B站@空白小原_Ohara",
+      "date": "2026.7.9"
+    },
+    {
+      "id": "jsh",
+      "image": "jsh.png",
+      "category": "fanart",
+      "title": "健身环TIME！！",
+      "description": "图片在此 画的是@明日堇sumire​",
+      "author": "B站@空白小原_Ohara",
+      "date": "2026.3.23"
+    },
+    {
+      "id": "mrjccc",
+      "image": "mrjccc.png",
+      "category": "fanart",
+      "title": "新年快乐！！",
+      "description": "新年快乐[脸红]@明日堇sumire​ @橙橙橙要努力变强​​",
+      "author": "B站@空白小原_Ohara",
+      "date": "2026.1.27"
+    },
+    {
+      "id": "kxgkbxy",
+      "image": "kxg-kbxy.png",
+      "category": "fanart",
+      "title": "kxg加油！",
+      "description": "花了一个礼拜 拼凑起上班和下班的时间 画了kxg全家福~ 感谢你们带来的欢乐 这个夏天过的超级开心 明天的比赛加油！\n@阿梓从小就很可爱​ @黑之951​ @雪糕cheese​ @符瑶koritsu​ @明日堇sumire​ @悠一wakareno​​​",
+      "author": "B站@空白小原_Ohara",
+      "date": "2025.8.8"
+    },
+    {
+      "id": "kxgqq",
+      "image": "kxgqq.jpg",
+      "category": "fanart",
+      "title": "分享图片",
+      "description": "整了个大家的qq人哎嘿​​​",
+      "author": "B站@符瑶koritsu",
+      "date": "2025.8.10"
+    },
+    {
+      "id": "kxgvision",
+      "image": "kxgvision.png",
+      "category": "fanart",
+      "title": "KXG比赛加油🥺",
+      "description": "最近的直播看得好开心好爱看一些队内互动...所以建设了!!\n祝接下来的比赛也一切顺利[颂乐人偶_眯眼笑]\n@悠一wakareno ​@雪糕cheese ​@黑之951 ​@符瑶koritsu ​@明日堇sumire ​@阿梓从小就很可爱 ​​",
+      "author": "B站@立刻躺下开始睡觉",
+      "date": "2025.8.14"
+    },
+    {
+      "id": "kxgohhh",
+      "image": "kxgohhh.jpg",
+      "category": "fanart",
+      "title": "恭喜KXG夺冠！！最正确的六个人！！！",
+      "description": "除了夺冠外最难能可贵的是交到了真正的好朋友！！\n[阿梓收藏集动态表情包_比心][阿梓收藏集动态表情包_比心][阿梓收藏集动态表情包_比心]\n这幅画参考了瓦的名画构图，而且还放了名场面！KXG是最强的！！@雪糕cheese​ @黑之951​ @符瑶koritsu​ @明日堇sumire​ @阿梓从小就很可爱​​",
+      "author": "B站@代宋传",
+      "date": "2025.8.18"
     },
     {
       "id": "emoji-002",
       "image": "emoji-002.jpg",
       "category": "emoji",
-      "title": "表情包2"
+      "title": "表情包2",
+      "description": "有趣的日常表情",
+      "author": "",
+      "date": ""
     },
     {
       "id": "comic-001",
       "image": "comic-001.jpg",
       "category": "comic",
-      "title": "漫画作品1"
+      "title": "漫画作品1",
+      "description": "精彩的四格漫画",
+      "author": "",
+      "date": ""
     },
     {
       "id": "fanart-003",
       "image": "fanart-003.jpg",
       "category": "fanart",
-      "title": "插画作品3"
+      "title": "插画作品3",
+      "description": "温馨的同人创作",
+      "author": "",
+      "date": ""
     },
     {
       "id": "emoji-003",
       "image": "emoji-003.jpg",
       "category": "emoji",
-      "title": "表情包3"
+      "title": "表情包3",
+      "description": "搞笑表情系列",
+      "author": "",
+      "date": ""
     },
     {
       "id": "fanart-004",
       "image": "fanart-004.jpg",
       "category": "fanart",
-      "title": "插画作品4"
+      "title": "插画作品4",
+      "description": "唯美的绘画创作",
+      "author": "",
+      "date": ""
     },
     {
       "id": "comic-002",
       "image": "comic-002.jpg",
       "category": "comic",
-      "title": "漫画作品2"
+      "title": "漫画作品2",
+      "description": "日常趣事短漫",
+      "author": "",
+      "date": ""
     },
     {
       "id": "fanart-005",
       "image": "fanart-005.jpg",
       "category": "fanart",
-      "title": "插画作品5"
+      "title": "插画作品5",
+      "description": "细腻的手绘作品",
+      "author": "",
+      "date": ""
     }
   ]
 }

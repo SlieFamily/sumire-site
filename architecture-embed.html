@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站架构</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0f172a;
+            overflow: hidden;
+        }
+        .diagram-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+        }
+        .diagram-container.grabbing {
+            cursor: grabbing;
+        }
+        svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+            transition: transform 0.2s ease;
+        }
+
+        /* 节点样式 */
+        .c-external { fill: rgba(30, 41, 59, 0.5); stroke: #94a3b8; }
+        .c-cloud { fill: rgba(120, 53, 15, 0.3); stroke: #fbbf24; }
+        .c-frontend { fill: rgba(8, 51, 68, 0.4); stroke: #22d3ee; }
+        .c-database { fill: rgba(76, 29, 149, 0.4); stroke: #a78bfa; }
+        .c-mask { fill: #0f172a; }
+
+        /* 连接线样式 */
+        .a-default { stroke: #64748b; fill: none; }
+        .a-emphasis { stroke: #34d399; fill: none; }
+        .a-dashed { stroke: #fb923c; fill: none; }
+
+        /* 文字样式 */
+        .t-primary { fill: #ffffff; }
+        .t-muted { fill: #94a3b8; }
+        .t-cloud { fill: #fbbf24; }
+        .t-security { fill: #fb7185; }
+        .t-external { fill: #94a3b8; }
+
+        /* 箭头标记 */
+        .m-default { fill: #64748b; }
+        .m-emphasis { fill: #34d399; }
+        .m-dashed { fill: #fb923c; }
+
+        /* 网格 */
+        .c-grid { stroke: #1e293b; fill: none; }
+
+        /* 区域边界 */
+        .c-region { fill: rgba(120, 53, 15, 0.15); stroke: #fbbf24; }
+        .c-security-group { fill: rgba(136, 19, 55, 0.15); stroke: #fb7185; }
+
+        /* 交互效果 */
+        g[data-node-id] {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        g[data-node-id]:hover {
+            opacity: 0.8;
+        }
+        g[data-node-id]:focus {
+            outline: 2px solid #8b7dc8;
+            outline-offset: 4px;
+        }
+
+        /* 控制按钮 */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 8px;
+        }
+        .controls button {
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            color: #e2e8f0;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .controls button:hover {
+            background: #1e293b;
+            border-color: #8b7dc8;
+        }
+        .zoom-level {
+            color: #94a3b8;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            min-width: 50px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagram-container" id="container">
+        <svg viewBox="0 0 1356 500" id="diagram">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+                </marker>
+                <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+                </marker>
+                <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+                </marker>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+
+            <rect width="100%" height="100%" fill="url(#grid)" />
+
+            <rect class="c-region" x="274" y="94" width="1042" height="242" rx="12" stroke-width="1"/>
+            <text x="282" y="112" class="t-cloud" font-size="9" font-weight="600">Vercel Edge Network</text>
+
+            <rect class="c-security-group" x="553" y="324" width="474" height="108" rx="8" stroke-width="1"/>
+            <text x="561" y="342" class="t-security" font-size="9" font-weight="600">第三方服务（跨域）</text>
+
+            <path d="M 160 283 L 300 283" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+            <path d="M 95 186 L 95 212 Q 95 220 103 220 L 362 220 Q 370 220 370 228 L 370 250" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)"/>
+            <path d="M 440 283 L 580 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <path d="M 650 250 L 650 186" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <path d="M 720 283 L 860 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <path d="M 1000 283 L 1140 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+            <path d="M 650 316 L 650 346" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)"/>
+            <path d="M 930 316 L 930 346" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)"/>
+
+            <g data-node-id="github" tabindex="0">
+                <rect x="30" y="120" width="130" height="66" rx="6" class="c-mask"/>
+                <rect x="30" y="120" width="130" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+                <text x="95" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">GitHub</text>
+                <text x="95" y="167" class="t-muted" font-size="9" text-anchor="middle">源代码仓库</text>
+            </g>
+
+            <g data-node-id="fans" tabindex="0">
+                <rect x="30" y="250" width="130" height="66" rx="6" class="c-mask"/>
+                <rect x="30" y="250" width="130" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+                <text x="95" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">访客</text>
+                <text x="95" y="297" class="t-muted" font-size="9" text-anchor="middle">浏览器设备</text>
+            </g>
+
+            <g data-node-id="vercel" tabindex="0">
+                <rect x="300" y="250" width="140" height="66" rx="6" class="c-mask"/>
+                <rect x="300" y="250" width="140" height="66" rx="6" class="c-cloud" stroke-width="1.5"/>
+                <text x="370" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Vercel Edge</text>
+                <text x="370" y="297" class="t-muted" font-size="9" text-anchor="middle">CDN · HTTPS</text>
+            </g>
+
+            <g data-node-id="pages" tabindex="0">
+                <rect x="580" y="250" width="140" height="66" rx="6" class="c-mask"/>
+                <rect x="580" y="250" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+                <text x="650" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">HTML 页面</text>
+                <text x="650" y="297" class="t-muted" font-size="9" text-anchor="middle">6个静态路由</text>
+            </g>
+
+            <g data-node-id="shell" tabindex="0">
+                <rect x="580" y="120" width="140" height="66" rx="6" class="c-mask"/>
+                <rect x="580" y="120" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+                <text x="650" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Shell JS</text>
+                <text x="650" y="167" class="t-muted" font-size="9" text-anchor="middle">js/main.js</text>
+            </g>
+
+            <g data-node-id="loaders" tabindex="0">
+                <rect x="860" y="250" width="140" height="66" rx="6" class="c-mask"/>
+                <rect x="860" y="250" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+                <text x="930" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">加载器 &amp; UI</text>
+                <text x="930" y="297" class="t-muted" font-size="9" text-anchor="middle">模块 · 关系图</text>
+            </g>
+
+            <g data-node-id="content" tabindex="0">
+                <rect x="1140" y="250" width="150" height="66" rx="6" class="c-mask"/>
+                <rect x="1140" y="250" width="150" height="66" rx="6" class="c-database" stroke-width="1.5"/>
+                <text x="1215" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">内容 JSON</text>
+                <text x="1215" y="297" class="t-muted" font-size="9" text-anchor="middle">7个数据集</text>
+            </g>
+
+            <g data-node-id="social" tabindex="0">
+                <rect x="575" y="346" width="150" height="66" rx="6" class="c-mask"/>
+                <rect x="575" y="346" width="150" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+                <text x="650" y="377" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">社交平台</text>
+                <text x="650" y="393" class="t-muted" font-size="9" text-anchor="middle">Bilibili · 微博</text>
+            </g>
+
+            <g data-node-id="weserv" tabindex="0">
+                <rect x="855" y="346" width="150" height="66" rx="6" class="c-mask"/>
+                <rect x="855" y="346" width="150" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+                <text x="930" y="377" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">图片代理</text>
+                <text x="930" y="393" class="t-muted" font-size="9" text-anchor="middle">wsrv.nl</text>
+            </g>
+
+            <g class="edge-label">
+                <rect x="203" y="263" width="54" height="14" rx="3" class="c-mask"/>
+                <text x="230" y="273" class="t-primary" font-size="8" text-anchor="middle">HTTPS GET</text>
+            </g>
+            <g class="edge-label">
+                <rect x="194" y="200" width="77" height="14" rx="3" class="c-mask"/>
+                <text x="232" y="210" class="t-muted" font-size="8" text-anchor="middle">自动部署</text>
+            </g>
+            <g class="edge-label">
+                <rect x="479" y="263" width="62" height="14" rx="3" class="c-mask"/>
+                <text x="510" y="273" class="t-muted" font-size="8" text-anchor="middle">服务文件</text>
+            </g>
+            <g class="edge-label">
+                <rect x="609" y="230" width="82" height="14" rx="3" class="c-mask"/>
+                <text x="650" y="240" class="t-muted" font-size="8" text-anchor="middle">共享脚本</text>
+            </g>
+            <g class="edge-label">
+                <rect x="754" y="263" width="72" height="14" rx="3" class="c-mask"/>
+                <text x="790" y="273" class="t-muted" font-size="8" text-anchor="middle">加载模块</text>
+            </g>
+            <g class="edge-label">
+                <rect x="1029" y="263" width="82" height="14" rx="3" class="c-mask"/>
+                <text x="1070" y="273" class="t-muted" font-size="8" text-anchor="middle">获取数据</text>
+            </g>
+            <g class="edge-label">
+                <rect x="702" y="321" width="116" height="14" rx="3" class="c-mask"/>
+                <text x="760" y="331" class="t-muted" font-size="8" text-anchor="middle">外链（新标签）</text>
+            </g>
+            <g class="edge-label">
+                <rect x="976" y="321" width="68" height="14" rx="3" class="c-mask"/>
+                <text x="1010" y="331" class="t-muted" font-size="8" text-anchor="middle">头像加载</text>
+            </g>
+        </svg>
+    </div>
+
+    <div class="controls">
+        <button id="zoom-out" title="缩小">−</button>
+        <div class="zoom-level" id="zoom-level">100%</div>
+        <button id="zoom-in" title="放大">+</button>
+        <button id="reset" title="重置视图">⟲</button>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const svg = document.getElementById('diagram');
+        const zoomLevel = document.getElementById('zoom-level');
+
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+
+        function updateTransform() {
+            svg.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            zoomLevel.textContent = Math.round(scale * 100) + '%';
+        }
+
+        function centerDiagram() {
+            scale = Math.min(
+                container.clientWidth / 1356,
+                container.clientHeight / 500
+            ) * 0.9;
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+        }
+
+        // 缩放控制
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            scale = Math.min(scale * 1.2, 3);
+            updateTransform();
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            scale = Math.max(scale / 1.2, 0.3);
+            updateTransform();
+        });
+
+        document.getElementById('reset').addEventListener('click', centerDiagram);
+
+        // 鼠标滚轮缩放
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? 0.9 : 1.1;
+            scale = Math.max(0.3, Math.min(3, scale * delta));
+            updateTransform();
+        });
+
+        // 拖拽平移
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.closest('[data-node-id]')) return;
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+            container.classList.add('grabbing');
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateTransform();
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.classList.remove('grabbing');
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.classList.remove('grabbing');
+        });
+
+        // 触摸支持
+        let touchStartDist = 0;
+        let touchStartScale = 1;
+
+        container.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                touchStartDist = Math.hypot(
+                    e.touches[0].pageX - e.touches[1].pageX,
+                    e.touches[0].pageY - e.touches[1].pageY
+                );
+                touchStartScale = scale;
+            } else if (e.touches.length === 1) {
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+                isDragging = true;
+            }
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (e.touches.length === 2) {
+                const dist = Math.hypot(
+                    e.touches[0].pageX - e.touches[1].pageX,
+                    e.touches[0].pageY - e.touches[1].pageY
+                );
+                scale = Math.max(0.3, Math.min(3, touchStartScale * (dist / touchStartDist)));
+                updateTransform();
+            } else if (e.touches.length === 1 && isDragging) {
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+                updateTransform();
+            }
+        });
+
+        container.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // 初始化
+        window.addEventListener('load', centerDiagram);
+        window.addEventListener('resize', centerDiagram);
+
+        // 节点点击提示
+        document.querySelectorAll('[data-node-id]').forEach(node => {
+            node.addEventListener('click', () => {
+                const id = node.getAttribute('data-node-id');
+                console.log('Clicked node:', id);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ async function loadCostumes() {
         const response = await fetch('data/costumes.json');
         const data = await response.json();
         renderCostumes(data.costumes);
+        initLightbox();
     } catch (error) {
         console.error('加载皮套数据失败:', error);
     }
@@ -17,6 +18,28 @@ function renderCostumes(costumes) {
     // 清空容器
     container.innerHTML = '';
 
+    // 创建Intersection Observer用于懒加载
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const actualSrc = img.dataset.src;
+                img.src = actualSrc;
+                img.classList.remove('lazy');
+                img.classList.add('lazy-loading');
+
+                // 图片加载完成后移除loading类
+                img.onload = function() {
+                    img.classList.remove('lazy-loading');
+                };
+
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '100px' // 提前100px开始加载
+    });
+
     // 渲染皮套卡片
     costumes.forEach(costume => {
         const card = document.createElement('div');
@@ -25,7 +48,7 @@ function renderCostumes(costumes) {
         // 判断图片是否存在，不存在则使用占位符
         const imagePath = `assets/images/costumes/${costume.image}`;
         const imageContent = costume.image
-            ? `<img src="${imagePath}" alt="${costume.title}" onerror="this.parentElement.innerHTML='<span class=\\'placeholder-icon\\'>👗</span>'">`
+            ? `<img class="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 533'%3E%3Crect fill='%238b7dc8' width='400' height='533'/%3E%3C/svg%3E" data-src="${imagePath}" alt="${costume.title}" data-lightbox="${imagePath}">`
             : `<span class="placeholder-icon">👗</span>`;
 
         const badgeHTML = costume.badge
@@ -53,6 +76,69 @@ function renderCostumes(costumes) {
         `;
 
         container.appendChild(card);
+
+        // 观察懒加载图片
+        if (costume.image) {
+            const img = card.querySelector('img.lazy');
+            if (img) {
+                imageObserver.observe(img);
+            }
+        }
+    });
+}
+
+// 图片灯箱功能
+function initLightbox() {
+    // 创建灯箱容器
+    let lightbox = document.getElementById('lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'lightbox';
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <button class="lightbox-close" aria-label="关闭">×</button>
+            <img src="" alt="">
+        `;
+        document.body.appendChild(lightbox);
+    }
+
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    // 点击图片打开灯箱
+    document.addEventListener('click', (e) => {
+        const img = e.target.closest('[data-lightbox]');
+        if (img) {
+            const src = img.getAttribute('data-lightbox');
+            lightboxImg.src = src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    });
+
+    // 关闭灯箱
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // ESC键关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
     });
 }
 

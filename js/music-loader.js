@@ -1,10 +1,14 @@
 // 音乐页面自动渲染
 
+let allSongs = [];
+
 async function loadSongs() {
     try {
         const response = await fetch('data/songs.json');
         const data = await response.json();
-        renderSongs(data.songs);
+        allSongs = data.songs;
+        renderSongs(allSongs);
+        initMusicFilters();
     } catch (error) {
         console.error('加载歌曲数据失败:', error);
     }
@@ -23,6 +27,8 @@ function renderSongs(songs) {
         const row = document.createElement('div');
         row.className = 'song-row';
         row.setAttribute('data-lang', song.lang);
+        row.setAttribute('data-title', song.title.toLowerCase());
+        row.setAttribute('data-artist', song.artist.toLowerCase());
 
         row.innerHTML = `
             <div class="song-number">${String(index + 1).padStart(2, '0')}</div>
@@ -57,12 +63,57 @@ function getLangName(lang) {
     return langMap[lang] || lang;
 }
 
+// 初始化筛选功能
+function initMusicFilters() {
+    const searchInput = document.getElementById('searchInput');
+    const filterTags = document.querySelectorAll('.filter-tag');
+    let currentLang = 'all';
+
+    // 搜索功能
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterSongs(searchTerm, currentLang);
+        });
+    }
+
+    // 语言筛选
+    filterTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            filterTags.forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+            currentLang = tag.getAttribute('data-lang');
+
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            filterSongs(searchTerm, currentLang);
+        });
+    });
+
+    function filterSongs(searchTerm, lang) {
+        const songRows = document.querySelectorAll('.song-row:not(.song-header)');
+
+        songRows.forEach(row => {
+            const title = row.getAttribute('data-title') || '';
+            const artist = row.getAttribute('data-artist') || '';
+            const rowLang = row.getAttribute('data-lang');
+
+            const matchesSearch = title.includes(searchTerm) || artist.includes(searchTerm);
+            const matchesLang = lang === 'all' || rowLang === lang;
+
+            if (matchesSearch && matchesLang) {
+                row.style.display = 'grid';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+}
+
 // 页面加载时自动加载歌曲
 if (document.querySelector('.songs-table')) {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadSongs);
     } else {
-        // 如果页面已经加载完成，立即执行
         loadSongs();
     }
 }

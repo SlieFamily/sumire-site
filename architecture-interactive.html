@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sumire-site Architecture</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #020617;
+      --grid: #1e293b;
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --mask: #0f172a;
+
+      --frontend-fill: rgba(8, 51, 68, 0.4);
+      --frontend-stroke: #22d3ee;
+      --backend-fill: rgba(6, 78, 59, 0.4);
+      --backend-stroke: #34d399;
+      --database-fill: rgba(76, 29, 149, 0.4);
+      --database-stroke: #a78bfa;
+      --cloud-fill: rgba(120, 53, 15, 0.3);
+      --cloud-stroke: #fbbf24;
+      --security-fill: rgba(136, 19, 55, 0.4);
+      --security-stroke: #fb7185;
+      --messagebus-stroke: #fb923c;
+      --external-fill: rgba(30, 41, 59, 0.5);
+      --external-stroke: #94a3b8;
+      --arrow: #64748b;
+      --arrow-emphasis: #34d399;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: var(--bg);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .diagram-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .diagram-container.grabbing { cursor: grabbing; }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Node styles */
+    .c-mask { fill: var(--mask); }
+    .c-external { fill: var(--external-fill); stroke: var(--external-stroke); }
+    .c-cloud { fill: var(--cloud-fill); stroke: var(--cloud-stroke); }
+    .c-frontend { fill: var(--frontend-fill); stroke: var(--frontend-stroke); }
+    .c-database { fill: var(--database-fill); stroke: var(--database-stroke); }
+    .c-region { fill: rgba(120, 53, 15, 0.15); stroke: var(--cloud-stroke); }
+    .c-security-group { fill: var(--security-fill); stroke: var(--security-stroke); }
+    .c-grid { stroke: var(--grid); fill: none; }
+
+    /* Arrow styles */
+    .a-default { stroke: var(--arrow); fill: none; }
+    .a-emphasis { stroke: var(--arrow-emphasis); fill: none; }
+    .a-dashed { stroke: var(--messagebus-stroke); fill: none; }
+    .m-default { fill: var(--arrow); }
+    .m-emphasis { fill: var(--arrow-emphasis); }
+    .m-dashed { fill: var(--messagebus-stroke); }
+
+    /* Text styles */
+    .t-primary { fill: var(--text); }
+    .t-muted { fill: var(--text-muted); }
+    .t-cloud { fill: var(--cloud-stroke); }
+    .t-security { fill: var(--security-stroke); }
+    .t-backend { fill: var(--backend-stroke); }
+    .t-messagebus { fill: var(--messagebus-stroke); }
+
+    /* Node interactions */
+    g[data-node-id] {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    g[data-node-id]:hover rect:not(.c-mask) {
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    g[data-node-id]:focus {
+      outline: none;
+    }
+
+    g[data-node-id][aria-pressed="true"] rect:not(.c-mask) {
+      stroke-width: 3;
+      filter: drop-shadow(0 0 12px currentColor) drop-shadow(0 0 24px currentColor);
+    }
+
+    /* Trace animation */
+    svg[data-animation="trace"] [data-animate="edge"] {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: trace-edge 2s ease-in-out infinite;
+    }
+
+    svg[data-animation="trace"] [data-animate="node"] {
+      animation: pulse-node 2s ease-in-out infinite;
+    }
+
+    @keyframes trace-edge {
+      0% { stroke-dashoffset: 1000; opacity: 0.3; }
+      50% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: -1000; opacity: 0.3; }
+    }
+
+    @keyframes pulse-node {
+      0%, 100% { filter: drop-shadow(0 0 0px transparent); }
+      50% { filter: drop-shadow(0 0 12px currentColor); }
+    }
+
+    /* Controls */
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 8px;
+      backdrop-filter: blur(10px);
+    }
+
+    .controls button {
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: 1px solid #475569;
+      border-radius: 4px;
+      color: #e2e8f0;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .controls button:hover {
+      background: #1e293b;
+      border-color: #22d3ee;
+      color: #22d3ee;
+    }
+
+    .controls button:active {
+      transform: scale(0.95);
+    }
+
+    .zoom-level {
+      color: #94a3b8;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      min-width: 50px;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    /* Info panel */
+    .info-panel {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      max-width: 320px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .info-panel.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .info-panel h3 {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .info-panel p {
+      color: var(--text-muted);
+      font-size: 11px;
+      line-height: 1.6;
+      margin: 4px 0;
+    }
+
+    .info-panel .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .info-panel .close-btn:hover {
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="diagram-container" id="container">
+    <svg viewBox="0 0 1356 500" id="diagram" data-animation="trace">
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+        </marker>
+        <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+        </marker>
+        <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+        </marker>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+
+      <rect width="100%" height="100%" fill="url(#grid)" />
+
+      <rect class="c-region" x="274" y="94" width="1042" height="242" rx="12" stroke-width="1"/>
+      <text x="282" y="112" class="t-cloud" font-size="9" font-weight="600">Deployed origin — Vercel edge network</text>
+
+      <rect class="c-security-group" x="553" y="324" width="474" height="108" rx="8" stroke-width="1"/>
+      <text x="561" y="342" class="t-security" font-size="9" font-weight="600">Third-party web (cross-origin)</text>
+
+      <!-- Connections with animation -->
+      <path data-animate="edge" d="M 160 283 L 300 283" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)" style="animation-delay: 0s"/>
+      <path data-animate="edge" d="M 95 186 L 95 212 Q 95 220 103 220 L 362 220 Q 370 220 370 228 L 370 250" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" style="animation-delay: 0.3s"/>
+      <path data-animate="edge" d="M 440 283 L 580 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)" style="animation-delay: 0.6s"/>
+      <path data-animate="edge" d="M 650 250 L 650 186" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)" style="animation-delay: 0.9s"/>
+      <path data-animate="edge" d="M 720 283 L 860 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)" style="animation-delay: 1.2s"/>
+      <path data-animate="edge" d="M 1000 283 L 1140 283" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)" style="animation-delay: 1.5s"/>
+      <path data-animate="edge" d="M 650 316 L 650 346" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" style="animation-delay: 1.8s"/>
+      <path data-animate="edge" d="M 930 316 L 930 346" class="a-dashed" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowhead-dashed)" style="animation-delay: 2.1s"/>
+
+      <!-- Nodes -->
+      <g data-node-id="github" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 0.3s">
+        <title>GitHub · repo · Issues · Architecture component · deploy source</title>
+        <rect x="30" y="120" width="130" height="66" rx="6" class="c-mask"/>
+        <rect x="30" y="120" width="130" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="95" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">GitHub</text>
+        <text x="95" y="167" class="t-muted" font-size="9" text-anchor="middle">repo · Issues</text>
+        <text x="95" y="178" class="t-muted" font-size="7" text-anchor="middle">deploy source</text>
+      </g>
+
+      <g data-node-id="fans" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 0s">
+        <title>Fans &amp; Visitors · browser devices · Architecture component</title>
+        <rect x="30" y="250" width="130" height="66" rx="6" class="c-mask"/>
+        <rect x="30" y="250" width="130" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="95" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Fans &amp; Visitors</text>
+        <text x="95" y="297" class="t-muted" font-size="9" text-anchor="middle">browser devices</text>
+      </g>
+
+      <g data-node-id="vercel" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 0.6s">
+        <title>Vercel Edge · sumire-site.vercel.app · Deployed origin — Vercel edge network · CDN · HTTPS</title>
+        <rect x="300" y="250" width="140" height="66" rx="6" class="c-mask"/>
+        <rect x="300" y="250" width="140" height="66" rx="6" class="c-cloud" stroke-width="1.5"/>
+        <text x="370" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Vercel Edge</text>
+        <text x="370" y="297" class="t-muted" font-size="9" text-anchor="middle">sumire-site.vercel.app</text>
+        <text x="370" y="308" class="t-cloud" font-size="7" text-anchor="middle">CDN · HTTPS</text>
+      </g>
+
+      <g data-node-id="pages" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 0.9s">
+        <title>HTML Pages · 6 static routes · Deployed origin — Vercel edge network</title>
+        <rect x="580" y="250" width="140" height="66" rx="6" class="c-mask"/>
+        <rect x="580" y="250" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="650" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">HTML Pages</text>
+        <text x="650" y="297" class="t-muted" font-size="9" text-anchor="middle">6 static routes</text>
+      </g>
+
+      <g data-node-id="shell" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 1.2s">
+        <title>Shell JS · js/main.js · Deployed origin — Vercel edge network</title>
+        <rect x="580" y="120" width="140" height="66" rx="6" class="c-mask"/>
+        <rect x="580" y="120" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="650" y="151" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Shell JS</text>
+        <text x="650" y="167" class="t-muted" font-size="9" text-anchor="middle">js/main.js</text>
+      </g>
+
+      <g data-node-id="loaders" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 1.5s">
+        <title>Loaders &amp; UI · js/*-loader.js · graph · Deployed origin — Vercel edge network</title>
+        <rect x="860" y="250" width="140" height="66" rx="6" class="c-mask"/>
+        <rect x="860" y="250" width="140" height="66" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="930" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Loaders &amp; UI</text>
+        <text x="930" y="297" class="t-muted" font-size="9" text-anchor="middle">js/*-loader.js · graph</text>
+      </g>
+
+      <g data-node-id="content" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 1.8s">
+        <title>Content JSON · 7 data sets · Deployed origin — Vercel edge network · same-origin</title>
+        <rect x="1140" y="250" width="150" height="66" rx="6" class="c-mask"/>
+        <rect x="1140" y="250" width="150" height="66" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="1215" y="281" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Content JSON</text>
+        <text x="1215" y="297" class="t-muted" font-size="9" text-anchor="middle">7 data sets</text>
+        <text x="1215" y="308" class="t-database" font-size="7" text-anchor="middle">same-origin</text>
+      </g>
+
+      <g data-node-id="social" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 2.1s">
+        <title>Bilibili · Weibo · space · profile · videos · Third-party web (cross-origin) · links open new tab</title>
+        <rect x="575" y="346" width="150" height="66" rx="6" class="c-mask"/>
+        <rect x="575" y="346" width="150" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="650" y="377" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Bilibili · Weibo</text>
+        <text x="650" y="393" class="t-muted" font-size="9" text-anchor="middle">space · profile · videos</text>
+        <text x="650" y="404" class="t-muted" font-size="7" text-anchor="middle">links open new tab</text>
+      </g>
+
+      <g data-node-id="weserv" data-animate="node" tabindex="0" role="button" aria-pressed="false" style="animation-delay: 2.4s">
+        <title>wsrv.nl · avatar image proxy · Third-party web (cross-origin)</title>
+        <rect x="855" y="346" width="150" height="66" rx="6" class="c-mask"/>
+        <rect x="855" y="346" width="150" height="66" rx="6" class="c-external" stroke-width="1.5"/>
+        <text x="930" y="377" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">wsrv.nl</text>
+        <text x="930" y="393" class="t-muted" font-size="9" text-anchor="middle">avatar image proxy</text>
+      </g>
+
+      <!-- Connection Labels -->
+      <g>
+        <rect x="203" y="263" width="54" height="14" rx="3" class="c-mask"/>
+        <text x="230" y="273" class="t-backend" font-size="8" text-anchor="middle">HTTPS GET</text>
+      </g>
+      <g>
+        <rect x="194" y="200" width="77" height="14" rx="3" class="c-mask"/>
+        <text x="232" y="210" class="t-messagebus" font-size="8" text-anchor="middle">deploy on push</text>
+      </g>
+      <g>
+        <rect x="479" y="263" width="62" height="14" rx="3" class="c-mask"/>
+        <text x="510" y="273" class="t-muted" font-size="8" text-anchor="middle">serve files</text>
+      </g>
+      <g>
+        <rect x="609" y="230" width="82" height="14" rx="3" class="c-mask"/>
+        <text x="650" y="240" class="t-muted" font-size="8" text-anchor="middle">shared shell JS</text>
+      </g>
+      <g>
+        <rect x="754" y="263" width="72" height="14" rx="3" class="c-mask"/>
+        <text x="790" y="273" class="t-muted" font-size="8" text-anchor="middle">loads modules</text>
+      </g>
+      <g>
+        <rect x="1029" y="263" width="82" height="14" rx="3" class="c-mask"/>
+        <text x="1070" y="273" class="t-muted" font-size="8" text-anchor="middle">fetch data JSON</text>
+      </g>
+      <g>
+        <rect x="702" y="321" width="116" height="14" rx="3" class="c-mask"/>
+        <text x="760" y="331" class="t-messagebus" font-size="8" text-anchor="middle">social links (new tab)</text>
+      </g>
+      <g>
+        <rect x="976" y="321" width="68" height="14" rx="3" class="c-mask"/>
+        <text x="1010" y="331" class="t-messagebus" font-size="8" text-anchor="middle">avatar &lt;img&gt;</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="info-panel" id="infoPanel">
+    <button class="close-btn" id="closeInfo">×</button>
+    <h3 id="infoTitle">Component</h3>
+    <p id="infoDesc"></p>
+  </div>
+
+  <div class="controls">
+    <button id="zoom-out" title="Zoom out (-)">−</button>
+    <div class="zoom-level" id="zoom-level">100%</div>
+    <button id="zoom-in" title="Zoom in (+)">+</button>
+    <button id="reset" title="Reset view (0)">⟲</button>
+    <button id="toggle-anim" title="Toggle animation">⚡</button>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const svg = document.getElementById('diagram');
+    const zoomLevel = document.getElementById('zoom-level');
+    const infoPanel = document.getElementById('infoPanel');
+    const infoTitle = document.getElementById('infoTitle');
+    const infoDesc = document.getElementById('infoDesc');
+    const closeInfo = document.getElementById('closeInfo');
+    const toggleAnim = document.getElementById('toggle-anim');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let activeNode = null;
+    let animationEnabled = true;
+
+    const nodeInfo = {
+      github: { title: 'GitHub Repository', desc: 'Source code repository. Triggers automatic deployment on push to main branch.' },
+      fans: { title: 'Fans & Visitors', desc: 'End users accessing the site through their browsers via HTTPS.' },
+      vercel: { title: 'Vercel Edge CDN', desc: 'Global CDN network serving static files with HTTPS. Fast edge delivery.' },
+      pages: { title: 'HTML Pages', desc: '6 static HTML routes. Pre-rendered pages served directly from CDN.' },
+      shell: { title: 'Shell JavaScript', desc: 'Main JavaScript bundle (js/main.js). Shared across all pages for consistent behavior.' },
+      loaders: { title: 'Loaders & UI Components', desc: 'Dynamic loaders (js/*-loader.js) and relationship graph renderer.' },
+      content: { title: 'Content JSON', desc: '7 data sets stored as JSON files. Same-origin fetch for character data, music, costumes, etc.' },
+      social: { title: 'Social Media Links', desc: 'External links to Bilibili and Weibo profiles. Open in new tabs.' },
+      weserv: { title: 'Image Proxy', desc: 'wsrv.nl service for avatar image optimization and caching.' }
+    };
+
+    function updateTransform() {
+      svg.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(${scale})`;
+      zoomLevel.textContent = Math.round(scale * 100) + '%';
+    }
+
+    function centerDiagram() {
+      scale = Math.min(container.clientWidth / 1356, container.clientHeight / 500) * 0.85;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    // Zoom controls
+    document.getElementById('zoom-in').addEventListener('click', () => {
+      scale = Math.min(scale * 1.2, 3);
+      updateTransform();
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', () => {
+      scale = Math.max(scale / 1.2, 0.3);
+      updateTransform();
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      centerDiagram();
+      if (activeNode) {
+        activeNode.setAttribute('aria-pressed', 'false');
+        activeNode = null;
+      }
+      infoPanel.classList.remove('active');
+    });
+
+    // Animation toggle
+    toggleAnim.addEventListener('click', () => {
+      animationEnabled = !animationEnabled;
+      if (animationEnabled) {
+        svg.setAttribute('data-animation', 'trace');
+        toggleAnim.style.color = '#22d3ee';
+      } else {
+        svg.removeAttribute('data-animation');
+        toggleAnim.style.color = '#94a3b8';
+      }
+    });
+
+    // Mouse wheel zoom
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.9 : 1.1;
+      scale = Math.max(0.3, Math.min(3, scale * delta));
+      updateTransform();
+    }, { passive: false });
+
+    // Drag to pan
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('[data-node-id]')) return;
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      container.classList.add('grabbing');
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDragging = false;
+      container.classList.remove('grabbing');
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+      container.classList.remove('grabbing');
+    });
+
+    // Node click
+    document.querySelectorAll('[data-node-id]').forEach(node => {
+      node.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = node.getAttribute('data-node-id');
+
+        // Toggle active state
+        if (activeNode === node) {
+          node.setAttribute('aria-pressed', 'false');
+          activeNode = null;
+          infoPanel.classList.remove('active');
+        } else {
+          if (activeNode) {
+            activeNode.setAttribute('aria-pressed', 'false');
+          }
+          node.setAttribute('aria-pressed', 'true');
+          activeNode = node;
+
+          // Show info
+          const info = nodeInfo[id];
+          if (info) {
+            infoTitle.textContent = info.title;
+            infoDesc.textContent = info.desc;
+            infoPanel.classList.add('active');
+          }
+        }
+      });
+
+      // Keyboard support
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          node.click();
+        }
+      });
+    });
+
+    closeInfo.addEventListener('click', () => {
+      infoPanel.classList.remove('active');
+      if (activeNode) {
+        activeNode.setAttribute('aria-pressed', 'false');
+        activeNode = null;
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '0') {
+        e.preventDefault();
+        centerDiagram();
+      } else if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        scale = Math.min(scale * 1.2, 3);
+        updateTransform();
+      } else if (e.key === '-') {
+        e.preventDefault();
+        scale = Math.max(scale / 1.2, 0.3);
+        updateTransform();
+      } else if (e.key === 'Escape') {
+        if (activeNode) {
+          activeNode.setAttribute('aria-pressed', 'false');
+          activeNode = null;
+        }
+        infoPanel.classList.remove('active');
+      }
+    });
+
+    // Touch support
+    let touchStartDist = 0;
+    let touchStartScale = 1;
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        touchStartDist = Math.hypot(
+          e.touches[0].pageX - e.touches[1].pageX,
+          e.touches[0].pageY - e.touches[1].pageY
+        );
+        touchStartScale = scale;
+      } else if (e.touches.length === 1 && !e.target.closest('[data-node-id]')) {
+        startX = e.touches[0].clientX - translateX;
+        startY = e.touches[0].clientY - translateY;
+        isDragging = true;
+      }
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      if (e.touches.length === 2) {
+        const dist = Math.hypot(
+          e.touches[0].pageX - e.touches[1].pageX,
+          e.touches[0].pageY - e.touches[1].pageY
+        );
+        scale = Math.max(0.3, Math.min(3, touchStartScale * (dist / touchStartDist)));
+        updateTransform();
+      } else if (e.touches.length === 1 && isDragging) {
+        translateX = e.touches[0].clientX - startX;
+        translateY = e.touches[0].clientY - startY;
+        updateTransform();
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Initialize
+    window.addEventListener('load', centerDiagram);
+    window.addEventListener('resize', centerDiagram);
+
+    // Set initial animation button state
+    toggleAnim.style.color = '#22d3ee';
+  </script>
+</body>
+</html>

@@ -1,14 +1,22 @@
 {
   "costumes": [
     {
-      "id": "costume-2024-08",
-      "title": "夏日泳装",
-      "date": "2024.08",
-      "year": 2024,
-      "image": "costume-2024-summer.jpg",
-      "badge": "NEW",
-      "badgeType": "new",
-      "tags": ["夏日", "泳装", "限定"]
+      "id": "original",
+      "title": "初号机",
+      "date": "2022.05",
+      "year": 2022,
+      "image": "original.jpg",
+      "badge": "经典",
+      "badgeType": "classic",
+      "tags": ["初代", "经典", "白兰死宅"]
+    },
+    {
+      "id": "black",
+      "title": "黑色外套",
+      "date": "2025.09",
+      "year": 2025,
+      "image": "black.jpg",
+      "tags": ["魅惑", "歌回", "量贩"]
     },
     {
       "id": "costume-2024-05",
@@ -34,6 +42,8 @@
       "date": "2023.04",
       "year": 2023,
       "image": "costume-2023-school.jpg",
+      "badge": "NEW",
+      "badgeType": "new",
       "tags": ["学院", "制服", "经典"]
     },
     {
@@ -43,16 +53,6 @@
       "year": 2023,
       "image": "costume-2023-kimono.jpg",
       "tags": ["和服", "春季"]
-    },
-    {
-      "id": "costume-2020-05",
-      "title": "初代服装",
-      "date": "2020.05",
-      "year": 2020,
-      "image": "costume-2020-original.jpg",
-      "badge": "经典",
-      "badgeType": "classic",
-      "tags": ["初代", "经典", "回忆"]
     }
   ]
 }
