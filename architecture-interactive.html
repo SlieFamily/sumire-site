@@ -431,7 +431,7 @@
     }
 
     function centerDiagram() {
-      scale = Math.min(container.clientWidth / 1356, container.clientHeight / 500) * 0.85;
+      scale = Math.min(container.clientWidth / 1356, container.clientHeight / 500) * 2.4;
       translateX = 0;
       translateY = 0;
       updateTransform();
@@ -439,12 +439,12 @@
 
     // Zoom controls
     document.getElementById('zoom-in').addEventListener('click', () => {
-      scale = Math.min(scale * 1.2, 3);
+      scale = Math.min(scale * 1.2, 20);
       updateTransform();
     });
 
     document.getElementById('zoom-out').addEventListener('click', () => {
-      scale = Math.max(scale / 1.2, 0.3);
+      scale = Math.max(scale / 1.2, 0.6);
       updateTransform();
     });
 
@@ -473,7 +473,7 @@
     container.addEventListener('wheel', (e) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? 0.9 : 1.1;
-      scale = Math.max(0.3, Math.min(3, scale * delta));
+      scale = Math.max(0.6, Math.min(20, scale * delta));
       updateTransform();
     }, { passive: false });
 
@@ -555,11 +555,11 @@
         centerDiagram();
       } else if (e.key === '+' || e.key === '=') {
         e.preventDefault();
-        scale = Math.min(scale * 1.2, 3);
+        scale = Math.min(scale * 1.2, 20);
         updateTransform();
       } else if (e.key === '-') {
         e.preventDefault();
-        scale = Math.max(scale / 1.2, 0.3);
+        scale = Math.max(scale / 1.2, 0.6);
         updateTransform();
       } else if (e.key === 'Escape') {
         if (activeNode) {
@@ -595,7 +595,7 @@
           e.touches[0].pageX - e.touches[1].pageX,
           e.touches[0].pageY - e.touches[1].pageY
         );
-        scale = Math.max(0.3, Math.min(3, touchStartScale * (dist / touchStartDist)));
+        scale = Math.max(0.6, Math.min(20, touchStartScale * (dist / touchStartDist)));
         updateTransform();
       } else if (e.touches.length === 1 && isDragging) {
         translateX = e.touches[0].clientX - startX;
