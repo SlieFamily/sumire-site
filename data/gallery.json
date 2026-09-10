@@ -172,8 +172,8 @@
       "date": "2026.8.3"
     },
     {
-      "id": "2026bitrh",
-      "image": "2026bitrh.png",
+      "id": "2026birth",
+      "image": "2026birth.png",
       "category": "fanart",
       "title": "Happy Birthday 2026",
       "description": "朋友画的贺图我哭死​",
@@ -181,8 +181,8 @@
       "date": "2026.8.4"
     },
     {
-      "id": "2025bitrh",
-      "image": "2025bitrh.jpg",
+      "id": "2025birth",
+      "image": "2025birth.jpg",
       "category": "fanart",
       "title": "Happy Birthday 2025",
       "description": "生日回圆满结束啦！麻薯鸡们早点休息哦！今天晚上17：00来画画和树洞2.0！！然后ob冠军赛！​",
@@ -197,6 +197,15 @@
       "description": "摸出了个kxg (˃ ⌑ ˂ഃ )​",
       "author": "明日堇sumire",
       "date": "2025.11.11"
+    },
+    {
+      "id": "mrjqbh",
+      "image": "mrjqbh.jpg",
+      "category": "fanart",
+      "title": "明日堇铅笔画",
+      "description": "(´ʚ｀)可爱小鸟！​",
+      "author": "明日堇sumire",
+      "date": "2023.6.29"
     },
     {
       "id": "nekomrj",

@@ -66,7 +66,7 @@ function parseDateString(dateStr) {
 function updateColumnCount() {
     const width = window.innerWidth;
     if (width <= 768) {
-        columnCount = 1;
+        columnCount = 2;
     } else if (width <= 1024) {
         columnCount = 2;
     } else {
@@ -136,8 +136,8 @@ async function renderGalleryItems(items) {
             img.alt = item.title;
             img.dataset.src = `assets/images/gallery/${item.image}`; // 使用data-src而不是直接src
 
-            // 使用占位图或者加载占位样式
-            img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"%3E%3Crect fill="%238b7dc8" width="800" height="600"/%3E%3C/svg%3E';
+            // 使用签名图作为占位图
+            img.src = 'assets/images/signature.png';
 
             // 预加载图片获取尺寸
             const tempImg = new Image();

@@ -10,29 +10,65 @@ body:has(.page-main) {
     position: relative;
 }
 
-/* 背景图片层 */
+/* 背景图片层 - 右侧原图 */
 body:has(.page-main)::before {
     content: '';
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
     background-image: url('../assets/images/background.png');
     background-size: auto 90%;
     background-position: right center;
     background-repeat: no-repeat;
     z-index: 0;
     opacity: 0.75;
-    mask-image: radial-gradient(ellipse 90% 85% at 80% 50%,
-        rgba(0, 0, 0, 1) 35%,
-        rgba(0, 0, 0, 0.95) 50%,
-        rgba(0, 0, 0, 0.75) 65%,
-        rgba(0, 0, 0, 0.4) 80%,
-        rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 85% at 80% 50%,
-        rgba(0, 0, 0, 1) 35%,
-        rgba(0, 0, 0, 0.95) 50%,
-        rgba(0, 0, 0, 0.75) 65%,
-        rgba(0, 0, 0, 0.4) 80%,
-        rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to left, black 20%, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 20%, black 50%, transparent 100%);
+}
+
+/* 左侧翻转图片层 - 仅PC端显示 */
+.page-main::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-image: url('../assets/images/background.png');
+    background-size: auto 90%;
+    background-position: left center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.45;
+    transform: scaleX(-1);
+    mask-image: linear-gradient(to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.3) 40%,
+        rgba(0, 0, 0, 0.6) 60%,
+        rgba(0, 0, 0, 0.8) 75%,
+        transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.3) 40%,
+        rgba(0, 0, 0, 0.6) 60%,
+        rgba(0, 0, 0, 0.8) 75%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* 移动端隐藏左侧翻转图片 */
+@media (max-width: 768px) {
+    .page-main::before {
+        display: none;
+    }
+
+    body:has(.page-main)::before {
+        width: 100%;
+        mask-image: linear-gradient(to left, black 30%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to left, black 30%, transparent 100%);
+    }
 }
 
 /* 遮罩和氛围层 */

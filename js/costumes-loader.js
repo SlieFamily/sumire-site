@@ -48,7 +48,7 @@ function renderCostumes(costumes) {
         // 判断图片是否存在，不存在则使用占位符
         const imagePath = `assets/images/costumes/${costume.image}`;
         const imageContent = costume.image
-            ? `<img class="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 533'%3E%3Crect fill='%238b7dc8' width='400' height='533'/%3E%3C/svg%3E" data-src="${imagePath}" alt="${costume.title}" data-lightbox="${imagePath}">`
+            ? `<img class="lazy" src="assets/images/signature.png" data-src="${imagePath}" alt="${costume.title}" data-lightbox="${imagePath}">`
             : `<span class="placeholder-icon">👗</span>`;
 
         const badgeHTML = costume.badge
