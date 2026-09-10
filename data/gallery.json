@@ -100,67 +100,185 @@
       "date": "2025.8.18"
     },
     {
-      "id": "emoji-002",
-      "image": "emoji-002.jpg",
+      "id": "kxgrec",
+      "image": "kxgrec.png",
+      "category": "fanart",
+      "title": "我们下次再见！",
+      "description": "@悠一wakareno ​@雪糕cheese ​@黑之951 ​@符瑶koritsu ​@明日堇sumire ​@阿梓从小就很可爱 ​​",
+      "author": "B站@立刻躺下开始睡觉",
+      "date": "2025.8.21"
+    },
+    {
+      "id": "kinsascend",
+      "image": "kinsascend.png",
+      "category": "fanart",
+      "title": "画了KXG队",
+      "description": "KA杯加油 让我们操着走！[Mygo表情包_让我看看]\n@悠一wakareno​ @黑之951​ @雪糕cheese​ @阿梓从小就很可爱​ @明日堇sumire​ @符瑶koritsu​ \n动作参考的模板 画的没有很细致 请见谅[Mygo表情包_不要吵架]​",
+      "author": "B站@无敌羊肉粥",
+      "date": "2025.8.14"
+    },
+    {
+      "id": "kxgyzy",
+      "image": "kxgyzy.png",
+      "category": "fanart",
+      "title": "悠儿园开心果大班🍼",
+      "description": "@悠一wakareno​ @黑之951​ @雪糕cheese​ @阿梓从小就很可爱​ @明日堇sumire​ @符瑶koritsu​​",
+      "author": "B站@不要问我为什么是这个名字",
+      "date": "2025.8.9"
+    },
+    {
+      "id": "bestteam",
+      "image": "bestteam.jpg",
+      "category": "fanart",
+      "title": "kxg加油📢",
+      "description": "真的很感谢kxg的大家带来这么一个快乐又感动的夏天\n感谢悠哥梓神九哥雪儿少爷少奶奶\n不管结果怎样kxg都是我心中最好的队伍[阿梓收藏集表情包_崇拜]\n@阿梓从小就很可爱 ​@黑之951 ​@雪糕cheese ​@符瑶koritsu ​@明日堇sumire ​@悠一wakareno ​\n\n为了每天看mc作息烂完了睡不着爬起来非常潦草地摸了\n动作有参考",
+      "author": "B站@Tresilis",
+      "date": "2025.8.17"
+    },
+    {
+      "id": "champions",
+      "image": "champions.png",
+      "category": "fanart",
+      "title": "恭喜KXG",
+      "description": "恭喜由@雪糕cheese​ 担任队长的 KXG开心果战队获得 KA杯无畏契约主播邀请赛 第二届冠军！ \n这是一支由@黑之951​ @符瑶koritsu​ @明日堇sumire​ @阿梓从小就很可爱​ 四位队员，和主教练@悠一wakareno​ 组成的队伍！在经历了长达一个月的磨合、训练后，终于在今天将对手BBD宝宝队以3:2的总比分拿下，在KA杯留下了属于他们的故事。\n再次感谢所有认真对待比赛的参赛者，是你们的努力让KA杯的存在有意义。\n作为观众的你，是否有在这一个月中获得快乐和力量呢？\n这一个月让我收获了很多，也感谢所有批评指正的声音，你们的声音会让我更深刻的记住我需要改正的问题，和我需要去为大家去做的、更好的一切。\n他们的故事还在继续，也有更多在这个舞台上展现自己的朋友们的故事仍在继续。\n\n我是奏Kanade，作为一个尚不成熟的活动主办，我看得很开心，你们呢？\n让咱们下届KA杯，再见~",
+      "author": "奏Kanade_Official",
+      "date": "2025.8.18"
+    },
+    {
+      "id": "kxgcanteen",
+      "image": "kxgcanteen.jpg",
+      "category": "fanart",
+      "title": "《赛前的KXG餐厅》",
+      "description": "希望时间停止，祝大家天天都是开心果！@阿梓从小就很可爱​ @雪糕cheese​ @明日堇sumire​ @符瑶koritsu​ @悠一wakareno​ @黑之951​",
+      "author": "B站@虚之舟",
+      "date": "2025.8.18"
+    },
+    {
+      "id": "ffjjmc",
+      "image": "ffjj.png",
+      "category": "fanart",
+      "title": "符堇比心",
+      "description": "@明日堇sumire ​管管你__ __​",
+      "author": "B站@正在投掷纳米塑料",
+      "date": "2025.8.5"
+    },
+    {
+      "id": "aiwlh",
+      "image": "aiwlh.jpg",
+      "category": "fanart",
+      "title": "往里浩战队视觉概念图",
+      "description": "明日堇sumire：我说四号晚上九点WLH歌回 有懂的吗​",
+      "author": "GPT Image 2.0",
+      "date": "2026.8.3"
+    },
+    {
+      "id": "2026bitrh",
+      "image": "2026bitrh.png",
+      "category": "fanart",
+      "title": "Happy Birthday 2026",
+      "description": "朋友画的贺图我哭死​",
+      "author": "明日堇sumire",
+      "date": "2026.8.4"
+    },
+    {
+      "id": "2025bitrh",
+      "image": "2025bitrh.jpg",
+      "category": "fanart",
+      "title": "Happy Birthday 2025",
+      "description": "生日回圆满结束啦！麻薯鸡们早点休息哦！今天晚上17：00来画画和树洞2.0！！然后ob冠军赛！​",
+      "author": "明日堇sumire",
+      "date": "2025.9.14"
+    },
+    {
+      "id": "kxgjbh",
+      "image": "kxgjbh.jpg",
+      "category": "fanart",
+      "title": "KXG简笔画",
+      "description": "摸出了个kxg (˃ ⌑ ˂ഃ )​",
+      "author": "明日堇sumire",
+      "date": "2025.11.11"
+    },
+    {
+      "id": "nekomrj",
+      "image": "nekomrj.gif",
       "category": "emoji",
-      "title": "表情包2",
-      "description": "有趣的日常表情",
-      "author": "",
-      "date": ""
+      "title": "小猫堇",
+      "description": "给堇神做的小猫堇，祝堇神天天开心@明日堇sumire ​",
+      "author": "B站@折月煮酒OvO",
+      "date": "2025.8.27"
     },
     {
-      "id": "comic-001",
-      "image": "comic-001.jpg",
-      "category": "comic",
-      "title": "漫画作品1",
-      "description": "精彩的四格漫画",
-      "author": "",
-      "date": ""
-    },
-    {
-      "id": "fanart-003",
-      "image": "fanart-003.jpg",
+      "id": "wnmrj",
+      "image": "wnmrj.png",
       "category": "fanart",
-      "title": "插画作品3",
-      "description": "温馨的同人创作",
-      "author": "",
-      "date": ""
+      "title": "女巫明日堇",
+      "description": "限定女巫苏米热爱来自@七之宝 ​​",
+      "author": "B站@七之宝",
+      "date": "2024.10.31"
     },
     {
-      "id": "emoji-003",
-      "image": "emoji-003.jpg",
+      "id": "bsloli",
+      "image": "bsloli.png",
+      "category": "fanart",
+      "title": "白丝萝莉堇",
+      "description": "当骰子抛出第七面，回到见你的第一眼​​",
+      "author": "明日堇sumire",
+      "date": "2025.9.24"
+    },
+    {
+      "id": "msjwsdl",
+      "image": "msjwsdl.png",
       "category": "emoji",
-      "title": "表情包3",
-      "description": "搞笑表情系列",
-      "author": "",
-      "date": ""
+      "title": "摔倒堇",
+      "description": "麻薯鸡，我摔倒了~​",
+      "author": "明日堇sumire",
+      "date": "2026.8.30"
     },
     {
-      "id": "fanart-004",
-      "image": "fanart-004.jpg",
-      "category": "fanart",
-      "title": "插画作品4",
-      "description": "唯美的绘画创作",
-      "author": "",
-      "date": ""
+      "id": "qgmrj",
+      "image": "qgmrj.gif",
+      "category": "emoji",
+      "title": "大电团堇",
+      "description": "今天遇到了一个超好的妈咪！我哭死！他人好温柔！​",
+      "author": "明日堇sumire",
+      "date": "2022.10.3"
     },
     {
-      "id": "comic-002",
-      "image": "comic-002.jpg",
+      "id": "nzhdl",
+      "image": "nzhdl.gif",
+      "category": "emoji",
+      "title": "被玩坏惹",
+      "description": "我要把自己脑子睡掉！​",
+      "author": "明日堇sumire",
+      "date": "2023.1.27"
+    },
+    {
+      "id": "2023hpny",
+      "image": "2023hpny.png",
+      "category": "emoji",
+      "title": "新年快乐",
+      "description": "除夕快乐！~[小鸟芋圆_饿饿饭饭][小鸟芋圆_打嗝][小鸟芋圆_v我]​",
+      "author": "明日堇sumire",
+      "date": "2023.1.21"
+    },
+    {
+      "id": "yyj",
+      "image": "yyj.png",
+      "category": "emoji",
+      "title": "犹豫堇",
+      "description": "如果你觉得欺负一个香香软软甜甜糯糯蜂蜜奶油甜甜腻腻酥酥脆脆滑滑嫩嫩绵绵密密弹弹润润丝丝滑滑蓬蓬松松香香甜甜油油润润细细软软密密实实润润甜甜酥酥软软嫩嫩滑滑松松软软甜甜蜜蜜细细绵绵香香浓浓弹弹嫩嫩香香甜甜酸酸甜甜辣辣爽爽咸咸鲜鲜苦苦甘甘滑滑嫩嫩酥酥脆脆软软绵香气扑鼻的酥米热会让你觉得开心的话，那请排便吧。我很忧郁。​",
+      "author": "明日堇sumire",
+      "date": "2026.5.3"
+    },
+    {
+      "id": "ffjj-comic",
+      "image": "ffjj-comic-3.jpg",
+      "images": ["ffjj-comic-1.png", "ffjj-comic-2.png", "ffjj-comic-3.jpg"],
       "category": "comic",
-      "title": "漫画作品2",
-      "description": "日常趣事短漫",
-      "author": "",
-      "date": ""
-    },
-    {
-      "id": "fanart-005",
-      "image": "fanart-005.jpg",
-      "category": "fanart",
-      "title": "插画作品5",
-      "description": "细腻的手绘作品",
-      "author": "",
-      "date": ""
+      "title": "《符堇小故事》",
+      "description": "论少爷怎么哄人。@符瑶koritsu ​@明日堇sumire ​",
+      "author": "B站@易不嗔今天早睡了吗",
+      "date": "2025.8.3"
     }
   ]
 }

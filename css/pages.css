@@ -21,30 +21,18 @@ body:has(.page-main)::before {
     background-repeat: no-repeat;
     z-index: 0;
     opacity: 0.75;
-    mask-image:
-        linear-gradient(to right,
-            transparent 0%,
-            rgba(0, 0, 0, 0.3) 60%,
-            rgba(0, 0, 0, 1) 75%,
-            rgba(0, 0, 0, 1) 100%),
-        linear-gradient(to bottom,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 1) 15%,
-            rgba(0, 0, 0, 1) 85%,
-            rgba(0, 0, 0, 0) 100%);
-    mask-composite: intersect;
-    -webkit-mask-image:
-        linear-gradient(to right,
-            transparent 0%,
-            rgba(0, 0, 0, 0.3) 60%,
-            rgba(0, 0, 0, 1) 75%,
-            rgba(0, 0, 0, 1) 100%),
-        linear-gradient(to bottom,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 1) 15%,
-            rgba(0, 0, 0, 1) 85%,
-            rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-composite: source-in;
+    mask-image: radial-gradient(ellipse 90% 85% at 80% 50%,
+        rgba(0, 0, 0, 1) 35%,
+        rgba(0, 0, 0, 0.95) 50%,
+        rgba(0, 0, 0, 0.75) 65%,
+        rgba(0, 0, 0, 0.4) 80%,
+        rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 85% at 80% 50%,
+        rgba(0, 0, 0, 1) 35%,
+        rgba(0, 0, 0, 0.95) 50%,
+        rgba(0, 0, 0, 0.75) 65%,
+        rgba(0, 0, 0, 0.4) 80%,
+        rgba(0, 0, 0, 0) 100%);
 }
 
 /* 遮罩和氛围层 */
@@ -1364,6 +1352,96 @@ img.lazy-loading {
     transform: rotate(90deg);
 }
 
+/* 漫画导航按钮 */
+.comic-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.15), rgba(107, 159, 232, 0.15));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 125, 200, 0.3);
+    border-radius: 50%;
+    color: var(--text-light);
+    font-size: 0;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.comic-nav-btn::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transition: all 0.3s ease;
+}
+
+.comic-prev::before {
+    transform: rotate(-135deg);
+    left: 24px;
+}
+
+.comic-next::before {
+    transform: rotate(45deg);
+    right: 24px;
+}
+
+.comic-nav-btn:hover {
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.3), rgba(107, 159, 232, 0.3));
+    border-color: var(--primary-color);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 6px 25px rgba(139, 125, 200, 0.4);
+}
+
+.comic-nav-btn:active {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.comic-nav-btn[style*="opacity: 0.3"] {
+    cursor: not-allowed;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.05), rgba(107, 159, 232, 0.05));
+    border-color: rgba(139, 125, 200, 0.1);
+    box-shadow: none;
+}
+
+.comic-nav-btn[style*="opacity: 0.3"]:hover {
+    transform: translateY(-50%) scale(1);
+}
+
+.comic-nav-btn[style*="opacity: 0.3"]::before {
+    opacity: 0.3;
+}
+
+.comic-prev {
+    left: 30px;
+}
+
+.comic-next {
+    right: 30px;
+}
+
+.comic-page-indicator {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.gallery-lightbox-image-container {
+    position: relative;
+}
+
 @media (max-width: 768px) {
     .gallery-lightbox-content {
         max-width: 95vw;
@@ -1393,6 +1471,31 @@ img.lazy-loading {
         width: 40px;
         height: 40px;
         font-size: 20px;
+    }
+
+    .comic-nav-btn {
+        width: 48px;
+        height: 48px;
+    }
+
+    .comic-prev {
+        left: 15px;
+    }
+
+    .comic-next {
+        right: 15px;
+    }
+
+    .comic-prev::before {
+        left: 20px;
+    }
+
+    .comic-next::before {
+        right: 20px;
+    }
+
+    .comic-page-indicator {
+        font-size: 0.875rem;
     }
 }
 

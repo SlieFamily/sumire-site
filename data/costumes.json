@@ -16,17 +16,17 @@
       "date": "2025.09",
       "year": 2025,
       "image": "black.jpg",
+      "badge": "HOT",
+      "badgeType": "hot",
       "tags": ["魅惑", "歌回", "量贩"]
     },
     {
-      "id": "costume-2024-05",
-      "title": "星光偶像服",
-      "date": "2024.05",
-      "year": 2024,
-      "image": "costume-2024-idol.jpg",
-      "badge": "HOT",
-      "badgeType": "hot",
-      "tags": ["偶像", "歌回", "华丽"]
+      "id": "rabbit",
+      "title": "小兔堇",
+      "date": "2025.07",
+      "year": 2025,
+      "image": "rabbit.png",
+      "tags": ["可爱", "PNG", "Q版"]
     },
     {
       "id": "costume-2023-12",
