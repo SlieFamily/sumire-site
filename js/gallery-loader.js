@@ -112,7 +112,7 @@ async function renderGalleryItems(items) {
             }
         });
     }, {
-        rootMargin: '50px' // 提前50px开始加载
+        rootMargin: '200px' // 提前200px开始加载，优化体验
     });
 
     // 为所有图片创建Promise，但使用懒加载
@@ -134,12 +134,28 @@ async function renderGalleryItems(items) {
             const img = document.createElement('img');
             img.className = 'gallery-card-image lazy';
             img.alt = item.title;
-            img.dataset.src = `assets/images/gallery/${item.image}`; // 使用data-src而不是直接src
+
+            // 处理缩略图路径：GIF保持原样，其他格式转为.jpg
+            const ext = item.image.split('.').pop().toLowerCase();
+            let thumbnailPath, originalPath;
+
+            if (ext === 'gif') {
+                thumbnailPath = `assets/images/gallery/thumbnails/${item.image}`;
+                originalPath = `assets/images/gallery/${item.image}`;
+            } else {
+                const thumbnailName = item.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+                thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
+                originalPath = `assets/images/gallery/${item.image}`;
+            }
+
+            // 懒加载使用缩略图，原图路径存储在data-original中
+            img.dataset.src = thumbnailPath;
+            img.dataset.original = originalPath;
 
             // 使用签名图作为占位图
             img.src = 'assets/images/signature.png';
 
-            // 预加载图片获取尺寸
+            // 预加载缩略图获取尺寸
             const tempImg = new Image();
             tempImg.onload = function() {
                 card.appendChild(img);
@@ -159,11 +175,12 @@ async function renderGalleryItems(items) {
             };
 
             tempImg.onerror = function() {
-                console.error(`图片加载失败: ${item.image}`);
+                console.error(`缩略图加载失败: ${thumbnailPath}`);
                 resolve();
             };
 
-            tempImg.src = `assets/images/gallery/${item.image}`;
+            // 使用缩略图预加载获取尺寸
+            tempImg.src = thumbnailPath;
         });
     });
 
@@ -188,8 +205,9 @@ function initGalleryLightbox() {
                 }
             }
 
-            // 其他类别使用普通灯箱
-            const imgSrc = this.querySelector('.gallery-card-image').src;
+            // 其他类别使用普通灯箱，使用原图
+            const img = this.querySelector('.gallery-card-image');
+            const imgSrc = img.dataset.original || img.src; // 使用原图路径
             const title = this.dataset.title;
             const description = this.dataset.description;
             const author = this.dataset.author;

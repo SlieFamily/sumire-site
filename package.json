@@ -1,12 +1,19 @@
 {
   "name": "sumire-site",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "明日堇sumire个人网站",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "thumbnails": "node scripts/generate-thumbnails.js"
   },
-  "keywords": ["vtuber", "website"],
+  "keywords": [
+    "vtuber",
+    "website"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
 }

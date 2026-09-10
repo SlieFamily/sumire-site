@@ -39,11 +39,12 @@
   src: url('inter-900.ttf') format('truetype');
 }
 
-/* ZCOOL XiaoWei 字体 */
+/* ZCOOL XiaoWei 字体 - 使用子集优化 */
 @font-face {
   font-family: 'ZCOOL XiaoWei';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('zcool-xiaowei.ttf') format('truetype');
+  unicode-range: U+4E00-9FFF, U+3000-303F, U+FF00-FFEF;
 }

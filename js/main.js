@@ -15,7 +15,7 @@ if (currentVideoIndex >= videos.length) {
     currentVideoIndex = 0;
 }
 
-// 页面加载动画
+// 页面加载动画 - 优化版本
 window.addEventListener('load', () => {
     const loadingOverlay = document.getElementById('loadingOverlay');
     const signatureLogo = document.querySelector('.signature-logo');
@@ -65,9 +65,17 @@ window.addEventListener('load', () => {
                     clonedSignature.remove();
                 }, 900);
             }
-        }, 1500);
+        }, 300); // 优化加载速度
     }
 });
+
+// 添加超时保护机制 - 如果1.5秒后仍未加载完成，强制隐藏loading
+setTimeout(() => {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay && !loadingOverlay.classList.contains('hidden')) {
+        loadingOverlay.classList.add('hidden');
+    }
+}, 1500);
 
 // 视频加载处理
 document.addEventListener('DOMContentLoaded', () => {

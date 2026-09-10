@@ -1,0 +1,46 @@
+# 启用 gzip 压缩
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# 浏览器缓存
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # 图片缓存 1 年
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+
+    # 字体缓存 1 年
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+
+    # CSS/JS 缓存 1 个月
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # 视频缓存 1 个月
+    ExpiresByType video/mp4 "access plus 1 month"
+
+    # JSON 数据缓存 1 天
+    ExpiresByType application/json "access plus 1 day"
+</IfModule>
+
+# 缓存控制头
+<IfModule mod_headers.c>
+    # 静态资源添加缓存头
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|ttf|woff|woff2|mp4)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+
+    <FilesMatch "\.(json)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>

@@ -46,9 +46,20 @@ function renderCostumes(costumes) {
         card.className = 'costume-card';
 
         // 判断图片是否存在，不存在则使用占位符
-        const imagePath = `assets/images/costumes/${costume.image}`;
+        const ext = costume.image ? costume.image.split('.').pop().toLowerCase() : '';
+        let thumbnailPath, originalPath;
+
+        if (ext === 'gif') {
+            thumbnailPath = `assets/images/costumes/thumbnails/${costume.image}`;
+            originalPath = `assets/images/costumes/${costume.image}`;
+        } else {
+            const thumbnailName = costume.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+            thumbnailPath = `assets/images/costumes/thumbnails/${thumbnailName}`;
+            originalPath = `assets/images/costumes/${costume.image}`;
+        }
+
         const imageContent = costume.image
-            ? `<img class="lazy" src="assets/images/signature.png" data-src="${imagePath}" alt="${costume.title}" data-lightbox="${imagePath}">`
+            ? `<img class="lazy" src="assets/images/signature.png" data-src="${thumbnailPath}" data-original="${originalPath}" alt="${costume.title}" data-lightbox="${originalPath}">`
             : `<span class="placeholder-icon">👗</span>`;
 
         const badgeHTML = costume.badge
