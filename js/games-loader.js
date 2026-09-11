@@ -22,7 +22,8 @@ function renderGames(games) {
         const card = document.createElement('div');
         card.className = 'game-card';
 
-        const imagePath = `assets/images/games/${game.image}`;
+        const imageNameWithoutExt = game.image.replace(/\.(jpg|jpeg|png)$/i, '');
+        const imagePath = `assets/images/games/${imageNameWithoutExt}-compressed.jpg`;
 
         card.innerHTML = `
             <div class="game-image">
