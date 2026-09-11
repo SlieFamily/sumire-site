@@ -1,6 +1,12 @@
 // 人物关系网 - 从JSON文件加载数据
 
 let relationshipData = null;
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+let isPanning = false;
+let startPanX = 0;
+let startPanY = 0;
 
 // 从JSON文件加载关系网数据
 async function loadRelationshipData() {
@@ -68,7 +74,7 @@ class ForceLayout {
         this.minDistanceExtra = this.isMobile ? 40 : 30;
     }
 
-    simulate(iterations = 100) {
+    simulate(iterations = 50) {
         const centerX = this.width / 2;
         const centerY = this.height / 2;
 
@@ -235,10 +241,22 @@ function initRelationshipNetwork() {
 
     // 使用力导向布局计算节点位置
     const layout = new ForceLayout(relationshipData.nodes, relationshipData.edges, width, height);
-    positionedNodes = layout.simulate(150);
+    positionedNodes = layout.simulate(50);
 
     // 初始绘制连线
     updateEdges();
+
+    // 创建内容容器（用于缩放和平移）
+    const contentWrapper = document.createElement('div');
+    contentWrapper.className = 'network-content';
+    contentWrapper.style.position = 'absolute';
+    contentWrapper.style.inset = '0';
+    contentWrapper.style.transformOrigin = 'center center';
+    contentWrapper.style.transition = 'none';
+    container.appendChild(contentWrapper);
+
+    // 将SVG移到contentWrapper中
+    contentWrapper.appendChild(svg);
 
     // 创建节点
     positionedNodes.forEach(node => {
@@ -289,7 +307,7 @@ function initRelationshipNetwork() {
 
         nodeEl.appendChild(avatar);
         nodeEl.appendChild(label);
-        container.appendChild(nodeEl);
+        contentWrapper.appendChild(nodeEl);
 
         // 拖拽功能
         let isDragging = false;
@@ -298,8 +316,6 @@ function initRelationshipNetwork() {
 
         // 鼠标事件
         nodeEl.addEventListener('mousedown', (e) => {
-            if (node.fixed) return; // 固定节点不可拖动
-
             isDragging = true;
             nodeEl.style.cursor = 'grabbing';
 
@@ -338,8 +354,6 @@ function initRelationshipNetwork() {
 
         // 触摸事件（移动端支持）
         nodeEl.addEventListener('touchstart', (e) => {
-            if (node.fixed) return;
-
             isDragging = true;
 
             const touch = e.touches[0];
@@ -388,12 +402,63 @@ function initRelationshipNetwork() {
         });
     });
 
-    // 响应式调整
+    // 缩放和平移功能
+    function updateTransform() {
+        contentWrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    // 鼠标滚轮缩放
+    container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        const newScale = scale * delta;
+
+        // 限制缩放范围 0.5x - 3x
+        if (newScale >= 0.5 && newScale <= 3) {
+            scale = newScale;
+            updateTransform();
+        }
+    }, { passive: false });
+
+    // 触摸双指缩放
+    let initialDistance = 0;
+    let initialScale = 1;
+
+    container.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            initialDistance = Math.sqrt(dx * dx + dy * dy);
+            initialScale = scale;
+        }
+    });
+
+    container.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            const newScale = initialScale * (distance / initialDistance);
+
+            // 限制缩放范围 0.5x - 3x
+            if (newScale >= 0.5 && newScale <= 3) {
+                scale = newScale;
+                updateTransform();
+            }
+        }
+    }, { passive: false });
+
+    // 响应式调整：只调整容器大小，不重新初始化
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            initRelationshipNetwork();
+            const newRect = container.getBoundingClientRect();
+            containerRect = newRect;
         }, 250);
     });
 }
