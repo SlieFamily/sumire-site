@@ -56,6 +56,70 @@
       "url": "https://space.bilibili.com/3546691244395002",
       "size": 60,
       "color": "#6B9FE8"
+    },
+    {
+      "id": "azhe",
+      "name": "阿辙azhe",
+      "avatar": "./assets/images/avatar/azhe.jpg",
+      "url": "https://space.bilibili.com/1822269711",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "yuko",
+      "name": "Yuko咩咩",
+      "avatar": "./assets/images/avatar/yuko.jpg",
+      "url": "https://space.bilibili.com/1266203568",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "kuru",
+      "name": "库鲁Kuru",
+      "avatar": "./assets/images/avatar/kuru.jpg",
+      "url": "https://space.bilibili.com/3309149",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "ssx",
+      "name": "闪闪闪闪星",
+      "avatar": "./assets/images/avatar/ssx.jpg",
+      "url": "https://space.bilibili.com/1898671",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "ccc",
+      "name": "橙橙橙要努力变强",
+      "avatar": "./assets/images/avatar/ccc.jpg",
+      "url": "https://space.bilibili.com/10035108",
+      "size": 60,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "u1",
+      "name": "悠一wakareno",
+      "avatar": "./assets/images/avatar/u1.jpg",
+      "url": "https://space.bilibili.com/627676911",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "1703",
+      "name": "解说1703",
+      "avatar": "./assets/images/avatar/1703.jpg",
+      "url": "https://space.bilibili.com/251345293",
+      "size": 50,
+      "color": "#6B9FE8"
+    },
+    {
+      "id": "zjr",
+      "name": "赵俊日",
+      "avatar": "./assets/images/avatar/zjr.jpg",
+      "url": "https://space.bilibili.com/66556492",
+      "size": 50,
+      "color": "#6B9FE8"
     }
   ],
   "edges": [
@@ -96,22 +160,148 @@
       "width": 2
     },
     {
+      "from": "sumire",
+      "to": "azhe",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "xmm",
+      "to": "azhe",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "yuko",
+      "to": "azhe",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "yuko",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "ccc",
+      "color": "#ff6b6b",
+      "width": 4
+    },
+    {
+      "from": "ssx",
+      "to": "951",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "ssx",
+      "to": "azusa",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "ssx",
+      "to": "cheese",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "ssx",
+      "to": "kuru",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "kuru",
+      "to": "koritsu",
+      "color": "#ff6b6b",
+      "width": 4
+    },
+    {
+      "from": "sumire",
+      "to": "ssx",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
       "from": "951",
       "to": "170",
-      "color": "rgba(255, 255, 255, 0.8)",
+      "color": "#ff6b6b",
       "width": 4
     },
     {
       "from": "cheese",
       "to": "azusa",
-      "color": "rgba(255, 255, 255, 0.8)",
+      "color": "#ff6b6b",
       "width": 4
     },
     {
       "from": "cheese",
       "to": "koritsu",
-      "color": "rgba(255, 255, 255, 0.8)",
+      "color": "#ff6b6b",
       "width": 4
+    },
+    {
+      "from": "cheese",
+      "to": "951",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "cheese",
+      "to": "170",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "sumire",
+      "to": "u1",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "sumire",
+      "to": "1703",
+      "color": "#ff6b6b",
+      "width": 4
+    },
+    {
+      "from": "1703",
+      "to": "azusa",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "1703",
+      "to": "zjr",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "u1",
+      "to": "azhe",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "u1",
+      "to": "yuko",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "u1",
+      "to": "951",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "u1",
+      "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 2
     }
   ]
 }
