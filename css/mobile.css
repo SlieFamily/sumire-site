@@ -182,10 +182,14 @@
         height: 16px;
     }
 
-    /* 游戏网格 */
+    /* 游戏网格 - 移动端改为2x2布局 */
     .games-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
+    }
+
+    .game-card {
+        margin-bottom: 0; /* 确保不会额外增加间距 */
     }
 
     /* 皮套瀑布流 - 改为2列 */
@@ -217,15 +221,17 @@
         gap: 0.5rem;
     }
 
-    /* 关系网 */
-    .relations-network {
-        min-height: 400px;
-        padding: 1rem;
+    /* 人物关系网嵌入 */
+    .relations-network-embed {
+        margin: 1rem -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        height: 400px; /* 移动端减小高度 */
     }
 
-    .node-label {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
+    .relations-network-embed iframe {
+        height: 400px; /* 移动端iframe高度 */
     }
 
     /* 电竞历程 */

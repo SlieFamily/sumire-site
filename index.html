@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>明日堇sumire - 个人网站</title>
     <link rel="icon" type="image/jpeg" href="assets/images/avatar/sumire.jpg">
     <link rel="preload" href="assets/fonts/zcool-xiaowei.ttf" as="font" type="font/ttf" crossorigin>
@@ -221,7 +221,9 @@
             <section class="content-section relations-section">
                 <div class="section-container">
                     <h2 class="section-title">人物关系网</h2>
-                    <div class="relations-network"></div>
+                    <div class="relations-network-embed">
+                        <iframe src="relationship-interactive.html" frameborder="0" title="人物关系网交互式可视化"></iframe>
+                    </div>
                 </div>
             </section>
 
@@ -249,7 +251,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/relationship.js"></script>
     <script src="js/games-loader.js"></script>
     <script src="js/creators-loader.js"></script>
 </body>

@@ -5,7 +5,7 @@
       "name": "明日堇sumire",
       "avatar": "./assets/images/avatar/sumire.jpg",
       "url": "https://space.bilibili.com/13271481",
-      "size": 70,
+      "size": 80,
       "color": "#8B7DC8",
       "fixed": true
     },
@@ -132,42 +132,6 @@
   ],
   "edges": [
     {
-      "from": "sumire",
-      "to": "cheese",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "sumire",
-      "to": "azusa",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "sumire",
-      "to": "951",
-      "color": "#ff6b6b",
-      "width": 4
-    },
-    {
-      "from": "sumire",
-      "to": "koritsu",
-      "color": "#ff6b6b",
-      "width": 5
-    },
-    {
-      "from": "sumire",
-      "to": "xmm",
-      "color": "#ff6b6b",
-      "width": 5
-    },
-    {
-      "from": "sumire",
-      "to": "azhe",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
       "from": "xmm",
       "to": "azhe",
       "color": "#ff6b6b",
@@ -178,18 +142,6 @@
       "to": "azhe",
       "color": "#ff6b6b",
       "width": 2
-    },
-    {
-      "from": "sumire",
-      "to": "yuko",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "sumire",
-      "to": "ccc",
-      "color": "#ff6b6b",
-      "width": 4
     },
     {
       "from": "ssx",
@@ -222,12 +174,6 @@
       "width": 4
     },
     {
-      "from": "sumire",
-      "to": "ssx",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
       "from": "951",
       "to": "170",
       "color": "#ff6b6b",
@@ -258,18 +204,6 @@
       "width": 3
     },
     {
-      "from": "sumire",
-      "to": "u1",
-      "color": "#ff6b6b",
-      "width": 3
-    },
-    {
-      "from": "sumire",
-      "to": "1703",
-      "color": "#ff6b6b",
-      "width": 4
-    },
-    {
       "from": "1703",
       "to": "azusa",
       "color": "#ff6b6b",
@@ -298,6 +232,18 @@
       "to": "951",
       "color": "#ff6b6b",
       "width": 3
+    },
+    {
+      "from": "u1",
+      "to": "azusa",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "u1",
+      "to": "koritsu",
+      "color": "#ff6b6b",
+      "width": 2
     },
     {
       "from": "koritsu",
@@ -331,12 +277,6 @@
     },
     {
       "from": "bbl",
-      "to": "sumire",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "bbl",
       "to": "azhe",
       "color": "#ff6b6b",
       "width": 2
@@ -364,6 +304,18 @@
       "to": "cheese",
       "color": "#ff6b6b",
       "width": 2
+    },
+    {
+      "from": "sumire",
+      "to": "ccc",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "sumire",
+      "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 3
     }
   ]
 }

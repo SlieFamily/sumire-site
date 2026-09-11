@@ -693,13 +693,35 @@ body {
     line-height: 1.6;
 }
 
-/* 人物关系网 */
-.relations-network {
-    position: relative;
-    min-height: 600px;
-    padding: 2rem;
+/* 人物关系网 iframe 嵌入 */
+.relations-network-embed {
+    margin: 2rem 0;
+    border: 1px solid rgba(139, 125, 200, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
     background: transparent;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.relations-network-embed iframe {
+    width: 100%;
+    height: 600px;
+    display: block;
     border: none;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .relations-network-embed {
+        margin: 1.5rem -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .relations-network-embed iframe {
+        height: 500px;
+    }
 }
 
 .network-svg {
@@ -709,7 +731,8 @@ body {
 }
 
 .network-edge {
-    opacity: 0.6;
+    opacity: 0.15;
+    stroke-width: 1px;
     transition: opacity 0.3s ease, stroke-width 0.3s ease;
 }
 
@@ -719,7 +742,7 @@ body {
 }
 
 .network-edge.dimmed {
-    opacity: 0.1;
+    opacity: 0.05;
 }
 
 .network-node {
@@ -784,14 +807,30 @@ body {
     backdrop-filter: blur(4px);
 }
 
+/* 中心节点旋转弧线 */
+.center-orbit-ring {
+    animation: rotateOrbit 8s linear infinite;
+}
+
+@keyframes rotateOrbit {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 @media (max-width: 768px) {
-    .relations-network {
-        min-height: 400px;
+    .relations-network-embed {
+        margin: 1.5rem -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
     }
 
-    .node-label {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
+    .relations-network-embed iframe {
+        height: 500px;
     }
 }
 
