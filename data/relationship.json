@@ -120,6 +120,14 @@
       "url": "https://space.bilibili.com/66556492",
       "size": 50,
       "color": "#6B9FE8"
+    },
+    {
+      "id": "bbl",
+      "name": "夜莲Annbbers",
+      "avatar": "./assets/images/avatar/bbl.jpg",
+      "url": "https://space.bilibili.com/1629467333",
+      "size": 50,
+      "color": "#6B9FE8"
     }
   ],
   "edges": [
@@ -152,12 +160,6 @@
       "to": "xmm",
       "color": "#ff6b6b",
       "width": 5
-    },
-    {
-      "from": "sumire",
-      "to": "170",
-      "color": "#ff6b6b",
-      "width": 2
     },
     {
       "from": "sumire",
@@ -298,8 +300,68 @@
       "width": 3
     },
     {
+      "from": "koritsu",
+      "to": "951",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "koritsu",
+      "to": "azusa",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "azusa",
+      "to": "951",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
       "from": "u1",
       "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "bbl",
+      "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "bbl",
+      "to": "sumire",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "bbl",
+      "to": "azhe",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "bbl",
+      "to": "u1",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "yuko",
+      "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "yuko",
+      "to": "bbl",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "u1",
+      "to": "cheese",
       "color": "#ff6b6b",
       "width": 2
     }
