@@ -163,33 +163,19 @@ class ForceLayout {
     }
 }
 
-// 初始化关系网络
-function initRelationshipNetwork() {
-    const container = document.querySelector('.relations-network');
-    if (!container) return;
+// 全局变量存储节点和SVG
+let positionedNodes = [];
+let svg = null;
+let containerRect = null;
 
-    // 清空容器
-    container.innerHTML = '';
+// 更新所有连线
+function updateEdges() {
+    if (!svg) return;
 
-    // 创建 SVG 画布用于绘制连线
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'network-svg');
-    svg.style.position = 'absolute';
-    svg.style.inset = '0';
-    svg.style.width = '100%';
-    svg.style.height = '100%';
-    svg.style.pointerEvents = 'none';
-    container.appendChild(svg);
+    // 清空所有连线
+    svg.innerHTML = '';
 
-    const rect = container.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    // 使用力导向布局计算节点位置
-    const layout = new ForceLayout(relationshipData.nodes, relationshipData.edges, width, height);
-    const positionedNodes = layout.simulate(150);
-
-    // 绘制连线（使用贝塞尔曲线）
+    // 重新绘制所有连线
     relationshipData.edges.forEach(edge => {
         const fromNode = positionedNodes.find(n => n.id === edge.from);
         const toNode = positionedNodes.find(n => n.id === edge.to);
@@ -206,8 +192,8 @@ function initRelationshipNetwork() {
         const dy = toPos.y - fromPos.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // 控制点偏移（产生弧度，增大偏移让弧线更长）
-        const offset = dist * 0.3; // 从0.2增加到0.3
+        // 控制点偏移（产生弧度）
+        const offset = dist * 0.3;
         const controlX = midX - dy / dist * offset;
         const controlY = midY + dx / dist * offset;
 
@@ -222,6 +208,37 @@ function initRelationshipNetwork() {
 
         svg.appendChild(path);
     });
+}
+
+// 初始化关系网络
+function initRelationshipNetwork() {
+    const container = document.querySelector('.relations-network');
+    if (!container) return;
+
+    // 清空容器
+    container.innerHTML = '';
+
+    // 创建 SVG 画布用于绘制连线
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'network-svg');
+    svg.style.position = 'absolute';
+    svg.style.inset = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none';
+    container.appendChild(svg);
+
+    const rect = container.getBoundingClientRect();
+    containerRect = rect;
+    const width = rect.width;
+    const height = rect.height;
+
+    // 使用力导向布局计算节点位置
+    const layout = new ForceLayout(relationshipData.nodes, relationshipData.edges, width, height);
+    positionedNodes = layout.simulate(150);
+
+    // 初始绘制连线
+    updateEdges();
 
     // 创建节点
     positionedNodes.forEach(node => {
@@ -230,14 +247,10 @@ function initRelationshipNetwork() {
         nodeEl.className = 'network-node';
         nodeEl.style.left = node.x + 'px';
         nodeEl.style.top = node.y + 'px';
+        nodeEl.style.cursor = 'grab';
+        nodeEl.dataset.nodeId = node.id;
 
-        // 节点链接
-        const link = document.createElement('a');
-        link.href = node.url;
-        link.target = '_blank';
-        link.className = 'node-link';
-
-        // 头像容器
+        // 头像容器（直接使用div，不使用链接）
         const avatar = document.createElement('div');
         avatar.className = 'node-avatar';
         avatar.style.width = node.size + 'px';
@@ -254,6 +267,7 @@ function initRelationshipNetwork() {
             img.style.height = '100%';
             img.style.objectFit = 'cover';
             img.style.borderRadius = '50%';
+            img.style.pointerEvents = 'none'; // 防止拖拽图片
             // 图片加载失败时显示表情符号
             img.onerror = function() {
                 this.style.display = 'none';
@@ -271,15 +285,102 @@ function initRelationshipNetwork() {
         const label = document.createElement('div');
         label.className = 'node-label';
         label.textContent = node.name;
+        label.style.pointerEvents = 'none'; // 防止拖拽标签
 
-        link.appendChild(avatar);
-        nodeEl.appendChild(link);
+        nodeEl.appendChild(avatar);
         nodeEl.appendChild(label);
         container.appendChild(nodeEl);
 
+        // 拖拽功能
+        let isDragging = false;
+        let startX, startY;
+        let offsetX, offsetY;
+
+        // 鼠标事件
+        nodeEl.addEventListener('mousedown', (e) => {
+            if (node.fixed) return; // 固定节点不可拖动
+
+            isDragging = true;
+            nodeEl.style.cursor = 'grabbing';
+
+            startX = e.clientX;
+            startY = e.clientY;
+            offsetX = node.x - startX;
+            offsetY = node.y - startY;
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const newX = e.clientX + offsetX;
+            const newY = e.clientY + offsetY;
+
+            // 边界约束
+            const margin = 60;
+            node.x = Math.max(margin, Math.min(containerRect.width - margin, newX));
+            node.y = Math.max(margin, Math.min(containerRect.height - margin, newY));
+
+            nodeEl.style.left = node.x + 'px';
+            nodeEl.style.top = node.y + 'px';
+
+            // 实时更新连线
+            updateEdges();
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                nodeEl.style.cursor = 'grab';
+            }
+        });
+
+        // 触摸事件（移动端支持）
+        nodeEl.addEventListener('touchstart', (e) => {
+            if (node.fixed) return;
+
+            isDragging = true;
+
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+            offsetX = node.x - startX;
+            offsetY = node.y - startY;
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+
+            const touch = e.touches[0];
+            const newX = touch.clientX + offsetX;
+            const newY = touch.clientY + offsetY;
+
+            // 边界约束
+            const margin = 60;
+            node.x = Math.max(margin, Math.min(containerRect.width - margin, newX));
+            node.y = Math.max(margin, Math.min(containerRect.height - margin, newY));
+
+            nodeEl.style.left = node.x + 'px';
+            nodeEl.style.top = node.y + 'px';
+
+            // 实时更新连线
+            updateEdges();
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
         // 悬停效果
         nodeEl.addEventListener('mouseenter', () => {
-            nodeEl.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            if (!isDragging) {
+                nodeEl.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            }
         });
 
         nodeEl.addEventListener('mouseleave', () => {
