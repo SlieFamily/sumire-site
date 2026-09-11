@@ -31,15 +31,20 @@ async function loadGallery() {
             return dateB - dateA; // 倒序：新的在前
         });
 
+        // 响应式列数调整
+        updateColumnCount();
+
         await renderGalleryItems(galleryItems);
         initGalleryLightbox();
 
-        // 响应式列数调整
-        updateColumnCount();
         window.addEventListener('resize', debounce(async () => {
+            const oldColumnCount = columnCount;
             updateColumnCount();
-            await renderGalleryItems(galleryItems);
-            initGalleryLightbox();
+            // 只有在列数变化时才重新渲染
+            if (oldColumnCount !== columnCount) {
+                await renderGalleryItems(galleryItems);
+                initGalleryLightbox();
+            }
         }, 250));
     } catch (error) {
         console.error('加载画廊数据失败:', error);
