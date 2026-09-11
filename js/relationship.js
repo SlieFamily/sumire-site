@@ -173,6 +173,58 @@ class ForceLayout {
 let positionedNodes = [];
 let svg = null;
 let containerRect = null;
+let activeNodeId = null; // 当前激活的节点ID
+
+// 高亮显示与指定节点相关的连线和节点
+function highlightConnections(nodeId) {
+    activeNodeId = nodeId;
+
+    if (!nodeId) {
+        // 清除高亮，恢复所有节点和边
+        document.querySelectorAll('.network-node').forEach(node => {
+            node.classList.remove('dimmed', 'highlighted');
+        });
+        document.querySelectorAll('.network-edge').forEach(edge => {
+            edge.classList.remove('dimmed', 'highlighted');
+        });
+        return;
+    }
+
+    // 找到与当前节点相关的所有边和节点
+    const connectedNodeIds = new Set([nodeId]);
+    const connectedEdges = new Set();
+
+    relationshipData.edges.forEach((edge, index) => {
+        if (edge.from === nodeId || edge.to === nodeId) {
+            connectedEdges.add(index);
+            connectedNodeIds.add(edge.from);
+            connectedNodeIds.add(edge.to);
+        }
+    });
+
+    // 更新节点样式
+    document.querySelectorAll('.network-node').forEach(node => {
+        const id = node.dataset.nodeId;
+        if (connectedNodeIds.has(id)) {
+            node.classList.add('highlighted');
+            node.classList.remove('dimmed');
+        } else {
+            node.classList.add('dimmed');
+            node.classList.remove('highlighted');
+        }
+    });
+
+    // 更新边样式
+    document.querySelectorAll('.network-edge').forEach((edge, index) => {
+        if (connectedEdges.has(index)) {
+            edge.classList.add('highlighted');
+            edge.classList.remove('dimmed');
+        } else {
+            edge.classList.add('dimmed');
+            edge.classList.remove('highlighted');
+        }
+    });
+}
 
 // 更新所有连线
 function updateEdges() {
@@ -211,9 +263,15 @@ function updateEdges() {
         path.setAttribute('stroke-width', edge.width);
         path.setAttribute('fill', 'none');
         path.setAttribute('class', 'network-edge');
+        path.dataset.edgeIndex = relationshipData.edges.indexOf(edge);
 
         svg.appendChild(path);
     });
+
+    // 重新应用高亮状态
+    if (activeNodeId) {
+        highlightConnections(activeNodeId);
+    }
 }
 
 // 初始化关系网络
@@ -319,6 +377,9 @@ function initRelationshipNetwork() {
             isDragging = true;
             nodeEl.style.cursor = 'grabbing';
 
+            // 高亮显示连接
+            highlightConnections(node.id);
+
             startX = e.clientX;
             startY = e.clientY;
             offsetX = node.x - startX;
@@ -349,12 +410,20 @@ function initRelationshipNetwork() {
             if (isDragging) {
                 isDragging = false;
                 nodeEl.style.cursor = 'grab';
+
+                // 清除高亮
+                setTimeout(() => {
+                    highlightConnections(null);
+                }, 300);
             }
         });
 
         // 触摸事件（移动端支持）
         nodeEl.addEventListener('touchstart', (e) => {
             isDragging = true;
+
+            // 高亮显示连接
+            highlightConnections(node.id);
 
             const touch = e.touches[0];
             startX = touch.clientX;
@@ -387,7 +456,14 @@ function initRelationshipNetwork() {
         });
 
         document.addEventListener('touchend', () => {
-            isDragging = false;
+            if (isDragging) {
+                isDragging = false;
+
+                // 清除高亮
+                setTimeout(() => {
+                    highlightConnections(null);
+                }, 300);
+            }
         });
 
         // 悬停效果
