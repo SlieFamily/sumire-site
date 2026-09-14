@@ -29,7 +29,7 @@ function renderCreators(creators) {
         card.innerHTML = `
             <div class="creator-avatar">
                 <img src="${creator.avatar}" alt="${creator.name}"
-                     onerror="this.src='assets/images/avatar/951.jpg'">
+                     onerror="this.src='assets/images/avatar/thumbnails/951.webp'">
             </div>
             <div class="creator-info">
                 <div class="creator-name">

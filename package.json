@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "thumbnails": "node scripts/generate-thumbnails.js"
+    "thumbnails": "node scripts/generate-thumbnails.js",
+    "compress-avatars": "node scripts/compress_avatars.js",
+    "redirect-avatars": "node scripts/redirect_avatars.js",
+    "process-avatars": "npm run compress-avatars && npm run redirect-avatars"
   },
   "keywords": [
     "vtuber",

@@ -182,10 +182,28 @@
         height: 16px;
     }
 
+    /* 代表色 - 移动端适配 */
+    .color-display {
+        gap: 0.5rem !important;
+    }
+
+    .color-item {
+        gap: 0.5rem !important;
+    }
+
+    .color-swatch {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .color-code {
+        font-size: 0.875rem !important;
+    }
+
     /* 游戏网格 - 移动端改为2x2布局 */
     .games-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
     }
 
     .game-card {
