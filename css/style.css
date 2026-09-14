@@ -1517,11 +1517,6 @@ body {
         font-size: 1.25rem;
     }
 
-    .color-display {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
     .fanclub-banner {
         flex-direction: column;
         text-align: center;

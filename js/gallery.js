@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function initGalleryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
 
+    // 页面加载时默认显示插画分类
+    const defaultFilter = 'fanart';
+    const filteredItems = galleryItems.filter(item => item.category === defaultFilter);
+    renderGalleryItems(filteredItems).then(() => {
+        initGalleryLightbox();
+    });
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', async function() {
             // 更新按钮状态
@@ -16,12 +23,8 @@ function initGalleryFilters() {
             const filter = this.dataset.filter;
 
             // 重新渲染符合筛选条件的项目
-            if (filter === 'all') {
-                await renderGalleryItems(galleryItems);
-            } else {
-                const filteredItems = galleryItems.filter(item => item.category === filter);
-                await renderGalleryItems(filteredItems);
-            }
+            const filteredItems = galleryItems.filter(item => item.category === filter);
+            await renderGalleryItems(filteredItems);
 
             // 重新初始化灯箱
             initGalleryLightbox();

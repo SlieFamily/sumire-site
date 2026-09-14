@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function filterSongs(searchTerm, lang) {
+        let visibleIndex = 1;
+
         songRows.forEach(row => {
             const title = row.querySelector('.song-title')?.textContent.toLowerCase() || '';
             const artist = row.querySelector('.song-artist')?.textContent.toLowerCase() || '';
@@ -38,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (matchesSearch && matchesLang) {
                 row.style.display = 'grid';
+                // 更新序号为当前可见索引
+                const numberElement = row.querySelector('.song-number');
+                if (numberElement) {
+                    numberElement.textContent = visibleIndex.toString().padStart(2, '0');
+                }
+                visibleIndex++;
             } else {
                 row.style.display = 'none';
             }

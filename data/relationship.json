@@ -223,27 +223,9 @@
     },
     {
       "from": "u1",
-      "to": "yuko",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "u1",
       "to": "951",
       "color": "#ff6b6b",
       "width": 3
-    },
-    {
-      "from": "u1",
-      "to": "azusa",
-      "color": "#ff6b6b",
-      "width": 2
-    },
-    {
-      "from": "u1",
-      "to": "koritsu",
-      "color": "#ff6b6b",
-      "width": 2
     },
     {
       "from": "koritsu",
@@ -262,12 +244,6 @@
       "to": "951",
       "color": "#ff6b6b",
       "width": 3
-    },
-    {
-      "from": "u1",
-      "to": "xmm",
-      "color": "#ff6b6b",
-      "width": 2
     },
     {
       "from": "bbl",
@@ -314,6 +290,12 @@
     {
       "from": "sumire",
       "to": "xmm",
+      "color": "#ff6b6b",
+      "width": 3
+    },
+    {
+      "from": "sumire",
+      "to": "koritsu",
       "color": "#ff6b6b",
       "width": 3
     }
