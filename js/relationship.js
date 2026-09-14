@@ -580,9 +580,15 @@ function initRelationshipNetwork() {
 
         // 头像内容（表情符号或图片）
         if (node.avatar && (node.avatar.startsWith('http') || node.avatar.startsWith('assets/') || node.avatar.startsWith('./'))) {
+            // 将头像路径转换为webp缩略图
+            const avatarPath = node.avatar
+                .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+                .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+                .replace(/\.(jpg|png)$/, '.webp');
+
             // 使用图片
             const img = document.createElement('img');
-            img.src = node.avatar;
+            img.src = avatarPath;
             img.alt = node.name;
             img.style.width = '100%';
             img.style.height = '100%';

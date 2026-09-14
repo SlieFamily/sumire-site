@@ -465,8 +465,14 @@ function renderNetwork() {
         avatar.style.height = node.size + 'px';
 
         if (node.avatar) {
+            // 将头像路径转换为webp缩略图
+            const avatarPath = node.avatar
+                .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+                .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+                .replace(/\.(jpg|png)$/, '.webp');
+
             const img = document.createElement('img');
-            img.src = node.avatar;
+            img.src = avatarPath;
             img.alt = node.name;
             img.draggable = false; // 禁止图片拖动
             img.style.pointerEvents = 'none'; // 禁止图片拦截鼠标事件

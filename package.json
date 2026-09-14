@@ -1,14 +1,12 @@
 {
   "name": "sumire-site",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "明日堇sumire个人网站",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "thumbnails": "node scripts/generate-thumbnails.js",
-    "compress-avatars": "node scripts/compress_avatars.js",
-    "redirect-avatars": "node scripts/redirect_avatars.js",
-    "process-avatars": "npm run compress-avatars && npm run redirect-avatars"
+    "avatars": "node scripts/compress_avatars.js"
   },
   "keywords": [
     "vtuber",

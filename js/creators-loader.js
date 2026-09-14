@@ -26,9 +26,14 @@ function renderCreators(creators) {
             .map(tag => `<span class="creator-tag">${tag}</span>`)
             .join('');
 
+        // 将头像路径转换为webp缩略图
+        const avatarPath = creator.avatar
+            .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+            .replace(/\.(jpg|png)$/, '.webp');
+
         card.innerHTML = `
             <div class="creator-avatar">
-                <img src="${creator.avatar}" alt="${creator.name}"
+                <img src="${avatarPath}" alt="${creator.name}"
                      onerror="this.src='assets/images/avatar/thumbnails/951.webp'">
             </div>
             <div class="creator-info">
