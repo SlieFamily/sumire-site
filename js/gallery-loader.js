@@ -34,7 +34,11 @@ async function loadGallery() {
         // 响应式列数调整
         updateColumnCount();
 
-        await renderGalleryItems(galleryItems);
+        // 页面加载时默认只显示插画分类
+        const defaultCategory = 'fanart';
+        const filteredItems = galleryItems.filter(item => item.category === defaultCategory);
+
+        await renderGalleryItems(filteredItems);
         initGalleryLightbox();
 
         window.addEventListener('resize', debounce(async () => {
@@ -42,7 +46,11 @@ async function loadGallery() {
             updateColumnCount();
             // 只有在列数变化时才重新渲染
             if (oldColumnCount !== columnCount) {
-                await renderGalleryItems(galleryItems);
+                // 获取当前激活的分类
+                const activeBtn = document.querySelector('.filter-btn.active');
+                const currentFilter = activeBtn ? activeBtn.dataset.filter : defaultCategory;
+                const currentFilteredItems = galleryItems.filter(item => item.category === currentFilter);
+                await renderGalleryItems(currentFilteredItems);
                 initGalleryLightbox();
             }
         }, 250));

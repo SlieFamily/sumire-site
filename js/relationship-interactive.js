@@ -466,10 +466,15 @@ function renderNetwork() {
 
         if (node.avatar) {
             // 将头像路径转换为webp缩略图
-            const avatarPath = node.avatar
-                .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+            let avatarPath = node.avatar;
+            // 移除开头的 ./
+            if (avatarPath.startsWith('./')) {
+                avatarPath = avatarPath.substring(2);
+            }
+            // 替换路径并转换为webp
+            avatarPath = avatarPath
                 .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
-                .replace(/\.(jpg|png)$/, '.webp');
+                .replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
             const img = document.createElement('img');
             img.src = avatarPath;

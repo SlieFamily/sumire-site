@@ -27,9 +27,15 @@ function renderCreators(creators) {
             .join('');
 
         // 将头像路径转换为webp缩略图
-        const avatarPath = creator.avatar
-            .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
-            .replace(/\.(jpg|png)$/, '.webp');
+        let avatarPath = creator.avatar;
+        // 移除开头的 ./
+        if (avatarPath.startsWith('./')) {
+            avatarPath = avatarPath.substring(2);
+        }
+        // 替换路径并转换为webp
+        avatarPath = avatarPath
+            .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
         card.innerHTML = `
             <div class="creator-avatar">

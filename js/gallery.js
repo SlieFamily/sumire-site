@@ -7,12 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function initGalleryFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
 
-    // 页面加载时默认显示插画分类
-    const defaultFilter = 'fanart';
-    const filteredItems = galleryItems.filter(item => item.category === defaultFilter);
-    renderGalleryItems(filteredItems).then(() => {
-        initGalleryLightbox();
-    });
+    // 不在这里进行初始渲染，因为gallery-loader.js已经在loadGallery()时处理了
+    // 只设置筛选按钮的事件监听
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', async function() {

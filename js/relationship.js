@@ -581,10 +581,15 @@ function initRelationshipNetwork() {
         // 头像内容（表情符号或图片）
         if (node.avatar && (node.avatar.startsWith('http') || node.avatar.startsWith('assets/') || node.avatar.startsWith('./'))) {
             // 将头像路径转换为webp缩略图
-            const avatarPath = node.avatar
-                .replace('./assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+            let avatarPath = node.avatar;
+            // 移除开头的 ./
+            if (avatarPath.startsWith('./')) {
+                avatarPath = avatarPath.substring(2);
+            }
+            // 替换路径并转换为webp
+            avatarPath = avatarPath
                 .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
-                .replace(/\.(jpg|png)$/, '.webp');
+                .replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
             // 使用图片
             const img = document.createElement('img');
