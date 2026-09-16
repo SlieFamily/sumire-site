@@ -26,16 +26,18 @@ function renderCreators(creators) {
             .map(tag => `<span class="creator-tag">${tag}</span>`)
             .join('');
 
-        // 将头像路径转换为webp缩略图
+        // 将头像路径转换为webp缩略图（仅处理本地路径）
         let avatarPath = creator.avatar;
-        // 移除开头的 ./
-        if (avatarPath.startsWith('./')) {
-            avatarPath = avatarPath.substring(2);
+        if (!avatarPath.startsWith('http://') && !avatarPath.startsWith('https://')) {
+            // 移除开头的 ./
+            if (avatarPath.startsWith('./')) {
+                avatarPath = avatarPath.substring(2);
+            }
+            // 替换路径并转换为webp
+            avatarPath = avatarPath
+                .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
+                .replace(/\.(jpg|jpeg|png)$/i, '.webp');
         }
-        // 替换路径并转换为webp
-        avatarPath = avatarPath
-            .replace('assets/images/avatar/', 'assets/images/avatar/thumbnails/')
-            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
         card.innerHTML = `
             <div class="creator-avatar">
