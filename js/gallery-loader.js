@@ -114,6 +114,9 @@ async function renderGalleryItems(items) {
         container.appendChild(column);
     }
 
+    // 立即初始化灯箱功能，使用事件委托
+    initGalleryLightbox();
+
     // 创建Intersection Observer用于懒加载
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -125,79 +128,72 @@ async function renderGalleryItems(items) {
             }
         });
     }, {
-        rootMargin: '200px' // 提前200px开始加载，优化体验
+        rootMargin: '500px' // 提前500px开始加载
     });
 
-    // 为所有图片创建Promise，但使用懒加载
-    const promises = items.map((item) => {
-        return new Promise((resolve) => {
-            const card = document.createElement('div');
-            card.className = 'gallery-card';
-            card.dataset.category = item.category;
-            card.dataset.id = item.id;
-            card.dataset.title = item.title;
-            card.dataset.description = item.description || '';
-            card.dataset.author = item.author || '';
-            card.dataset.date = item.date || '';
-            // 存储漫画的多图数据
-            if (item.images && item.images.length > 0) {
-                card.dataset.images = JSON.stringify(item.images);
-            }
+    // 异步渲染每个卡片，不等待全部完成
+    items.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.dataset.category = item.category;
+        card.dataset.id = item.id;
+        card.dataset.title = item.title;
+        card.dataset.description = item.description || '';
+        card.dataset.author = item.author || '';
+        card.dataset.date = item.date || '';
+        // 存储漫画的多图数据
+        if (item.images && item.images.length > 0) {
+            card.dataset.images = JSON.stringify(item.images);
+        }
 
-            const img = document.createElement('img');
-            img.className = 'gallery-card-image lazy';
-            img.alt = item.title;
+        const img = document.createElement('img');
+        img.className = 'gallery-card-image lazy';
+        img.alt = item.title;
 
-            // 处理缩略图路径：GIF保持原样，其他格式转为.jpg
-            const ext = item.image.split('.').pop().toLowerCase();
-            let thumbnailPath, originalPath;
+        // 处理缩略图路径：GIF保持原样，其他格式转为.jpg
+        const ext = item.image.split('.').pop().toLowerCase();
+        let thumbnailPath, originalPath;
 
-            if (ext === 'gif') {
-                thumbnailPath = `assets/images/gallery/thumbnails/${item.image}`;
-                originalPath = `assets/images/gallery/${item.image}`;
-            } else {
-                const thumbnailName = item.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
-                thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
-                originalPath = `assets/images/gallery/${item.image}`;
-            }
+        if (ext === 'gif') {
+            thumbnailPath = `assets/images/gallery/thumbnails/${item.image}`;
+            originalPath = `assets/images/gallery/${item.image}`;
+        } else {
+            const thumbnailName = item.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+            thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
+            originalPath = `assets/images/gallery/${item.image}`;
+        }
 
-            // 懒加载使用缩略图，原图路径存储在data-original中
-            img.dataset.src = thumbnailPath;
-            img.dataset.original = originalPath;
+        // 懒加载使用缩略图，原图路径存储在data-original中
+        img.dataset.src = thumbnailPath;
+        img.dataset.original = originalPath;
 
-            // 使用签名图作为占位图
-            img.src = 'assets/images/signature.png';
+        // 使用签名图作为占位图
+        img.src = 'assets/images/signature.png';
 
-            // 预加载缩略图获取尺寸
-            const tempImg = new Image();
-            tempImg.onload = function() {
-                card.appendChild(img);
+        // 预加载缩略图获取尺寸
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            card.appendChild(img);
 
-                // 找到最短的列
-                const shortestColumn = columns.reduce((prev, curr) =>
-                    prev.height < curr.height ? prev : curr
-                );
+            // 找到最短的列
+            const shortestColumn = columns.reduce((prev, curr) =>
+                prev.height < curr.height ? prev : curr
+            );
 
-                shortestColumn.element.appendChild(card);
-                shortestColumn.height += tempImg.naturalHeight / tempImg.naturalWidth;
+            shortestColumn.element.appendChild(card);
+            shortestColumn.height += tempImg.naturalHeight / tempImg.naturalWidth;
 
-                // 开始观察这个图片
-                imageObserver.observe(img);
+            // 开始观察这个图片
+            imageObserver.observe(img);
+        };
 
-                resolve();
-            };
+        tempImg.onerror = function() {
+            console.error(`缩略图加载失败: ${thumbnailPath}`);
+        };
 
-            tempImg.onerror = function() {
-                console.error(`缩略图加载失败: ${thumbnailPath}`);
-                resolve();
-            };
-
-            // 使用缩略图预加载获取尺寸
-            tempImg.src = thumbnailPath;
-        });
+        // 使用缩略图预加载获取尺寸
+        tempImg.src = thumbnailPath;
     });
-
-    await Promise.all(promises);
 }
 
 // 灯箱功能
