@@ -61,6 +61,7 @@
 }
 
 .hero-title {
+    font-family: var(--font-title);
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 1rem;
@@ -72,6 +73,7 @@
 }
 
 .hero-subtitle {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     color: var(--text-light);
     margin-bottom: 2rem;

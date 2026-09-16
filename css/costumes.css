@@ -14,6 +14,7 @@
 }
 
 .page-title {
+    font-family: var(--font-title);
     font-size: 3rem;
     color: var(--text-light);
     margin-bottom: 1rem;
@@ -21,6 +22,7 @@
 }
 
 .page-subtitle {
+    font-family: var(--font-title);
     font-size: 1.3rem;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -178,6 +180,7 @@
 }
 
 .costume-title {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     color: var(--text-light);
     margin-bottom: 0.5rem;

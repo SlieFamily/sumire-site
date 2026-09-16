@@ -1,12 +1,12 @@
+/* 使用本地字体 */
+@import url('/assets/fonts/fonts.css');
+
 /* 全局样式重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-/* 使用本地字体 */
-@import url('../assets/fonts/fonts.css');
 
 :root {
     --primary-color: #8B7DC8;
@@ -16,12 +16,13 @@
     --text-light: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.55);
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-    --font-serif: 'ZCOOL XiaoWei', 'Noto Serif SC', 'SimSun', 'STZhongsong', 'STSong', 'NSimSun', serif;
+    --font-title: 'ZCOOL XiaoWei', 'Noto Serif SC', 'SimSun', 'STZhongsong', 'STSong', 'NSimSun', serif;
+    --font-body: 'Noto Serif SC', 'SimSun', 'STZhongsong', 'STSong', 'NSimSun', serif;
     --primary-jin: var(--primary-color);
 }
 
 body {
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     background: var(--dark-bg);
     color: var(--text-light);
     overflow-x: hidden;
@@ -230,7 +231,7 @@ body {
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -299,7 +300,7 @@ body {
 }
 
 .hero-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-size: clamp(2.5rem, 7vw, 4.8rem);
     font-weight: 900;
     line-height: 0.9;
@@ -312,7 +313,7 @@ body {
 
 .title-accent {
     margin-left: 0.18em;
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-weight: 500;
     font-style: italic;
     letter-spacing: -0.02em;
@@ -320,6 +321,7 @@ body {
 }
 
 .hero-subtitle {
+    font-family: var(--font-title);
     font-size: clamp(0.875rem, 1.5vw, 1.05rem);
     font-weight: 600;
     letter-spacing: 0.5em;
@@ -467,7 +469,7 @@ body {
 }
 
 .section-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -1165,6 +1167,7 @@ body {
 }
 
 .info-card-title {
+    font-family: var(--font-title);
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--text-light);
@@ -1274,6 +1277,7 @@ body {
 }
 
 .fanclub-subtitle {
+    font-family: var(--font-title);
     font-size: 0.9375rem;
     color: var(--text-muted);
 }
@@ -1452,6 +1456,7 @@ body {
 }
 
 .preference-heading {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-light);

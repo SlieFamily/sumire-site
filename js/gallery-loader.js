@@ -492,9 +492,34 @@ function closeLightbox(lightbox) {
     setTimeout(() => lightbox.remove(), 300);
 }
 
+// 初始化画廊筛选功能
+function initGalleryFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', async function() {
+            // 更新按钮状态
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.dataset.filter;
+
+            // 重新渲染符合筛选条件的项目
+            const filteredItems = galleryItems.filter(item => item.category === filter);
+            await renderGalleryItems(filteredItems);
+        });
+    });
+}
+
 // 页面加载时初始化
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadGallery);
+    document.addEventListener('DOMContentLoaded', () => {
+        loadGallery().then(() => {
+            initGalleryFilters();
+        });
+    });
 } else {
-    loadGallery();
+    loadGallery().then(() => {
+        initGalleryFilters();
+    });
 }

@@ -118,6 +118,7 @@ body:has(.page-main)::after {
 }
 
 .page-kicker {
+    font-family: var(--font-title);
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.42em;
@@ -127,7 +128,7 @@ body:has(.page-main)::after {
 }
 
 .page-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     letter-spacing: -0.02em;
@@ -182,6 +183,7 @@ body:has(.page-main)::after {
 }
 
 .song-title {
+    font-family: var(--font-title);
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--text-light);
@@ -686,6 +688,7 @@ body:has(.page-main)::after {
 }
 
 .costume-title {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -779,6 +782,7 @@ body:has(.page-main)::after {
 }
 
 .changelog-title {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-light);
@@ -1026,7 +1030,7 @@ body:has(.page-main)::after {
     outline: none;
     color: var(--text-light);
     font-size: 0.9375rem;
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
 }
 
 .search-box input::placeholder {
@@ -1109,7 +1113,7 @@ body:has(.page-main)::after {
 
 /* 皮套瀑布流布局 */
 .costumes-masonry {
-    column-count: 3;
+    column-count: 4;
     column-gap: 1.5rem;
 }
 
@@ -1139,6 +1143,7 @@ body:has(.page-main)::after {
 }
 
 .costume-card-title {
+    font-family: var(--font-title);
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--text-light);
@@ -1159,13 +1164,13 @@ body:has(.page-main)::after {
 
 @media (max-width: 1024px) {
     .costumes-masonry {
-        column-count: 2;
+        column-count: 3;
     }
 }
 
 @media (max-width: 768px) {
     .costumes-masonry {
-        column-count: 1;
+        column-count: 2;
     }
 }
 
@@ -1329,6 +1334,7 @@ img.lazy-loading {
 }
 
 .gallery-lightbox-title {
+    font-family: var(--font-title);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-light);

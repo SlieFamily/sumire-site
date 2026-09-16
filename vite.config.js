@@ -9,9 +9,14 @@ export default defineConfig({
     assetsInlineLimit: 0, // 禁用小图片内联
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        gallery: resolve(__dirname, 'gallery.html'),
-        costumes: resolve(__dirname, 'costumes.html')
+        main: resolve(import.meta.dirname, 'index.html'),
+        gallery: resolve(import.meta.dirname, 'gallery.html'),
+        costumes: resolve(import.meta.dirname, 'costumes.html'),
+        music: resolve(import.meta.dirname, 'music.html'),
+        about: resolve(import.meta.dirname, 'about.html'),
+        changelog: resolve(import.meta.dirname, 'changelog.html'),
+        relationship: resolve(import.meta.dirname, 'relationship-interactive.html'),
+        architecture: resolve(import.meta.dirname, 'architecture-interactive.html')
       },
       output: {
         entryFileNames: 'js/[name].[hash:8].js',

@@ -1,261 +1,271 @@
-# 数据自动化配置说明
+# 数据配置说明
 
-## 📁 数据文件位置
+## 数据文件位置
 
-所有数据配置文件都在 `data/` 文件夹中：
+所有数据配置文件位于 `public/data/` 目录：
 
 ```
-data/
-├── songs.json          # 音乐列表
+public/data/
+├── songs.json          # 歌曲列表
 ├── costumes.json       # 皮套列表
-├── gallery.json        # 画廊列表
-└── relationship.json   # 人物关系网
+├── gallery.json        # 画廊作品
+├── relationship.json   # 人物关系网
+├── creators.json       # 创作者信息
+├── games.json          # 游戏列表
+└── changelog.json      # 更新日志
 ```
 
-## 🎵 音乐列表（songs.json）
+## 歌曲列表（songs.json）
 
-### 添加歌曲
-
-编辑 `data/songs.json`，添加新歌曲：
+### 数据结构
 
 ```json
 {
-  "id": 9,
-  "title": "歌曲名称",
-  "artist": "明日堇sumire",
-  "type": "原创",
-  "lang": "zh",
-  "duration": "03:45",
-  "url": "https://www.bilibili.com/video/BV..."
+  "songs": [
+    {
+      "id": 1,
+      "title": "歌曲名称",
+      "artist": "明日堇sumire",
+      "type": "原创",
+      "language": "zh",
+      "duration": "03:45",
+      "url": "https://www.bilibili.com/video/BV..."
+    }
+  ]
 }
 ```
 
 ### 字段说明
 
-- `id`: 唯一ID（数字）
-- `title`: 歌曲名称
-- `artist`: 演唱者
-- `type`: 类型（原创/翻唱/合唱）
-- `lang`: 语言（zh=中文, ja=日语, en=英语）
-- `duration`: 时长（格式：MM:SS）
-- `url`: B站视频链接
+- `id` - 唯一标识符（数字）
+- `title` - 歌曲名称
+- `artist` - 演唱者
+- `type` - 类型（原创、翻唱、合唱）
+- `language` - 语言代码（zh=中文, ja=日语, en=英语）
+- `duration` - 时长（格式：MM:SS）
+- `url` - B站视频链接
 
-## 👗 皮套列表（costumes.json）
+## 皮套列表（costumes.json）
 
-### 添加皮套
-
-编辑 `data/costumes.json`，添加新皮套：
+### 数据结构
 
 ```json
 {
-  "id": "costume-2024-09",
-  "title": "秋日套装",
-  "date": "2024.09",
-  "year": 2024,
-  "image": "costume-2024-autumn.jpg",
-  "badge": "NEW",
-  "badgeType": "new",
-  "tags": ["秋季", "限定"]
+  "costumes": [
+    {
+      "id": 1,
+      "name": "皮套名称",
+      "date": "2024-08",
+      "year": 2024,
+      "image": "/assets/images/costumes/costume1.jpg",
+      "tags": ["标签1", "标签2"],
+      "isNew": true,
+      "description": "描述文字"
+    }
+  ]
 }
 ```
 
 ### 字段说明
 
-- `id`: 唯一ID
-- `title`: 皮套名称
-- `date`: 发布日期
-- `year`: 年份（用于分组）
-- `image`: 图片文件名（放在 `assets/images/costumes/` 文件夹）
-- `badge`: 徽章文字（可选）
-- `badgeType`: 徽章类型（new/hot/classic，可选）
-- `tags`: 标签数组
+- `id` - 唯一标识符
+- `name` - 皮套名称
+- `date` - 发布日期（YYYY-MM 格式）
+- `year` - 年份（用于时间线分组）
+- `image` - 图片路径（相对于网站根目录）
+- `tags` - 标签数组
+- `isNew` - 是否显示 NEW 徽章（可选）
+- `description` - 描述文字（可选）
 
 ### 图片要求
 
 - 位置：`assets/images/costumes/`
-- 格式：JPG/PNG
-- 推荐尺寸：宽度800px以上
-- 比例：3:4（竖图）
+- 格式：JPG、PNG、WebP
+- 推荐尺寸：宽度 800px 以上
+- 建议比例：3:4（竖图）
 
-## 🖼️ 画廊列表（gallery.json）
+## 画廊作品（gallery.json）
 
-### 添加图片
-
-编辑 `data/gallery.json`，添加新图片：
+### 数据结构
 
 ```json
 {
-  "id": "fanart-006",
-  "image": "fanart-006.jpg",
-  "category": "fanart",
-  "title": "插画作品6"
+  "gallery": [
+    {
+      "id": 1,
+      "title": "作品标题",
+      "author": "作者名",
+      "date": "2024-08-15",
+      "category": "illustration",
+      "image": "/assets/images/gallery/image1.jpg",
+      "authorUrl": "https://space.bilibili.com/..."
+    }
+  ]
 }
 ```
 
 ### 字段说明
 
-- `id`: 唯一ID
-- `image`: 图片文件名（放在 `assets/images/gallery/` 文件夹）
-- `category`: 分类（fanart=插画, emoji=表情包, comic=漫画）
-- `title`: 图片标题
+- `id` - 唯一标识符
+- `title` - 作品标题
+- `author` - 作者名称
+- `date` - 发布日期（YYYY-MM-DD 格式）
+- `category` - 分类（illustration=插画, emoji=表情包, comic=漫画）
+- `image` - 图片路径
+- `authorUrl` - 作者主页链接（可选）
 
 ### 图片要求
 
 - 位置：`assets/images/gallery/`
-- 格式：JPG/PNG
-- 推荐尺寸：正方形或宽图
-- 文件名：使用英文和数字
+- 格式：JPG、PNG、WebP
+- 推荐尺寸：最大边 1200px
 
-## 🌐 人物关系网（relationship.json）
+## 人物关系网（relationship.json）
 
-### 添加节点
-
-编辑 `data/relationship.json`，在 `nodes` 数组中添加：
+### 数据结构
 
 ```json
 {
-  "id": "friend5",
-  "name": "好友E",
-  "avatar": "https://i0.hdslb.com/bfs/face/xxx.jpg",
-  "url": "https://space.bilibili.com/12345",
-  "size": 50,
-  "color": "#6B9FE8"
-}
-```
-
-### 添加连线
-
-在 `edges` 数组中添加：
-
-```json
-{
-  "from": "sumire",
-  "to": "friend5",
-  "color": "#ff6b6b",
-  "width": 2
+  "nodes": [
+    {
+      "id": "sumire",
+      "name": "明日堇",
+      "avatar": "https://...",
+      "url": "https://space.bilibili.com/...",
+      "type": "center"
+    }
+  ],
+  "links": [
+    {
+      "source": "sumire",
+      "target": "friend1",
+      "relationship": "关系描述"
+    }
+  ]
 }
 ```
 
 ### 字段说明
 
 **节点（nodes）**：
-- `id`: 唯一ID
-- `name`: 显示名称
-- `avatar`: 头像URL（B站头像链接）
-- `url`: B站空间链接
-- `size`: 头像大小（像素）
-- `color`: 背景色
-- `fixed`: 是否固定在中心（可选，默认false）
+- `id` - 唯一标识符
+- `name` - 显示名称
+- `avatar` - 头像 URL
+- `url` - B站空间链接
+- `type` - 节点类型（center=中心节点, person=普通节点）
 
-**连线（edges）**：
-- `from`: 起始节点ID
-- `to`: 目标节点ID
-- `color`: 连线颜色
-- `width`: 连线宽度
+**连线（links）**：
+- `source` - 起始节点 ID
+- `target` - 目标节点 ID
+- `relationship` - 关系描述文字
 
-## 🔄 自动更新机制
+力导向布局算法会自动计算节点位置和连线路径。
 
-### 页面加载时自动读取
+## 创作者信息（creators.json）
 
-所有页面会在加载时自动读取对应的JSON文件：
-
-- `music.html` → 读取 `data/songs.json`
-- `costumes.html` → 读取 `data/costumes.json`
-- `gallery.html` → 读取 `data/gallery.json`
-- `index.html` → 读取 `data/relationship.json`
-
-### 图片不存在时的处理
-
-- 皮套页面：显示 👗 占位符
-- 画廊页面：显示对应分类的表情符号
-- 关系网：使用URL中的头像
-
-## ✅ 维护流程
-
-### 添加新歌曲
-
-1. 编辑 `data/songs.json`
-2. 添加歌曲信息
-3. 刷新页面即可看到
-
-### 添加新皮套
-
-1. 准备图片，放入 `assets/images/costumes/`
-2. 编辑 `data/costumes.json`
-3. 添加皮套信息（包括图片文件名）
-4. 刷新页面即可看到
-
-### 添加画廊图片
-
-1. 准备图片，放入 `assets/images/gallery/`
-2. 编辑 `data/gallery.json`
-3. 添加图片信息
-4. 刷新页面即可看到
-
-### 修改人物关系网
-
-1. 编辑 `data/relationship.json`
-2. 添加或修改节点和连线
-3. 刷新页面即可看到
-
-## ⚠️ 注意事项
-
-1. **JSON格式**：确保JSON格式正确，可用在线工具验证
-2. **文件名**：使用英文和数字，避免特殊字符
-3. **图片路径**：确保图片文件存在且路径正确
-4. **ID唯一性**：每个项目的ID必须唯一
-5. **备份**：修改前建议备份JSON文件
-
-## 🚀 优点
-
-✅ 无需修改HTML代码  
-✅ 数据与页面分离  
-✅ 易于维护和更新  
-✅ 支持批量操作  
-✅ 自动容错处理  
-
-
-## 🎮 游戏列表（games.json）
-
-### 添加游戏
-
-编辑 `data/games.json`，添加新游戏：
+### 数据结构
 
 ```json
 {
-  "id": "game-id",
-  "name": "游戏中文名",
-  "nameEn": "Game English Name",
-  "description": "游戏类型或描述",
-  "image": "game-image.jpg"
+  "creators": [
+    {
+      "id": "creator1",
+      "name": "创作者名称",
+      "role": "角色/职位",
+      "avatar": "https://...",
+      "url": "https://space.bilibili.com/..."
+    }
+  ]
+}
+```
+
+## 游戏列表（games.json）
+
+### 数据结构
+
+```json
+{
+  "games": [
+    {
+      "id": "valorant",
+      "name": "瓦罗兰特",
+      "nameEn": "VALORANT",
+      "category": "FPS",
+      "icon": "🎮"
+    }
+  ]
+}
+```
+
+## 更新日志（changelog.json）
+
+### 数据结构
+
+```json
+{
+  "versions": [
+    {
+      "version": "1.1.0",
+      "date": "2024-09-16",
+      "title": "版本标题",
+      "sections": [
+        {
+          "type": "新增",
+          "items": ["新功能描述"]
+        },
+        {
+          "type": "优化",
+          "items": ["优化内容描述"]
+        },
+        {
+          "type": "修复",
+          "items": ["修复问题描述"]
+        }
+      ]
+    }
+  ]
 }
 ```
 
 ### 字段说明
 
-- `id`: 唯一ID（英文）
-- `name`: 游戏中文名
-- `nameEn`: 游戏英文名（悬停时显示）
-- `description`: 游戏描述或类型
-- `image`: 图片文件名（放在 `assets/images/games/` 文件夹）
+- `version` - 版本号（语义化版本）
+- `date` - 发布日期（YYYY-MM-DD 格式）
+- `title` - 版本标题
+- `sections` - 更新内容分组
+  - `type` - 更新类型（新增、优化、修复、变更）
+  - `items` - 更新条目数组
 
-### 图片要求
+## 数据更新流程
 
-- 位置：`assets/images/games/`
-- 格式：JPG/PNG
-- 推荐尺寸：正方形（500x500px 或更大）
-- 文件名：使用英文和数字，如 `valorant.jpg`
+### 修改数据后
 
-### 如何获取游戏图片
+1. 编辑对应的 JSON 文件
+2. 保存文件
+3. 运行 `npm run build` 重新构建
+4. 部署更新后的 `dist/` 目录
 
-1. **官方素材**：从游戏官网下载高清图片
-2. **Steam/Epic**：从游戏商店页面下载封面图
-3. **搜索引擎**：搜索"游戏名 logo"或"游戏名 wallpaper"
-4. **裁剪处理**：使用图片编辑工具裁剪为正方形
+### 本地测试
 
-### 悬停效果
+```bash
+npm run dev
+```
 
-- 默认：只显示游戏图片
-- 悬停：显示半透明遮罩 + 游戏名 + 英文名 + 描述
-- 过渡动画：平滑淡入淡出
+访问 `http://localhost:8000` 查看效果。
 
+## 注意事项
+
+1. JSON 格式必须正确，建议使用 JSON 验证工具检查
+2. 文件名使用英文和数字，避免特殊字符
+3. 图片路径确保正确，使用相对路径或绝对路径
+4. ID 必须唯一，避免重复
+5. 修改前建议备份原文件
+6. 日期格式统一使用 ISO 8601 标准
+
+## 优点
+
+- 数据与页面分离，便于维护
+- 无需修改 HTML 代码
+- 支持批量操作
+- 易于版本控制
+- 自动容错处理

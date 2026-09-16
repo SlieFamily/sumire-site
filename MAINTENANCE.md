@@ -1,258 +1,307 @@
-# 明日堇sumire 个人网站维护文档
+# 网站维护文档
 
-## 📁 项目结构
+## 项目结构
 
 ```
 sumire-site/
-├── index.html              # 主页（人物设堇）
-├── music.html              # 千千堇听（歌曲列表）
-├── costumes.html           # 堇衣卫（历代皮套）
-├── gallery.html            # 触堇生情（画廊）
-├── about.html              # 关于页面
-├── changelog.html          # 更新日志
+├── public/
+│   └── data/                      # 静态数据文件（JSON）
+│       ├── gallery.json           # 画廊数据
+│       ├── costumes.json          # 皮套数据
+│       ├── songs.json             # 歌曲数据
+│       ├── creators.json          # 创作者数据
+│       ├── games.json             # 游戏数据
+│       ├── relationship.json      # 人物关系数据
+│       └── changelog.json         # 更新日志数据
 ├── css/
-│   ├── style.css          # 全局样式（主页 + 基础组件）
-│   ├── pages.css          # 子页面样式
-│   ├── gallery.css        # 画廊页面专用样式
-│   └── mobile.css         # 移动端适配样式
+│   ├── style.css                  # 全局样式和主页样式
+│   ├── pages.css                  # 通用页面样式
+│   ├── mobile.css                 # 移动端响应式样式
+│   ├── about.css                  # 关于页面样式
+│   ├── changelog.css              # 更新日志页面样式
+│   ├── costumes.css               # 皮套页面样式
+│   ├── gallery.css                # 画廊页面样式
+│   └── music.css                  # 音乐页面样式
 ├── js/
-│   ├── main.js            # 主要功能（视频切换、loading动画）
-│   ├── music.js           # 音乐页面功能（搜索、筛选）
-│   ├── gallery.js         # 画廊筛选功能
-│   └── relationship.js    # 人物关系网（力导向布局算法）
+│   ├── main.js                    # 核心功能
+│   ├── changelog-loader.js        # 更新日志加载器
+│   ├── costumes-loader.js         # 皮套数据加载器
+│   ├── gallery-loader.js          # 画廊数据加载器
+│   ├── music-loader.js            # 音乐数据加载器
+│   └── relationship-interactive.js # 人物关系网（D3.js 力导向布局）
 ├── assets/
-│   ├── fonts/             # 本地字体文件
-│   │   ├── fonts.css      # 字体定义
-│   │   ├── inter-*.ttf    # Inter字体（400/500/600/700/900）
-│   │   └── zcool-xiaowei.ttf # 站酷小薇体
-│   ├── images/            # 图片资源
-│   │   ├── avatar/        # 头像图片
-│   │   └── signature.png  # 签名图片（需要添加）
-│   └── videos/            # 视频资源
-│       ├── background.mp4 # 主背景视频
-│       ├── background2.mp4# 备用视频2
-│       └── background3.mp4# 备用视频3
-└── *.md                   # 维护文档
+│   ├── fonts/                     # 本地字体资源
+│   │   ├── fonts.css
+│   │   ├── inter-*.ttf            # Interface 字体
+│   │   ├── zcool-xiaowei.ttf      # 标题字体
+│   │   └── noto-serif-sc-*.otf    # 正文字体
+│   └── images/
+│       ├── avatar/                # 头像图片
+│       ├── gallery/               # 画廊图片
+│       └── costumes/              # 皮套图片
+├── scripts/
+│   ├── generate-thumbnails.js     # 缩略图生成脚本
+│   └── compress_avatars.js        # 头像压缩脚本
+├── index.html                     # 主页
+├── music.html                     # 歌曲页面
+├── costumes.html                  # 皮套页面
+├── gallery.html                   # 画廊页面
+├── about.html                     # 关于页面
+├── changelog.html                 # 更新日志页面
+├── relationship-interactive.html  # 人物关系网页面
+├── architecture-interactive.html  # 架构图页面
+├── vite.config.js                 # Vite 构建配置
+├── vercel.json                    # Vercel 部署配置
+└── package.json                   # 项目依赖配置
 ```
 
-## 🎨 常见修改任务
+## 内容更新指南
 
-### 1. 替换签名图片
+### 1. 更新歌曲列表
 
-**步骤**：
-1. 准备透明背景PNG图片（推荐尺寸：200x200px）
-2. 命名为 `signature.png`
-3. 放入 `assets/images/` 文件夹
-4. 修改所有HTML文件：
+编辑 `public/data/songs.json`：
 
-**找到**：
-```html
-<div class="signature-logo"><img src="assets/images/signature.png" alt="签名"></div>
-<div class="page-signature">✨</div>
-```
-
-**改为**：
-```html
-<div class="signature-logo"><img src="assets/images/signature.png" alt="签名"></div>
-<div class="page-signature"><img src="assets/images/signature.png" alt="签名"></div>
-```
-
-**需要修改的文件**：
-- index.html
-- music.html
-- costumes.html
-- gallery.html
-- about.html
-- changelog.html
-
-### 2. 添加/更换背景视频
-
-**步骤**：
-1. 准备视频文件（推荐格式：MP4，H.264编码）
-2. 命名规则：
-   - 主视频：`background.mp4`
-   - 备用视频：`background2.mp4`、`background3.mp4`
-3. 放入 `assets/videos/` 文件夹
-
-**如果需要更多视频**，编辑 `js/main.js`：
-```javascript
-const videos = [
-    'assets/videos/background.mp4',
-    'assets/videos/background2.mp4',
-    'assets/videos/background3.mp4',
-    'assets/videos/background4.mp4'  // 添加更多
-];
-```
-
-### 3. 修改歌曲列表
-
-编辑 `music.html`，找到 `<div class="song-row">` 部分：
-
-```html
-<div class="song-row" data-lang="zh">
-    <div class="song-number">01</div>
-    <div class="song-info">
-        <h3 class="song-title">歌曲名称</h3>
-        <p class="song-artist">明日堇sumire · 原创 · 中文</p>
-    </div>
-    <div class="song-duration">03:45</div>
-    <div class="song-action">
-        <a href="https://www.bilibili.com/video/BV..." class="song-link">
-            <svg>...</svg>
-        </a>
-    </div>
-</div>
-```
-
-**语言标签**：`data-lang="zh"` (zh=中文, ja=日语, en=英语)
-
-### 4. 修改人物关系网
-
-编辑 `js/relationship.js` 文件。
-
-**重要特性**：
-- 使用力导向布局算法自动排列节点，防止重叠
-- 移动端和桌面端自动优化布局参数
-- 节点间通过贝塞尔曲线连接
-
-**添加新节点**：
-```javascript
+```json
 {
-    id: 'friend5',                              // 唯一ID
-    name: 'UP主名字',                           // 显示名称
-    avatar: 'https://...',                     // 头像URL或表情符号
-    url: 'https://space.bilibili.com/...',    // B站链接
-    size: 50,                                  // 头像大小（推荐40-70）
-    color: '#6B9FE8'                          // 背景色
+  "songs": [
+    {
+      "id": 1,
+      "title": "歌曲名称",
+      "artist": "明日堇sumire",
+      "type": "原创",
+      "language": "zh",
+      "duration": "03:45",
+      "url": "https://www.bilibili.com/video/BV..."
+    }
+  ]
 }
 ```
 
-**注意**：移除了手动的 x、y 坐标，系统会自动计算最优位置。
+语言代码：`zh` (中文)、`ja` (日语)、`en` (英语)
 
-**添加连线**：
-```javascript
+### 2. 更新皮套展示
+
+编辑 `public/data/costumes.json`：
+
+```json
 {
-    from: 'sumire',
-    to: 'friend5',
-    label: '关系描述',                         // 连线上的文字标签
-    color: '#ff6b6b',
-    width: 2
+  "costumes": [
+    {
+      "id": 1,
+      "name": "皮套名称",
+      "date": "2024-08",
+      "year": 2024,
+      "image": "/assets/images/costumes/costume1.jpg",
+      "tags": ["标签1", "标签2"],
+      "isNew": true,
+      "description": "描述文字"
+    }
+  ]
 }
 ```
 
-**算法说明**：
-- 自动防止节点重叠
-- 根据屏幕大小调整斥力和安全间距
-- 移动端（<768px）使用更强斥力确保不重叠
+### 3. 更新画廊作品
 
-详细说明见 `RELATIONSHIP.md`
+编辑 `public/data/gallery.json`：
 
-### 5. 修改皮套展示
-
-编辑 `costumes.html`，找到 `<div class="costume-card">` 部分：
-
-```html
-<div class="costume-card">
-    <div class="costume-card-image">
-        <div class="image-placeholder">
-            <span class="placeholder-icon">👗</span>
-        </div>
-        <span class="costume-badge new">NEW</span>
-    </div>
-    <div class="costume-card-info">
-        <h3 class="costume-card-title">皮套名称</h3>
-        <p class="costume-card-date">2024.08</p>
-        <div class="costume-card-tags">
-            <span class="tag">标签1</span>
-            <span class="tag">标签2</span>
-        </div>
-    </div>
-</div>
+```json
+{
+  "gallery": [
+    {
+      "id": 1,
+      "title": "作品标题",
+      "author": "作者名",
+      "date": "2024-08-15",
+      "category": "illustration",
+      "image": "/assets/images/gallery/image1.jpg",
+      "authorUrl": "https://space.bilibili.com/..."
+    }
+  ]
+}
 ```
 
-**替换图片**：将 `<span class="placeholder-icon">👗</span>` 改为 `<img src="...">`
+分类类型：`illustration` (插画)、`emoji` (表情包)、`comic` (漫画)
 
-### 6. 修改画廊图片
+### 4. 更新人物关系网
 
-编辑 `gallery.html`，找到 `<div class="gallery-item">` 部分：
+编辑 `public/data/relationship.json`：
 
-```html
-<div class="gallery-item" data-category="fanart">
-    <div class="gallery-card">
-        <div class="gallery-image">
-            <img src="assets/images/gallery/image1.jpg" alt="">
-        </div>
-    </div>
-</div>
+```json
+{
+  "nodes": [
+    {
+      "id": "friend1",
+      "name": "UP主名字",
+      "avatar": "https://...",
+      "url": "https://space.bilibili.com/...",
+      "type": "person"
+    }
+  ],
+  "links": [
+    {
+      "source": "sumire",
+      "target": "friend1",
+      "relationship": "关系描述"
+    }
+  ]
+}
 ```
 
-**分类标签**：`data-category="fanart"` (fanart=插画, emoji=表情包, comic=漫画)
+力导向布局算法会自动计算节点位置，无需手动指定坐标。
 
-### 7. 移除子页面的视频切换按钮
+### 5. 更新创作者信息
 
-如果不需要子页面的视频切换按钮，编辑各子页面HTML，删除：
+编辑 `public/data/creators.json`：
 
-```html
-<button class="video-toggle-btn">
-    <svg>...</svg>
-    <span>切换背景</span>
-</button>
+```json
+{
+  "creators": [
+    {
+      "id": "creator1",
+      "name": "创作者名称",
+      "role": "角色/职位",
+      "avatar": "https://...",
+      "url": "https://space.bilibili.com/..."
+    }
+  ]
+}
 ```
 
-只保留主页的视频切换按钮。
+### 6. 更新游戏信息
 
-## 🎯 配色方案
+编辑 `public/data/games.json`：
+
+```json
+{
+  "games": [
+    {
+      "id": "game1",
+      "name": "游戏名称",
+      "icon": "🎮",
+      "category": "类型"
+    }
+  ]
+}
+```
+
+### 7. 添加更新日志
+
+编辑 `public/data/changelog.json`：
+
+```json
+{
+  "versions": [
+    {
+      "version": "1.1.0",
+      "date": "2024-09-16",
+      "title": "版本标题",
+      "sections": [
+        {
+          "type": "新增",
+          "items": [
+            "新功能描述"
+          ]
+        },
+        {
+          "type": "优化",
+          "items": [
+            "优化内容描述"
+          ]
+        },
+        {
+          "type": "修复",
+          "items": [
+            "修复问题描述"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 开发与构建
+
+### 开发环境
+
+```bash
+# 启动开发服务器（端口 8000）
+npm run dev
+
+# 访问
+http://localhost:8000
+```
+
+开发模式特性：
+- 热更新（修改代码自动刷新）
+- 源码调试支持
+- 快速编译
+
+### 生产构建
+
+```bash
+# 构建生产版本
+npm run build
+
+# 预览构建结果
+npm run preview
+```
+
+构建输出在 `dist/` 目录，包含：
+- 文件名哈希（自动缓存失效）
+- 代码压缩和优化
+- 资源分块加载
+
+### 图片处理
+
+```bash
+# 生成缩略图
+npm run thumbnails
+
+# 压缩头像
+npm run avatars
+```
+
+## 样式配置
+
+### 颜色主题
+
+编辑 `css/style.css` 中的 CSS 变量：
 
 ```css
---primary-color: #8B7DC8;    /* 主色（紫色）*/
---secondary-color: #6B9FE8;  /* 辅助色（蓝色）*/
---accent-color: #B794F6;     /* 强调色（淡紫）*/
---dark-bg: #0c0505;          /* 深色背景 */
+:root {
+    --primary-color: #8B7DC8;      /* 主色（紫色）*/
+    --secondary-color: #6B9FE8;    /* 辅助色（蓝色）*/
+    --accent-color: #B794F6;       /* 强调色（淡紫）*/
+    --dark-bg: #0c0505;            /* 深色背景 */
+    --darker-bg: #000000;          /* 更深背景 */
+}
 ```
 
-修改颜色：编辑 `css/style.css` 的 `:root` 部分
+### 字体配置
 
-## 📱 响应式断点
+项目使用三种字体系统：
 
-- 手机：< 768px
-- 平板：768px - 1024px
-- 桌面：> 1024px
+- **标题字体**（`--font-title`）：ZCOOL XiaoWei
+  - 用于页面标题、章节标题、卡片标题
+  
+- **正文字体**（`--font-body`）：Noto Serif SC
+  - 用于正文内容、段落、描述文字
 
-## 🔧 字体
+- **界面字体**（`--font-interface`）：Inter
+  - 用于按钮、标签、导航栏
 
-项目使用本地字体文件，确保在任何网络环境下都能正常显示：
+字体定义在 `assets/fonts/fonts.css`，所有字体文件本地化存储。
 
-- **界面文字**：Inter（400/500/600/700/900）
-- **标题/中文**：ZCOOL XiaoWei（站酷小薇体）
-- **系统字体回退**：SimSun、STSong、PingFang SC、Microsoft YaHei
+### 响应式断点
 
-所有字体文件位于 `assets/fonts/` 目录，通过 `assets/fonts/fonts.css` 引入。
+```css
+/* 移动端 */
+@media (max-width: 768px) { }
 
-### 特殊效果
+/* 平板 */
+@media (max-width: 1024px) { }
 
-主页标题"sumire"采用：
-- 渐变色效果（紫色→蓝色→淡紫）
-- 外发光效果（炫光边缘）
-- 使用Unicode数学字母字符：𝓼𝓾𝓶𝓲𝓻𝓮
-
-## 📝 更新日志
-
-修改网站后，记得更新 `changelog.html` 添加版本记录。
-
-## ⚠️ 注意事项
-
-1. 修改HTML后务必测试loading动画
-2. 添加图片时注意优化文件大小
-3. 视频文件建议压缩后上传
-4. 修改配置文件后刷新浏览器缓存（Ctrl+F5）
-5. 所有"堇"字保持紫色高亮（使用 `<span class="highlight-jin">堇</span>`）
-
-## 🚀 部署
-
-项目是纯静态网站，可部署到：
-- GitHub Pages
-- Vercel
-- Netlify
-- 任何静态托管服务
-
-推荐使用 Vercel，步骤见 README.md
+/* 超小屏幕 */
+@media (max-width: 480px) { }
+```
