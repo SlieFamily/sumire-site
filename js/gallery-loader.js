@@ -440,17 +440,6 @@ function showGalleryLightbox(thumbnailSrc, originalSrc, title, description, auth
         info.appendChild(descEl);
     }
 
-    // 添加下载原图按钮
-    if (originalSrc) {
-        const downloadBtn = document.createElement('a');
-        downloadBtn.className = 'gallery-download-btn';
-        downloadBtn.href = originalSrc;
-        downloadBtn.download = '';
-        downloadBtn.textContent = '下载原图';
-        downloadBtn.target = '_blank';
-        info.appendChild(downloadBtn);
-    }
-
     const metaEl = document.createElement('div');
     metaEl.className = 'gallery-lightbox-meta';
 
@@ -470,6 +459,17 @@ function showGalleryLightbox(thumbnailSrc, originalSrc, title, description, auth
         const categorySpan = document.createElement('span');
         categorySpan.textContent = `分类: ${getCategoryName(category)}`;
         metaEl.appendChild(categorySpan);
+    }
+
+    // 添加下载原图按钮到meta栏
+    if (originalSrc) {
+        const downloadBtn = document.createElement('a');
+        downloadBtn.className = 'gallery-download-btn';
+        downloadBtn.href = originalSrc;
+        downloadBtn.download = '';
+        downloadBtn.textContent = '下载原图';
+        downloadBtn.target = '_blank';
+        metaEl.appendChild(downloadBtn);
     }
 
     info.appendChild(metaEl);
