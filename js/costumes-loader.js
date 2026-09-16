@@ -53,7 +53,7 @@ function renderCostumes(costumes) {
             thumbnailPath = `assets/images/costumes/thumbnails/${costume.image}`;
             originalPath = `assets/images/costumes/${costume.image}`;
         } else {
-            const thumbnailName = costume.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+            const thumbnailName = costume.image.replace(/\.(png|jpeg|jpg)$/i, '.webp');
             thumbnailPath = `assets/images/costumes/thumbnails/${thumbnailName}`;
             originalPath = `assets/images/costumes/${costume.image}`;
         }

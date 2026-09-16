@@ -39,7 +39,6 @@ async function loadGallery() {
         const filteredItems = galleryItems.filter(item => item.category === defaultCategory);
 
         await renderGalleryItems(filteredItems);
-        initGalleryLightbox();
 
         window.addEventListener('resize', debounce(async () => {
             const oldColumnCount = columnCount;
@@ -51,7 +50,6 @@ async function loadGallery() {
                 const currentFilter = activeBtn ? activeBtn.dataset.filter : defaultCategory;
                 const currentFilteredItems = galleryItems.filter(item => item.category === currentFilter);
                 await renderGalleryItems(currentFilteredItems);
-                initGalleryLightbox();
             }
         }, 250));
     } catch (error) {
@@ -114,9 +112,6 @@ async function renderGalleryItems(items) {
         container.appendChild(column);
     }
 
-    // 立即初始化灯箱功能，使用事件委托
-    initGalleryLightbox();
-
     // 创建Intersection Observer用于懒加载
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -131,7 +126,7 @@ async function renderGalleryItems(items) {
         rootMargin: '500px' // 提前500px开始加载
     });
 
-    // 异步渲染每个卡片，不等待全部完成
+    // 渲染所有卡片
     items.forEach((item) => {
         const card = document.createElement('div');
         card.className = 'gallery-card';
@@ -150,7 +145,7 @@ async function renderGalleryItems(items) {
         img.className = 'gallery-card-image lazy';
         img.alt = item.title;
 
-        // 处理缩略图路径：GIF保持原样，其他格式转为.jpg
+        // 处理缩略图路径：GIF保持原样，其他格式转为.webp
         const ext = item.image.split('.').pop().toLowerCase();
         let thumbnailPath, originalPath;
 
@@ -158,7 +153,7 @@ async function renderGalleryItems(items) {
             thumbnailPath = `assets/images/gallery/thumbnails/${item.image}`;
             originalPath = `assets/images/gallery/${item.image}`;
         } else {
-            const thumbnailName = item.image.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+            const thumbnailName = item.image.replace(/\.(png|jpeg|jpg)$/i, '.webp');
             thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
             originalPath = `assets/images/gallery/${item.image}`;
         }
@@ -169,6 +164,32 @@ async function renderGalleryItems(items) {
 
         // 使用签名图作为占位图
         img.src = 'assets/images/signature.png';
+
+        // 绑定点击事件
+        card.addEventListener('click', function() {
+            const category = this.dataset.category;
+            const itemId = this.dataset.id;
+
+            // 如果是漫画类别且有多图，使用漫画查看器
+            if (category === 'comic') {
+                const item = galleryItems.find(item => item.id === itemId);
+                if (item && item.images && item.images.length > 0) {
+                    showComicLightbox(item);
+                    return;
+                }
+            }
+
+            // 其他类别使用普通灯箱，使用缩略图
+            const img = this.querySelector('.gallery-card-image');
+            const thumbnailSrc = img.dataset.src || img.src; // 使用缩略图路径
+            const originalSrc = img.dataset.original; // 保存原图路径用于下载
+            const title = this.dataset.title;
+            const description = this.dataset.description;
+            const author = this.dataset.author;
+            const date = this.dataset.date;
+
+            showGalleryLightbox(thumbnailSrc, originalSrc, title, description, author, date, category);
+        });
 
         // 预加载缩略图获取尺寸
         const tempImg = new Image();
@@ -196,37 +217,7 @@ async function renderGalleryItems(items) {
     });
 }
 
-// 灯箱功能
-function initGalleryLightbox() {
-    const cards = document.querySelectorAll('.gallery-card');
-
-    cards.forEach(card => {
-        card.addEventListener('click', function() {
-            const category = this.dataset.category;
-            const itemId = this.dataset.id;
-
-            // 如果是漫画类别且有多图，使用漫画查看器
-            if (category === 'comic') {
-                const item = galleryItems.find(item => item.id === itemId);
-                if (item && item.images && item.images.length > 0) {
-                    showComicLightbox(item);
-                    return;
-                }
-            }
-
-            // 其他类别使用普通灯箱，使用缩略图
-            const img = this.querySelector('.gallery-card-image');
-            const thumbnailSrc = img.dataset.src || img.src; // 使用缩略图路径
-            const originalSrc = img.dataset.original; // 保存原图路径用于下载
-            const title = this.dataset.title;
-            const description = this.dataset.description;
-            const author = this.dataset.author;
-            const date = this.dataset.date;
-
-            showGalleryLightbox(thumbnailSrc, originalSrc, title, description, author, date, category);
-        });
-    });
-}
+// 注意：卡片点击事件现在在renderGalleryItems中直接绑定
 
 // 漫画灯箱查看器
 let currentComicData = null;
@@ -355,7 +346,7 @@ function updateComicImage() {
     if (img && currentComicData) {
         // 使用缩略图路径
         const imageName = currentComicData.images[currentComicPage];
-        const thumbnailName = imageName.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+        const thumbnailName = imageName.replace(/\.(png|jpeg|jpg)$/i, '.webp');
         const thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
         const originalPath = `assets/images/gallery/${imageName}`;
 

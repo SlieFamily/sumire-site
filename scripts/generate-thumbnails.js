@@ -9,7 +9,7 @@ const costumesThumbnailDir = path.join(__dirname, '../assets/images/costumes/thu
 
 // 缩略图配置
 const THUMBNAIL_WIDTH = 600; // 宽度600px足够瀑布流显示
-const THUMBNAIL_QUALITY = 80; // JPEG质量80%
+const THUMBNAIL_QUALITY = 80; // WebP质量80%
 
 // 创建缩略图目录
 if (!fs.existsSync(thumbnailDir)) {
@@ -45,19 +45,28 @@ async function generateThumbnail(inputPath, outputPath, width = THUMBNAIL_WIDTH)
         const image = sharp(inputPath);
         const metadata = await image.metadata();
 
-        // 如果图片宽度已经小于目标宽度，跳过
+        // 如果图片宽度已经小于等于目标宽度，仍然生成webp缩略图以获得更好的压缩
         if (metadata.width <= width) {
-            console.log(`跳过小图: ${path.basename(inputPath)} (${metadata.width}px)`);
+            // 对于小图，使用原始尺寸
+            await image
+                .webp({ quality: THUMBNAIL_QUALITY, lossless: false })
+                .toFile(outputPath);
+
+            const inputSize = fs.statSync(inputPath).size;
+            const outputSize = fs.statSync(outputPath).size;
+            const ratio = ((1 - outputSize / inputSize) * 100).toFixed(1);
+
+            console.log(`✓ ${path.basename(inputPath)} (小图): ${(inputSize / 1024).toFixed(0)}KB → ${(outputSize / 1024).toFixed(0)}KB (减少${ratio}%)`);
             return;
         }
 
-        // 生成缩略图
+        // 生成缩略图（使用webp格式，支持透明背景）
         await image
             .resize(width, null, {
                 withoutEnlargement: true,
                 fit: 'inside'
             })
-            .jpeg({ quality: THUMBNAIL_QUALITY, progressive: true })
+            .webp({ quality: THUMBNAIL_QUALITY, lossless: false })
             .toFile(outputPath);
 
         const inputSize = fs.statSync(inputPath).size;
@@ -96,8 +105,8 @@ async function processDirectory(inputDir, outputDir) {
             continue;
         }
 
-        // 生成缩略图（转为.jpg）
-        const outputFile = file.replace(/\.(png|jpeg)$/i, '.jpg');
+        // 生成缩略图（转为.webp）
+        const outputFile = file.replace(/\.(png|jpeg|jpg)$/i, '.webp');
         const outputPath = path.join(outputDir, outputFile);
 
         await generateThumbnail(inputPath, outputPath);
