@@ -218,15 +218,16 @@ function initGalleryLightbox() {
                 }
             }
 
-            // 其他类别使用普通灯箱，使用原图
+            // 其他类别使用普通灯箱，使用缩略图
             const img = this.querySelector('.gallery-card-image');
-            const imgSrc = img.dataset.original || img.src; // 使用原图路径
+            const thumbnailSrc = img.dataset.src || img.src; // 使用缩略图路径
+            const originalSrc = img.dataset.original; // 保存原图路径用于下载
             const title = this.dataset.title;
             const description = this.dataset.description;
             const author = this.dataset.author;
             const date = this.dataset.date;
 
-            showGalleryLightbox(imgSrc, title, description, author, date, category);
+            showGalleryLightbox(thumbnailSrc, originalSrc, title, description, author, date, category);
         });
     });
 }
@@ -289,6 +290,14 @@ function showComicLightbox(item) {
         info.appendChild(descEl);
     }
 
+    // 添加下载当前页原图按钮
+    const downloadBtn = document.createElement('a');
+    downloadBtn.className = 'gallery-download-btn';
+    downloadBtn.id = 'comicDownloadBtn';
+    downloadBtn.textContent = '下载当前页原图';
+    downloadBtn.target = '_blank';
+    info.appendChild(downloadBtn);
+
     const metaEl = document.createElement('div');
     metaEl.className = 'gallery-lightbox-meta';
 
@@ -343,11 +352,24 @@ function navigateComic(direction) {
 function updateComicImage() {
     const img = document.getElementById('comicCurrentImage');
     const pageIndicator = document.getElementById('comicPageIndicator');
+    const downloadBtn = document.getElementById('comicDownloadBtn');
     const prevBtn = document.querySelector('.comic-prev');
     const nextBtn = document.querySelector('.comic-next');
 
     if (img && currentComicData) {
-        img.src = `assets/images/gallery/${currentComicData.images[currentComicPage]}`;
+        // 使用缩略图路径
+        const imageName = currentComicData.images[currentComicPage];
+        const thumbnailName = imageName.replace(/\.(png|jpeg|jpg)$/i, '.jpg');
+        const thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
+        const originalPath = `assets/images/gallery/${imageName}`;
+
+        img.src = thumbnailPath;
+        img.dataset.original = originalPath;
+
+        // 更新下载按钮
+        if (downloadBtn) {
+            downloadBtn.href = originalPath;
+        }
     }
 
     if (pageIndicator && currentComicData) {
@@ -388,7 +410,7 @@ function closeComicLightbox(lightbox) {
     }, 300);
 }
 
-function showGalleryLightbox(imgSrc, title, description, author, date, category) {
+function showGalleryLightbox(thumbnailSrc, originalSrc, title, description, author, date, category) {
     const lightbox = document.createElement('div');
     lightbox.className = 'gallery-lightbox';
 
@@ -399,7 +421,7 @@ function showGalleryLightbox(imgSrc, title, description, author, date, category)
     imageContainer.className = 'gallery-lightbox-image-container';
 
     const img = document.createElement('img');
-    img.src = imgSrc;
+    img.src = thumbnailSrc;
     img.alt = title;
 
     const info = document.createElement('div');
@@ -416,6 +438,17 @@ function showGalleryLightbox(imgSrc, title, description, author, date, category)
         descEl.className = 'gallery-lightbox-description';
         descEl.textContent = description;
         info.appendChild(descEl);
+    }
+
+    // 添加下载原图按钮
+    if (originalSrc) {
+        const downloadBtn = document.createElement('a');
+        downloadBtn.className = 'gallery-download-btn';
+        downloadBtn.href = originalSrc;
+        downloadBtn.download = '';
+        downloadBtn.textContent = '下载原图';
+        downloadBtn.target = '_blank';
+        info.appendChild(downloadBtn);
     }
 
     const metaEl = document.createElement('div');

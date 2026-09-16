@@ -108,21 +108,27 @@ function initLightbox() {
         lightbox.className = 'lightbox';
         lightbox.innerHTML = `
             <button class="lightbox-close" aria-label="关闭">×</button>
-            <img src="" alt="">
+            <div class="lightbox-content">
+                <img src="" alt="">
+                <a class="gallery-download-btn" href="" download target="_blank">下载原图</a>
+            </div>
         `;
         document.body.appendChild(lightbox);
     }
 
     const lightboxImg = lightbox.querySelector('img');
+    const downloadBtn = lightbox.querySelector('.gallery-download-btn');
     const closeBtn = lightbox.querySelector('.lightbox-close');
 
     // 点击图片打开灯箱
     document.addEventListener('click', (e) => {
         const img = e.target.closest('[data-lightbox]');
         if (img) {
-            const src = img.getAttribute('data-lightbox');
-            lightboxImg.src = src;
+            const thumbnailSrc = img.dataset.src || img.src;
+            const originalSrc = img.getAttribute('data-lightbox');
+            lightboxImg.src = thumbnailSrc;
             lightboxImg.alt = img.alt;
+            downloadBtn.href = originalSrc;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         }

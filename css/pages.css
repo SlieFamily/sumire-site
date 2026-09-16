@@ -558,6 +558,14 @@ body:has(.page-main)::after {
 
 .lightbox.active {
     display: flex;
+    flex-direction: column;
+}
+
+.lightbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .lightbox img {
@@ -567,6 +575,10 @@ body:has(.page-main)::after {
     border-radius: 8px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
     animation: zoomIn 0.3s ease;
+}
+
+.lightbox .gallery-download-btn {
+    cursor: pointer;
 }
 
 .lightbox-close {
@@ -1331,6 +1343,29 @@ img.lazy-loading {
     margin-bottom: 1.25rem;
     white-space: pre-line;
     text-align: left;
+}
+
+.gallery-download-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.4), rgba(107, 159, 232, 0.4));
+    border: 1px solid rgba(139, 125, 200, 0.6);
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(139, 125, 200, 0.2);
+    margin-bottom: 1.25rem;
+}
+
+.gallery-download-btn:hover {
+    background: linear-gradient(135deg, rgba(139, 125, 200, 0.6), rgba(107, 159, 232, 0.6));
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 125, 200, 0.4);
 }
 
 .gallery-lightbox-meta {

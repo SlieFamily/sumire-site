@@ -2,9 +2,8 @@
 
 // 视频切换功能
 const videos = [
-    'assets/videos/background.mp4',
-    'assets/videos/background2.mp4',
-    'assets/videos/background3.mp4'
+    'assets/videos/background1.mp4',
+    'assets/videos/background2.mp4'
 ];
 
 // 从 localStorage 读取用户上次选择的视频索引
