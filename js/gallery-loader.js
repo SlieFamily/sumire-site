@@ -350,8 +350,39 @@ function updateComicImage() {
         const thumbnailPath = `assets/images/gallery/thumbnails/${thumbnailName}`;
         const originalPath = `assets/images/gallery/${imageName}`;
 
-        img.src = thumbnailPath;
-        img.dataset.original = originalPath;
+        // 添加加载中状态
+        const imageContainer = img.parentElement;
+        let loader = imageContainer.querySelector('.comic-image-loader');
+
+        if (!loader) {
+            loader = document.createElement('div');
+            loader.className = 'comic-image-loader';
+            loader.innerHTML = '<div class="loader-spinner"></div>';
+            imageContainer.appendChild(loader);
+        }
+
+        // 显示加载器，隐藏图片
+        loader.style.display = 'flex';
+        img.style.opacity = '0';
+
+        // 预加载新图片
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            img.src = thumbnailPath;
+            img.dataset.original = originalPath;
+
+            // 图片加载完成后隐藏加载器，显示图片
+            loader.style.display = 'none';
+            img.style.opacity = '1';
+        };
+
+        tempImg.onerror = function() {
+            console.error(`漫画图片加载失败: ${thumbnailPath}`);
+            loader.style.display = 'none';
+            img.style.opacity = '1';
+        };
+
+        tempImg.src = thumbnailPath;
 
         // 更新下载按钮
         if (downloadBtn) {
