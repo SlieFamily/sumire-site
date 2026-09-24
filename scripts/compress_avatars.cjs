@@ -2,8 +2,8 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const sourceDir = 'assets/images/avatar';
-const targetDir = 'assets/images/avatar/thumbnails';
+const sourceDir = 'public/assets/images/avatar';
+const targetDir = 'public/assets/images/avatar/thumbnails';
 
 // 确保目标目录存在
 if (!fs.existsSync(targetDir)) {

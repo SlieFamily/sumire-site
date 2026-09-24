@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "thumbnails": "node scripts/generate-thumbnails.js",
-    "avatars": "node scripts/compress_avatars.js"
+    "thumbnails": "node scripts/generate-thumbnails.cjs",
+    "avatars": "node scripts/compress_avatars.cjs"
   },
   "keywords": [
     "vtuber",

@@ -248,6 +248,14 @@
       "url": "https://space.bilibili.com/3546755817802138",
       "size": 50,
       "color": "#6B9FE8"
+    },
+    {
+      "id": "hqxn",
+      "name": "黑崎小了",
+      "avatar": "assets/images/avatar/hqxn.jpg",
+      "url": "https://space.bilibili.com/7108223",
+      "size": 50,
+      "color": "#6B9FE8"
     }
     
   ],
@@ -560,6 +568,18 @@
     {
       "from": "kuru",
       "to": "moon",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "hqxn",
+      "to": "sumire",
+      "color": "#ff6b6b",
+      "width": 2
+    },
+    {
+      "from": "hqxn",
+      "to": "ccc",
       "color": "#ff6b6b",
       "width": 2
     }

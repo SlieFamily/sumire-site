@@ -26,33 +26,63 @@
       "date": "2025.07",
       "year": 2025,
       "image": "rabbit.png",
-      "tags": ["可爱", "PNG", "Q版"]
+      "tags": ["可爱", "贴图", "Q版"]
     },
     {
       "id": "qb001",
       "title": "Q版小人001号",
-      "date": "2025.7",
+      "date": "2025.07",
       "year": 2025,
       "image": "qb001.png",
-      "tags": ["可爱", "PNG", "Q版"]
+      "tags": ["可爱", "贴图", "Q版"]
     },
     {
-      "id": "costume-2023-04",
-      "title": "学院风制服",
-      "date": "2023.04",
-      "year": 2023,
-      "image": "costume-2023-school.jpg",
-      "badge": "NEW",
-      "badgeType": "new",
-      "tags": ["学院", "制服", "经典"]
+      "id": "jkbaby",
+      "title": "JK宝宝堇",
+      "date": "2025.08",
+      "year": 2025,
+      "image": "jkbaby.png",
+      "tags": ["Q版", "制服", "可爱"]
     },
     {
-      "id": "costume-2023-03",
-      "title": "春日和服",
-      "date": "2023.03",
-      "year": 2023,
-      "image": "costume-2023-kimono.jpg",
+      "id": "broom",
+      "title": "扫把小埋堇",
+      "date": "2025.07",
+      "year": 2025,
+      "image": "broom.png",
       "tags": ["和服", "春季"]
+    },
+    {
+      "id": "crayon",
+      "title": "蜡笔女仆堇",
+      "date": "2025.07",
+      "year": 2025,
+      "image": "crayon.png",
+      "tags": ["Q版", "蜡笔小新", "女仆"]
+    },
+    {
+      "id": "greysad",
+      "title": "灰质委屈2.5D",
+      "date": "2025.07",
+      "year": 2025,
+      "image": "greysad.png",
+      "tags": ["Q版", "立体"]
+    },
+    {
+      "id": "winxp",
+      "title": "WinXP复古堇",
+      "date": "2025.07",
+      "year": 2025,
+      "image": "winxp.jpg",
+      "tags": ["立体", "Q版", "电台"]
+    },
+    {
+      "id": "fade",
+      "title": "黑梦俯视堇",
+      "date": "2025.08",
+      "year": 2025,
+      "image": "fade.jpg",
+      "tags": ["游戏", "Q版", "COS"]
     }
   ]
 }

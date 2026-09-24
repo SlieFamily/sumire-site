@@ -1111,15 +1111,15 @@ body:has(.page-main)::after {
     }
 }
 
-/* 皮套瀑布流布局 */
+/* 皮套网格布局 */
 .costumes-masonry {
-    column-count: 4;
-    column-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
 }
 
 .costume-card {
-    break-inside: avoid;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 0;

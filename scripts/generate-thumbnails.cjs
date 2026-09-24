@@ -2,10 +2,10 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const galleryDir = path.join(__dirname, '../assets/images/gallery');
-const thumbnailDir = path.join(__dirname, '../assets/images/gallery/thumbnails');
-const costumesDir = path.join(__dirname, '../assets/images/costumes');
-const costumesThumbnailDir = path.join(__dirname, '../assets/images/costumes/thumbnails');
+const galleryDir = path.join(__dirname, '../public/assets/images/gallery');
+const thumbnailDir = path.join(__dirname, '../public/assets/images/gallery/thumbnails');
+const costumesDir = path.join(__dirname, '../public/assets/images/costumes');
+const costumesThumbnailDir = path.join(__dirname, '../public/assets/images/costumes/thumbnails');
 
 // 缩略图配置
 const THUMBNAIL_WIDTH = 600; // 宽度600px足够瀑布流显示
